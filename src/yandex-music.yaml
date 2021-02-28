@@ -80,7 +80,7 @@ paths:
                 type: string
                 description: Данные заголовок использует Windows приложение Yandex.Music, если пользователь не авторизован
                 example: "os=unknown; os_version=unknown; manufacturer=unknown; model=unknown; clid=; device_id=unknown; uuid=unknown"
-  
+
   /landing3/{landingBlock}:
     parameters:
       - in: path
@@ -88,17 +88,61 @@ paths:
         required: true
         schema:
           type: string
-          enum: ['new-playlists', 'new-releases', 'new-playlists', 'chart', 'podcasts']
+          enum:
+            [
+              "new-playlists",
+              "new-releases",
+              "new-playlists",
+              "chart",
+              "podcasts",
+            ]
 
-  
   /landing3/chart/{chartType}:
     parameters:
       - in: path
         name: chartType
         required: true
-        schema: 
+        schema:
           type: string
           enum: ["russia", "world"]
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /genres:
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /search:
+    parameters:
+      - in: query
+        name: text
+        description: Текст запроса
+        schema:
+          type: string
+          example: Король и Шут
+      - in: query
+        name: page
+        description: Номер страницы выдачи
+        schema:
+          type: number
+          example: 0
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum: ["artist", "album", "track", "podcast", "all"]
+          default: "all"
+      - in: query
+        name: nococrrect
+        schema:
+          type: boolean
+          default: false
     get:
       responses:
         200:
