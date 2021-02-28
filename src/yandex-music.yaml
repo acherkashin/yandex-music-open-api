@@ -149,4 +149,19 @@ paths:
           description: Ok
           content: {}
 
+  /users/{userId}/playlists/list:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
 components: {}
