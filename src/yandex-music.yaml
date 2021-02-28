@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
   title: Yandex Music Api
-  description: 'Swagger документация для Yandex Music API.'
+  description: "Swagger документация для Yandex Music API."
   version: 1.0.0
 servers:
-- url: https://api.music.yandex.net:443/
-- url: http://api.music.yandex.net:443/
+  - url: https://api.music.yandex.net:443/
+  - url: http://api.music.yandex.net:443/
 paths:
   /feed:
     get:
@@ -13,6 +13,7 @@ paths:
         200:
           description: Ok
           content: {}
+
   /albums/{albumId}/:
     parameters:
       - in: path
@@ -26,6 +27,7 @@ paths:
         200:
           description: Ok
           content: {}
+
   /albums/{albumId}/with-tracks:
     parameters:
       - in: path
@@ -34,6 +36,69 @@ paths:
           type: number
         required: true
         example: 7019818
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /albums:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+            example: '{"album-ids" : "13984185,13730064,13963354,13546288,13937809"}'
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  #TODO: Добавить авторизацию
+  /landing3:
+    parameters:
+      - in: query
+        name: blocks
+        schema:
+          type: string
+          description: Одно или несколько значений блоков, разделенных запятой "promotions","new-releases","new-playlists","mixes","chart","playlists","play_contexts","podcasts"
+        examples:
+          single:
+            value: "new-releases"
+          multiple:
+            value: "new-playlists, new-playlists"
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+          headers:
+            "X-Yandex-Music-Device":
+              schema:
+                type: string
+                description: Данные заголовок использует Windows приложение Yandex.Music, если пользователь не авторизован
+                example: "os=unknown; os_version=unknown; manufacturer=unknown; model=unknown; clid=; device_id=unknown; uuid=unknown"
+  
+  /landing3/{landingBlock}:
+    parameters:
+      - in: path
+        name: landingBlock
+        required: true
+        schema:
+          type: string
+          enum: ['new-playlists', 'new-releases', 'new-playlists', 'chart', 'podcasts']
+
+  
+  /landing3/chart/{chartType}:
+    parameters:
+      - in: path
+        name: chartType
+        required: true
+        schema: 
+          type: string
+          enum: ["russia", "world"]
     get:
       responses:
         200:
