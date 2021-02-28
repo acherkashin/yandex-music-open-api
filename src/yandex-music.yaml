@@ -1,9 +1,7 @@
 openapi: 3.0.1
 info:
   title: Yandex Music Api
-  description: 'This is a sample server Petstore server.  You can find out more about     Swagger
-    at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For
-    this sample, you can use the api key `special-key` to test the authorization     filters.'
+  description: 'Swagger документация для Yandex Music API.'
   version: 1.0.0
 servers:
 - url: https://api.music.yandex.net:443/
@@ -15,7 +13,31 @@ paths:
         200:
           description: Ok
           content: {}
-        400:
-          description: Bad request
+  /albums/{albumId}/:
+    parameters:
+      - in: path
+        name: albumId
+        schema:
+          type: number
+        required: true
+        example: 7019818
+    get:
+      responses:
+        200:
+          description: Ok
           content: {}
+  /albums/{albumId}/with-tracks:
+    parameters:
+      - in: path
+        name: albumId
+        schema:
+          type: number
+        required: true
+        example: 7019818
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
 components: {}
