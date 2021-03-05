@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "chrome:windows": ".\\run-chrome-windows.ps1"
   },
   "author": "Cherkashin Alexander",
   "license": "Apache-2.0",

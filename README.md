@@ -24,9 +24,14 @@ open -na Google\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir
 Windows:
 
 ```
+npm run chrome:windows
+```
+
+или
+
+```
 cd C:\Program Files (x86)\Google\Chrome\Application
 .\Chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
-
 ```
 
 Linux:
