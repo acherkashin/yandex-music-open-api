@@ -164,4 +164,27 @@ paths:
           description: Ok
           content: {}
 
+  /users/{userId}/playlists/{kind}:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        # TODO: почему называется kind?  
+        name: kind
+        description: Идентификатор плейлиста
+        schema: 
+          type: number
+          example: 1000
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
 components: {}
