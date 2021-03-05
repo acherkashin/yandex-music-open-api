@@ -163,6 +163,9 @@ paths:
         200:
           description: Ok
           content: {}
+        405:
+          description: "Error: Method Not Allowed"
+          content: {}
 
   /users/{userId}/playlists/{kind}:
     parameters:
@@ -175,10 +178,10 @@ paths:
           example: 541320800
       - in: path
         required: true
-        # TODO: почему называется kind?  
+        # TODO: почему называется kind?
         name: kind
         description: Идентификатор плейлиста
-        schema: 
+        schema:
           type: number
           example: 1000
     get:
@@ -215,6 +218,85 @@ paths:
           type: boolean
           example: false
     get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /users/{userId}/playlists/create:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+              example: '{"title" : "Название плейлиста", "visibility": "public"}'
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized
+
+  /users/{userId}/playlists/{kind}/name:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        # TODO: почему называется kind?
+        name: kind
+        description: Идентификатор плейлиста
+        schema:
+          type: number
+          example: 1000
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+            # TODO: test
+            example: '{"value" : "new-name"}'
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /users/{userId}/playlists/{kind}/delete:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        # TODO: почему называется kind?
+        name: kind
+        description: Идентификатор плейлиста
+        schema:
+          type: number
+          example: 1000
+    delete:
       responses:
         200:
           description: Ok
