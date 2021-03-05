@@ -164,4 +164,37 @@ paths:
           description: Ok
           content: {}
 
+  /users/{userId}/playlists:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: query
+        required: true
+        name: kinds
+        schema:
+          type: string
+          example: "1000,1003"
+      - in: query
+        required: true
+        name: mixed
+        schema:
+          type: boolean
+          example: false
+      - in: query
+        required: true
+        name: rich-tracks
+        schema:
+          type: boolean
+          example: false
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
 components: {}
