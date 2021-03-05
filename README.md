@@ -40,3 +40,10 @@ TODO
 
 Для тестирования CORS используйте [следующую ссылку](https://webbrowsertools.com/test-cors/).
 
+# Помощь
+
+Все вопросы касающиеся yandex music api, могут быть заданы в [Telegram чате](https://t.me/yandex_music_api).
+
+# Благодарность
+
+Спасибо [MarshalX](https://github.com/MarshalX/), [его работа](https://github.com/MarshalX/yandex-music-api) положена в основу [yandex-music-extension](https://github.com/acherkashin/yandex-music-extension) и [yandex-music-open-api](https://github.com/acherkashin/yandex-music-open-api).
