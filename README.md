@@ -17,14 +17,19 @@ npm start
 Mac OS:
 
 ```
-cd /Applications/
+npm run chrome:mac
+```
+
+или
+
+```
 open -na Google\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials
 ```
 
 Windows:
 
 ```
-npm run chrome:windows
+npm run chrome:win
 ```
 
 или
