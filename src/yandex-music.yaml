@@ -178,7 +178,6 @@ paths:
           example: 541320800
       - in: path
         required: true
-        # TODO: почему называется kind?
         name: kind
         description: Идентификатор плейлиста
         schema:
@@ -259,7 +258,6 @@ paths:
           example: 541320800
       - in: path
         required: true
-        # TODO: почему называется kind?
         name: kind
         description: Идентификатор плейлиста
         schema:
@@ -290,7 +288,6 @@ paths:
           example: 541320800
       - in: path
         required: true
-        # TODO: почему называется kind?
         name: kind
         description: Идентификатор плейлиста
         schema:
@@ -301,5 +298,139 @@ paths:
         200:
           description: Ok
           content: {}
+
+  # TODO: Complete
+  /users/{userId}/playlists/{kind}/change-relative:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        name: kind
+        description: Идентификатор плейлиста
+        schema:
+          type: number
+          example: 1000
+    post:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /users/{userId}/likes/tracks/add-multiple:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+            example: '{"track-ids" : "7019818,29238706"}'
+      responses:
+        200:
+          description: Ok
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+
+  /users/{userId}/likes/tracks/remove:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+    post:
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+            example: '{"track-ids" : "7019818,29238706"}'
+      responses:
+        200:
+          description: Ok
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+  
+  /users/{userId}/likes/tracks:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /tracks/:
+    post:
+      requestBody:
+        required: true
+        content: 
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+              example: '{"track-ids": "7019818,29238706", "with-positions": false}'
+      responses:
+        200: 
+          description: Ok
+          content: {}
+        400:
+          description: Bad Request
+          content: {}
+
+  /tracks/{trackId}/download-info:
+    parameters:
+      - in: path
+        required: true
+        name: trackId
+        schema: 
+          type: string
+          example: '78550148'
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /artists/{artistId}/track-ids-by-rating:
+    parameters:
+      - in: path
+        required: true
+        name: artistId
+        schema: 
+          type: string
+          example: 218099
+    get:
+      responses:
+        200:
+          description: Ok
+          content: {}
+        
 
 components: {}
