@@ -4,7 +4,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open",
-    "chrome:windows": ".\\run-chrome-windows.ps1",
+    "chrome:win": ".\\run-chrome-windows.ps1",
     "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server"
   },
   "author": "Cherkashin Alexander",

@@ -9,6 +9,8 @@ servers:
 paths:
   /feed:
     get:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -56,7 +58,6 @@ paths:
           description: Ok
           content: {}
 
-  #TODO: Добавить авторизацию
   /landing3:
     parameters:
       - in: query
@@ -70,6 +71,8 @@ paths:
           multiple:
             value: "new-playlists, new-playlists"
     get:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -159,12 +162,14 @@ paths:
           type: number
           example: 541320800
     get:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
           content: {}
         405:
-          description: "Error: Method Not Allowed"
+          description: "Method Not Allowed"
           content: {}
 
   /users/{userId}/playlists/{kind}:
@@ -184,6 +189,8 @@ paths:
           type: number
           example: 1000
     get:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -217,6 +224,8 @@ paths:
           type: boolean
           example: false
     get:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -264,6 +273,8 @@ paths:
           type: number
           example: 1000
     post:
+      security: 
+        - oAuth: []
       requestBody:
         required: true
         content:
@@ -294,6 +305,8 @@ paths:
           type: number
           example: 1000
     delete:
+      security: 
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -332,6 +345,8 @@ paths:
           type: number
           example: 541320800
     post:
+      security: 
+        - oAuth: []      
       requestBody:
         required: true
         content:
@@ -357,6 +372,8 @@ paths:
           type: number
           example: 541320800
     post:
+      security: 
+        - oAuth: []
       requestBody:
         required: true
         content:
@@ -430,7 +447,14 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
-        
+          content: {}        
 
-components: {}
+components: 
+  securitySchemes:
+      oAuth:
+        type: oauth2
+        description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
+        flows:
+          password:
+            tokenUrl: https://oauth.yandex.ru/token
+            scopes: {}
