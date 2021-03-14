@@ -13,6 +13,7 @@ tags:
   - name: "playlists"
   - name: "landing"
   - name: "artists"
+  - name: "rotor"
 
 paths:
   /feed:
@@ -579,6 +580,23 @@ paths:
     get:
       tags:
         - "artists"
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /rotor/stations/list:
+    parameters:
+      - in: query
+        required: false
+        name: language
+        schema:
+          type: string
+          example: ru
+
+    get:
+      tags:
+        - "rotor"
       responses:
         200:
           description: Ok
