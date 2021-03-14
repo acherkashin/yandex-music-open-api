@@ -556,6 +556,26 @@ paths:
         schema:
           type: string
           example: 218099
+      - in: query
+        required: false
+        name: page
+        schema:
+          type: number
+          example: 0
+      - in: query
+        required: false
+        name: page-size
+        schema:
+          type: number
+          example: 20
+      - in: query
+        required: false
+        name: sort-by
+        schema:
+          type: string
+          enum:
+            - "year"
+            - "rating"
     get:
       tags:
         - "artists"
