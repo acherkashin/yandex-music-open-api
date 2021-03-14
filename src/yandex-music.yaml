@@ -536,6 +536,22 @@ paths:
           description: Ok
           content: {}
 
+  /artists/{artistId}/direct-albums:
+    parameters:
+      - in: path
+        required: true
+        name: artistId
+        schema:
+          type: string
+          example: 218099
+    get:
+      tags:
+        - "artists"
+      responses:
+        200:
+          description: Ok
+          content: {}
+
 components:
   securitySchemes:
     oAuth:
