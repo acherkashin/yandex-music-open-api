@@ -164,9 +164,15 @@ paths:
           content: 
             application/json:
               schema: 
-                type: array
-                items:
-                  $ref: '#/components/schemas/Playlist'
+                type: object
+                properties:
+                  invocationInfo:
+                      type: object
+                      $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Playlist'
         400:
           description: Bad Request
           content: {}
@@ -546,6 +552,15 @@ components:
           tokenUrl: https://oauth.yandex.ru/token
           scopes: {}
   schemas:
+    InvocationInfo:
+      type: object
+      properties:
+        "exec-duration-millis":
+          type: number
+        hostname:
+          type: string
+        "req-id":
+          type: number  
     Album:
       type: object
       properties:
