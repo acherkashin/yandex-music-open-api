@@ -167,12 +167,12 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                      type: object
-                      $ref: '#/components/schemas/InvocationInfo'
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: array
                     items:
-                        $ref: '#/components/schemas/Playlist'
+                      $ref: '#/components/schemas/Playlist'
         400:
           description: Bad Request
           content: {}
