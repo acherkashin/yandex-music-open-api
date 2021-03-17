@@ -139,6 +139,44 @@ paths:
           description: Ok
           content: {}
 
+  /playlists/list:
+    description: Получение полной информации о плейлистах по их идентификатору
+    parameters:
+      - in: query
+        name: playlistIds
+        description: uid владельца плейлиста и kind плейлиста через двоеточие и запятую
+        schema:
+          type: string
+          example: 103372440:1878,460140864:1000
+    post:
+      tags:
+        - "playlists"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+              example: '{"playlistIds": "103372440:1878,460140864:1000"}'
+      responses:
+        200:
+          description: Ok
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Playlist'
+        400:
+          description: Bad Request
+          content: {}
+
   /search:
     parameters:
       - in: query
@@ -593,3 +631,320 @@ components:
         password:
           tokenUrl: https://oauth.yandex.ru/token
           scopes: {}
+  schemas:
+    InvocationInfo:
+      type: object
+      properties:
+        "exec-duration-millis":
+          type: number
+        hostname:
+          type: string
+        "req-id":
+          type: number  
+    Album:
+      type: object
+      properties:
+        id:
+          type: number
+        error:
+          description: Getting album error
+          type: string
+          nullable: true
+        title:
+          type: string
+        "type":
+          type: string
+          enum: ["single", "podcast"]
+        metaType:
+          type: string
+          enum: ["single", "podcast", "music"]
+        year:
+          description: Release year
+          type: number
+        releaseDate:
+          description: Release date in ISO 8601 format
+          type: string
+        coverUri:
+          type: string
+        ogImage:
+          type: string
+        genre:
+          description: Music genre
+          type: string
+        buy:
+          type: array
+          items:
+            type: object
+        trackCount:
+          type: number
+        recent:
+          description: Is new album
+          type: boolean
+        veryImportant:
+          description: Whether album is popular for listeners
+          type: boolean
+        artists:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/Artist'
+        labels:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              name:
+                type: string
+        available:
+          type: boolean
+        availableForPremiumUsers:
+          type: boolean
+        availableForMobile:
+          type: boolean
+        availablePartially:
+          type: boolean
+        bests:
+          description: the best tracks ids
+          type: array
+          items:
+            type: number
+        prerolls:
+          type: array
+          items:
+            type: object
+        volumes:
+          description: Треки альбома, разделенные по дискам.
+          type: array
+          nullable: true
+          items:
+            type: array
+            items:
+              type: object
+              $ref: '#/components/schemas/Track'
+    Artist:
+      type: object
+      properties:
+        composer:
+          type: boolean
+        cover:
+          type: object
+          nullable: true
+          $ref: '#/components/schemas/Cover'
+        decomposed:
+          type: array
+          nullable: true
+          items:
+            type: object
+        genres:
+          type: array
+          items:
+            type: object
+        id:
+          type: string
+        name:
+          type: string
+        various:
+          type: boolean
+        popularTracks:
+          type: array
+          nullable: true
+          items:
+            type: object
+            $ref: '#/components/schemas/Track'
+        ticketsAvailable:
+          description: Имеются ли в продаже билеты на концерт
+          nullable: true
+          type: boolean
+        regions:
+          type: array
+          nullable: true
+          items:
+            type: string
+    Cover:
+      type: object
+      properties:
+        custom:
+          type: boolean
+          nullable: true
+        dir:
+          type: string
+          nullable: true
+        "type":
+          nullable: true
+          type: string
+          enum: ["pic", "mosaic"]
+        itemsUri:
+          type: array
+          nullable: true
+          items: 
+            type: string
+        uri:
+          type: string
+          nullable: true
+        version:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+          description: If exists other properties is missing
+    Owner:
+      type: object
+      properties:
+        login:
+          type: string
+        name:
+          type: string
+        sex:
+          type: string
+        uid:
+          type: number
+        verified:
+          type: boolean
+    Track:
+      type: object
+      properties:
+        albums:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/Album'
+        artists:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/Artist'
+        available:
+          type: boolean
+        availableForPremiumUsers:
+          type: boolean 
+        availableFullWithoutPermission:
+          type: boolean
+        coverUri:
+          description: Cover uri template
+          type: string
+        durationMs:
+          type: number
+        fileSize:
+          type: number 
+        id:
+          type: string
+        lyricsAvailable:
+          type: boolean
+        major:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        normalization:
+          type: object
+          properties:
+            gain:
+              type: number
+            peak:
+              type: number
+        ogImage:
+          type: string
+        previewDurationMs:
+          type: number
+        realId:
+          type: string
+        rememberPosition:
+          type: boolean
+        storageDir:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+    TrackItem:
+      type: object
+      properties:
+        id:
+          type: number
+        playCount:
+          type: number
+        recent:
+          type: boolean
+        timestamp:
+          type: string
+        track:
+          description: Null when tracks are not riched
+          type: object
+          $ref: '#/components/schemas/Track'
+    Playlist: 
+      description: play list data
+      type: object
+      properties:
+        playlistUuid:
+          type: string
+        description:
+          type: string
+        descriptionFormatted:
+          type: string
+        available:
+          type: boolean
+        collective:
+          type: boolean
+        cover:
+          type: object
+          $ref: '#/components/schemas/Cover'
+        created:
+          type: string
+        modified:
+          type: string
+        backgroundColor:
+          type: string
+        textColor:
+          type: string
+        durationMs:
+          type: number
+        isBunner:
+          type: boolean
+        isPremiere:
+          type: boolean
+        kind:
+          type: number
+        ogImage:
+          type: string
+        owner:
+          type: object
+          $ref: '#/components/schemas/Owner'
+        prerolls:
+          type: array
+          items:
+            type: object
+        revision:
+          type: number
+        snapshot:
+          type: number
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              value:
+                type: string
+        title:
+          type: string
+        trackCount:
+          type: number
+        uid:
+          type: number
+        visibility:
+          type: string
+          enum: ["public", "private"]
+        likesCount:
+          type: number
+        tracks:
+          type: array
+          nullable: true
+          items:
+            type: object
+            $ref: '#/components/schemas/TrackItem'          
