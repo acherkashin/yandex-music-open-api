@@ -15,6 +15,100 @@ tags:
   - name: "artists"
 
 paths:
+  /account/status:
+    description: Get account status for current user
+    get:
+      tags:
+        - "account"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    properties:
+                      account:
+                        type: object
+                        $ref: '#/components/schemas/Account'
+                      permissions:
+                        type: object
+                        properties:
+                          until:
+                            type: string
+                            example: "2021-03-24T18:13:40+00:00"
+                          values:
+                            type: array
+                            items:
+                              enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+                          default:
+                            type: array
+                            items:
+                              enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+                      subscription:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            hadAnySubscription:
+                              type: boolean
+                            canStartTrial:
+                              type: boolean
+                            mcdonalds:
+                              type: boolean
+                      subeditor:
+                        type: boolean
+                      subeditorLevel:
+                        type: number
+                      pretrialActive:
+                        type: boolean
+                      plus:
+                        type: object
+                        properties:
+                          hasPlus:
+                            type: boolean
+                          isTutorialCompleted:
+                            type: boolean
+                      defaultEmail:
+                        type: string
+                        example: "email@example.com"
+                      barBelow:
+                        type: object
+                        properties:
+                          alertId:
+                            type: string
+                          text:
+                            type: string
+                          bgColor:
+                            type: string
+                          textColor:
+                            type: string
+                          alertType:
+                            type: string
+                          button:
+                            type: object
+                            properties:
+                              text:
+                                type: string
+                              bgColor:
+                                type: string
+                              textColor:
+                                type: string
+                              uri:
+                                type: string
+                          closeButton:
+                            type: boolean
+        400:
+          description: Bad Request
+          content: {}
   /feed:
     get:
       security:
@@ -640,7 +734,38 @@ components:
         hostname:
           type: string
         "req-id":
-          type: number  
+          type: number
+    Account:
+      type: object
+      properties:
+        now:
+          type: string
+          example: "2021-03-17T18:13:40+00:00"
+        uid:
+          type: number
+        login:
+          type: string
+        region:
+          type: number
+        fullName:
+          type: string
+        secondName:
+          type: string 
+        firstName:
+          type: string
+        displayName:
+          type: string
+        serviceAvailable:
+          type: boolean
+        hostedUser:
+          type: boolean
+        "passport-phones":
+          type: array
+          items:
+            type: object
+            properties:
+              phone:
+                type: string 
     Album:
       type: object
       properties:
