@@ -35,77 +35,7 @@ paths:
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: object
-                    properties:
-                      account:
-                        type: object
-                        $ref: '#/components/schemas/Account'
-                      permissions:
-                        type: object
-                        properties:
-                          until:
-                            type: string
-                            example: "2021-03-24T18:13:40+00:00"
-                          values:
-                            type: array
-                            items:
-                              enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
-                          default:
-                            type: array
-                            items:
-                              enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
-                      subscription:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            hadAnySubscription:
-                              type: boolean
-                            canStartTrial:
-                              type: boolean
-                            mcdonalds:
-                              type: boolean
-                      subeditor:
-                        type: boolean
-                      subeditorLevel:
-                        type: number
-                      pretrialActive:
-                        type: boolean
-                      plus:
-                        type: object
-                        properties:
-                          hasPlus:
-                            type: boolean
-                          isTutorialCompleted:
-                            type: boolean
-                      defaultEmail:
-                        type: string
-                        example: "email@example.com"
-                      barBelow:
-                        type: object
-                        properties:
-                          alertId:
-                            type: string
-                          text:
-                            type: string
-                          bgColor:
-                            type: string
-                          textColor:
-                            type: string
-                          alertType:
-                            type: string
-                          button:
-                            type: object
-                            properties:
-                              text:
-                                type: string
-                              bgColor:
-                                type: string
-                              textColor:
-                                type: string
-                              uri:
-                                type: string
-                          closeButton:
-                            type: boolean
+                    $ref: '#/components/schemas/Status'
         400:
           description: Bad Request
           content: {}
@@ -737,30 +667,42 @@ components:
           type: number
     Account:
       type: object
+      description: Основная информация об аккаунте
       properties:
         now:
           type: string
+          description: Текущая дата и время
           example: "2021-03-17T18:13:40+00:00"
         uid:
           type: number
+          description: Уникальный идентификатор
         login:
           type: string
+          description: Виртуальное имя (обычно e-mail)
         region:
           type: number
+          description: Регион
         fullName:
           type: string
+          description: Полное имя (имя и фамилия)
         secondName:
-          type: string 
+          type: string
+          description: Фамилия
         firstName:
           type: string
+          description: Имя
         displayName:
           type: string
+          description: Отображаемое имя
         serviceAvailable:
           type: boolean
+          description: Доступен ли сервис
         hostedUser:
           type: boolean
+          description: Является ли пользователем чьим-то другим
         "passport-phones":
           type: array
+          description: Мобильные номера
           items:
             type: object
             properties:
@@ -1072,4 +1014,107 @@ components:
           nullable: true
           items:
             type: object
-            $ref: '#/components/schemas/TrackItem'          
+            $ref: '#/components/schemas/TrackItem' 
+    Status:
+      type: object
+      properties:
+        account:
+          type: object
+          $ref: '#/components/schemas/Account'
+        permissions:
+          type: object
+          $ref: '#/components/schemas/Permissions'
+        subscription:
+          type: object
+          $ref: '#/components/schemas/Subscription'
+        subeditor:
+          type: boolean
+          description: Наличие статуса модератора проверки корректности информации
+        subeditorLevel:
+          type: number
+          description: Уровень статуса модератора
+        pretrialActive:
+          type: boolean
+        plus:
+          type: object
+          description: Информация о Plus подписке
+          properties:
+            hasPlus:
+              type: boolean
+            isTutorialCompleted:
+              type: boolean
+        defaultEmail:
+          type: string
+          description: Основной e-mail адрес аккаунта
+          example: "email@example.com"
+        barBelow:
+          type: object
+          description: Блок с предупреждениями о конце подписки и подарках
+          $ref: '#/components/schemas/Alert'
+    Permissions:
+      type: object
+      description: Информация о правах пользователя, их изначальных значениях и даты окончания
+      properties:
+        until:
+          type: string
+          example: "2021-03-24T18:13:40+00:00"
+        values:
+          type: array
+          items:
+            enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+        default:
+          type: array
+          items:
+            enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+    Subscription:
+      type: object
+      description: Информация о подписках пользователя
+      properties:
+        hadAnySubscription:
+          type: boolean
+        canStartTrial:
+          type: boolean
+        mcdonalds:
+          type: boolean
+    Alert:
+      type: object
+      description: Блок с предупреждениями о конце подписки и подарках
+      properties:
+        alertId:
+          type: string
+          description: Уникальный идентификатор
+        text:
+          type: string
+          description: Текст предупреждения
+        bgColor:
+          type: string
+          description: Цвет заднего фона (HTML)
+        textColor:
+          type: string
+          description: Цвет текста (HTML)
+        alertType:
+          type: string
+          description: Тип предупреждения
+          example: "Promo_rk360"
+        button:
+          type: object
+          $ref: '#/components/schemas/AlertButton'
+        closeButton:
+          type: boolean
+          description: Наличие кнопки "Закрыть"
+    AlertButton:
+      type: object
+      description: кнопка со ссылкой
+      properties:
+        text:
+          type: string
+          description: Текст на кнопке
+        bgColor:
+          type: string
+          description: Цвет заднего фона (HTML)
+        textColor:
+          type: string
+          description: Цвет текста (HTML)
+        uri:
+          type: string
+          description: Ссылка, куда ведет кнопка
