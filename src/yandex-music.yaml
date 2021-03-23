@@ -657,7 +657,7 @@ components:
           scopes: {}
   schemas:
     InvocationInfo:
-      $ref: 'models/InvocationInfo.yaml'
+      $ref: '/src/models/InvocationInfo.yaml'
     Account:
       type: object
       description: Основная информация об аккаунте
