@@ -1,39 +1,11 @@
 import SwaggerUI from "swagger-ui";
 import "swagger-ui/dist/swagger-ui.css";
-const yamljs = require("yamljs");
-const resolveRefs = require("json-refs").resolveRefs;
+const yandexMusic = require("./yandex-music.yaml");
 
-/**
- * Return JSON with resolved references
- * @param {array | object} root - The structure to find JSON References within (Swagger spec)
- * @returns {Promise.<JSON>}
- */
-const multiFileSwagger = (root) => {
-  const options = {
-    filter: ["relative", "remote"],
-    loaderOptions: {
-      processContent: function (res, callback) {
-        callback(null, yamljs.parse(res.text));
-      },
-    },
-  };
-
-  return resolveRefs(root, options).then(
-    function (results) {
-      return results.resolved;
-    },
-    function (err) {
-      console.log(err.stack);
-    }
-  );
-};
 
 async function initSwaggerUI() {
-  const spec = require("./yandex-music.yaml");
-  const resolved = await multiFileSwagger(spec);
-
   const ui = SwaggerUI({
-    spec: resolved,
+    spec: yandexMusic,
     dom_id: "#swagger",
     // If set to true, it persists authorization data and it would not be lost on browser close/refresh
     persistAuthorization: true,
