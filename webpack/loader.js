@@ -1,5 +1,7 @@
 const yamljs = require("yamljs");
 const resolveRefs = require("json-refs").resolveRefs;
+const sp = require('synchronized-promise')
+const path = require('path');
 
 /**
  * Return JSON with resolved references
@@ -8,7 +10,8 @@ const resolveRefs = require("json-refs").resolveRefs;
  */
 const multiFileSwagger = (root) => {
   const options = {
-    filter: ["relative", "remote"],
+    filter: ["relative"],
+    location: path.join(__dirname, "..", "src", "yandex-music.yaml"),
     loaderOptions: {
       processContent: function (res, callback) {
         callback(null, yamljs.parse(res.text));
@@ -26,8 +29,9 @@ const multiFileSwagger = (root) => {
   );
 };
 
-module.exports = async function (rawJson) {
+module.exports = function (rawJson) {
+  //TODO: need to figure out how to write async webpack loaders
   const json = JSON.parse(rawJson);
-  const result = await multiFileSwagger(json);
+  const result = sp(multiFileSwagger)(json);
   return JSON.stringify(result);
 };
