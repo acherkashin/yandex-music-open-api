@@ -16,6 +16,28 @@ tags:
   - name: "rotor"
 
 paths:
+  /account/settings:
+    description: Получение настроек текущего пользователя
+    get:
+      tags: 
+        - account
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    $ref: '#components/schemas/UserSettings'
+
   /account/status:
     description: Get account status for current user
     get:
@@ -728,6 +750,8 @@ components:
           tokenUrl: https://oauth.yandex.ru/token
           scopes: {}
   schemas:
+    UserSettings:
+      $ref: './models/UserSettings.yaml'
     InvocationInfo:
       $ref: './models/InvocationInfo.yaml'
     Account:
