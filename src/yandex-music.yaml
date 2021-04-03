@@ -647,6 +647,22 @@ paths:
           description: Ok
           content: {}
 
+  /rotor/account/status:
+    description: "Получение статуса пользователя с дополнителными полями"
+    get: 
+      tags: 
+        - "rotor"
+        - "account"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content: {}
+        400:
+          description: Bad request
+          content: {}
+
   /rotor/stations/list:
     description: "Получение всех радиостанций с настройками пользователя"
     parameters:
