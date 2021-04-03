@@ -1,4 +1,4 @@
-# Yandex Music Open API
+<h1 align="center"><img alt="yandex-music-open-api" src="./assets/logo.svg" style="max-width:50rem"><br />yandex-music-open-api</h1>
 
 Swagger документация для Yandex Music.
 
