@@ -648,17 +648,55 @@ paths:
           content: {}
 
   /rotor/stations/list:
+    description: "Получение всех радиостанций с настройками пользователя"
     parameters:
       - in: query
         required: false
         name: language
+        description: "Язык, на котором будет информация о станциях"
         schema:
           type: string
           example: ru
-
     get:
       tags:
         - "rotor"
+      responses:
+        200:
+          description: Ok
+          content: {}
+
+  /rotor/stations/dashboard:
+    description: "Получение рекомендованных станций текущего пользователя"
+    get: 
+      security:
+          - oAuth: []
+      tags:
+        - "rotor"
+      responses:
+        200:
+          description: Ok
+          content: {}
+  
+  /rotor/station/{station}/feedback:
+    description: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
+    parameters:
+      - in: path
+        required: true
+        name: station
+        description: Станция
+        schema:
+          type: string
+    post:
+      tags:
+          - "rotor"
+      requestBody:
+        required: true
+        content:
+          # TODO: complete parameters 
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+              example: ''
       responses:
         200:
           description: Ok
