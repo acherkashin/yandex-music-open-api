@@ -675,14 +675,7 @@ components:
           scopes: {}
   schemas:
     InvocationInfo:
-      type: object
-      properties:
-        "exec-duration-millis":
-          type: number
-        hostname:
-          type: string
-        "req-id":
-          type: number
+      $ref: './models/InvocationInfo.yaml'
     Account:
       type: object
       description: Основная информация об аккаунте

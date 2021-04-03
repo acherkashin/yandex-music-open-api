@@ -14,9 +14,10 @@ module.exports = {
     rules: [
       {
         test: /\.yaml$/,
+        type: 'json',
         use: [
-          { loader: 'json-loader' },
-          { loader: 'yaml-loader' }
+          { loader: './webpack/loader.js' },
+          { loader: 'yaml-loader' },
         ]
       },
       {
