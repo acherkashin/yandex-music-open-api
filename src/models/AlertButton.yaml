@@ -1,0 +1,15 @@
+type: object
+description: кнопка со ссылкой
+properties:
+  text:
+    type: string
+    description: Текст на кнопке
+  bgColor:
+    type: string
+    description: Цвет заднего фона (HTML)
+  textColor:
+    type: string
+    description: Цвет текста (HTML)
+  uri:
+    type: string
+    description: Ссылка, куда ведет кнопка

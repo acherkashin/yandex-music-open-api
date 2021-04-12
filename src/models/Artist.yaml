@@ -1,0 +1,38 @@
+type: object
+properties:
+  composer:
+    type: boolean
+  cover:
+    type: object
+    nullable: true
+    $ref: 'Cover.yaml'
+  decomposed:
+    type: array
+    nullable: true
+    items:
+      type: object
+  genres:
+    type: array
+    items:
+      type: object
+  id:
+    type: string
+  name:
+    type: string
+  various:
+    type: boolean
+  popularTracks:
+    type: array
+    nullable: true
+    items:
+      type: object
+      $ref: 'Track.yaml'
+  ticketsAvailable:
+    description: Имеются ли в продаже билеты на концерт
+    nullable: true
+    type: boolean
+  regions:
+    type: array
+    nullable: true
+    items:
+      type: string

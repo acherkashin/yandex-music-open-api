@@ -1,0 +1,57 @@
+type: object
+properties:
+  albums:
+    type: array
+    items:
+      type: object
+      $ref: 'Album.yaml'
+  artists:
+    type: array
+    items:
+      type: object
+      $ref: 'Artist.yaml'
+  available:
+    type: boolean
+  availableForPremiumUsers:
+    type: boolean 
+  availableFullWithoutPermission:
+    type: boolean
+  coverUri:
+    description: Cover uri template
+    type: string
+  durationMs:
+    type: number
+  fileSize:
+    type: number 
+  id:
+    type: string
+  lyricsAvailable:
+    type: boolean
+  major:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+  normalization:
+    type: object
+    properties:
+      gain:
+        type: number
+      peak:
+        type: number
+  ogImage:
+    type: string
+  previewDurationMs:
+    type: number
+  realId:
+    type: string
+  rememberPosition:
+    type: boolean
+  storageDir:
+    type: string
+  title:
+    type: string
+  type:
+    type: string

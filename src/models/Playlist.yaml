@@ -1,0 +1,71 @@
+description: play list data
+type: object
+properties:
+  playlistUuid:
+    type: string
+  description:
+    type: string
+  descriptionFormatted:
+    type: string
+  available:
+    type: boolean
+  collective:
+    type: boolean
+  cover:
+    type: object
+    $ref: '#/components/schemas/Cover'
+  created:
+    type: string
+  modified:
+    type: string
+  backgroundColor:
+    type: string
+  textColor:
+    type: string
+  durationMs:
+    type: number
+  isBunner:
+    type: boolean
+  isPremiere:
+    type: boolean
+  kind:
+    type: number
+  ogImage:
+    type: string
+  owner:
+    type: object
+    $ref: '#/components/schemas/Owner'
+  prerolls:
+    type: array
+    items:
+      type: object
+  revision:
+    type: number
+  snapshot:
+    type: number
+  tags:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        value:
+          type: string
+  title:
+    type: string
+  trackCount:
+    type: number
+  uid:
+    type: number
+  visibility:
+    type: string
+    enum: ["public", "private"]
+  likesCount:
+    type: number
+  tracks:
+    type: array
+    nullable: true
+    items:
+      type: object
+      $ref: '#/components/schemas/TrackItem' 

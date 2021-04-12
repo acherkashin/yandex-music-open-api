@@ -1,0 +1,12 @@
+type: object
+properties:
+  login:
+    type: string
+  name:
+    type: string
+  sex:
+    type: string
+  uid:
+    type: number
+  verified:
+    type: boolean

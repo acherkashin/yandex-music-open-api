@@ -1,0 +1,81 @@
+type: object
+properties:
+  id:
+    type: number
+  error:
+    description: Getting album error
+    type: string
+    nullable: true
+  title:
+    type: string
+  "type":
+    type: string
+    enum: ["single", "podcast"]
+  metaType:
+    type: string
+    enum: ["single", "podcast", "music"]
+  year:
+    description: Release year
+    type: number
+  releaseDate:
+    description: Release date in ISO 8601 format
+    type: string
+  coverUri:
+    type: string
+  ogImage:
+    type: string
+  genre:
+    description: Music genre
+    type: string
+  buy:
+    type: array
+    items:
+      type: object
+  trackCount:
+    type: number
+  recent:
+    description: Is new album
+    type: boolean
+  veryImportant:
+    description: Whether album is popular for listeners
+    type: boolean
+  artists:
+    type: array
+    items:
+      type: object
+      $ref: 'Artist.yaml'
+  labels:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+  available:
+    type: boolean
+  availableForPremiumUsers:
+    type: boolean
+  availableForMobile:
+    type: boolean
+  availablePartially:
+    type: boolean
+  bests:
+    description: the best tracks ids
+    type: array
+    items:
+      type: number
+  prerolls:
+    type: array
+    items:
+      type: object
+  volumes:
+    description: Треки альбома, разделенные по дискам.
+    type: array
+    nullable: true
+    items:
+      type: array
+      items:
+        type: object
+        $ref: 'Track.yaml'

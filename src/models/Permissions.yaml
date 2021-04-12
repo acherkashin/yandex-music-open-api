@@ -1,0 +1,14 @@
+type: object
+description: Информация о правах пользователя, их изначальных значениях и даты окончания
+properties:
+  until:
+    type: string
+    example: "2021-03-24T18:13:40+00:00"
+  values:
+    type: array
+    items:
+      enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+  default:
+    type: array
+    items:
+      enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]

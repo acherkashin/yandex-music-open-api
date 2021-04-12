@@ -1,0 +1,42 @@
+type: object
+description: Основная информация об аккаунте
+properties:
+  now:
+    type: string
+    description: Текущая дата и время
+    example: "2021-03-17T18:13:40+00:00"
+  uid:
+    type: number
+    description: Уникальный идентификатор
+  login:
+    type: string
+    description: Виртуальное имя (обычно e-mail)
+  region:
+    type: number
+    description: Регион
+  fullName:
+    type: string
+    description: Полное имя (имя и фамилия)
+  secondName:
+    type: string
+    description: Фамилия
+  firstName:
+    type: string
+    description: Имя
+  displayName:
+    type: string
+    description: Отображаемое имя
+  serviceAvailable:
+    type: boolean
+    description: Доступен ли сервис
+  hostedUser:
+    type: boolean
+    description: Является ли пользователем чьим-то другим
+  "passport-phones":
+    type: array
+    description: Мобильные номера
+    items:
+      type: object
+      properties:
+        phone:
+          type: string 

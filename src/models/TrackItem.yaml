@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: number
+  playCount:
+    type: number
+  recent:
+    type: boolean
+  timestamp:
+    type: string
+  track:
+    description: Null when tracks are not riched
+    type: object
+    $ref: 'Track.yaml'

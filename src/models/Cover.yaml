@@ -1,0 +1,27 @@
+type: object
+properties:
+  custom:
+    type: boolean
+    nullable: true
+  dir:
+    type: string
+    nullable: true
+  "type":
+    nullable: true
+    type: string
+    enum: ["pic", "mosaic"]
+  itemsUri:
+    type: array
+    nullable: true
+    items: 
+      type: string
+  uri:
+    type: string
+    nullable: true
+  version:
+    type: string
+    nullable: true
+  error:
+    type: string
+    nullable: true
+    description: If exists other properties is missing

@@ -1,0 +1,25 @@
+type: object
+description: Блок с предупреждениями о конце подписки и подарках
+properties:
+  alertId:
+    type: string
+    description: Уникальный идентификатор
+  text:
+    type: string
+    description: Текст предупреждения
+  bgColor:
+    type: string
+    description: Цвет заднего фона (HTML)
+  textColor:
+    type: string
+    description: Цвет текста (HTML)
+  alertType:
+    type: string
+    description: Тип предупреждения
+    example: "Promo_rk360"
+  button:
+    type: object
+    $ref: 'AlertButton.yaml'
+  closeButton:
+    type: boolean
+    description: Наличие кнопки "Закрыть"

@@ -1,0 +1,9 @@
+type: object
+description: Информация о подписках пользователя
+properties:
+  hadAnySubscription:
+    type: boolean
+  canStartTrial:
+    type: boolean
+  mcdonalds:
+    type: boolean

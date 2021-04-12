@@ -1,0 +1,35 @@
+type: object
+properties:
+  account:
+    type: object
+    $ref: 'Account.yaml'
+  permissions:
+    type: object
+    $ref: 'Permissions.yaml'
+  subscription:
+    type: object
+    $ref: 'Subscription.yaml'
+  subeditor:
+    type: boolean
+    description: Наличие статуса модератора проверки корректности информации
+  subeditorLevel:
+    type: number
+    description: Уровень статуса модератора
+  pretrialActive:
+    type: boolean
+  plus:
+    type: object
+    description: Информация о Plus подписке
+    properties:
+      hasPlus:
+        type: boolean
+      isTutorialCompleted:
+        type: boolean
+  defaultEmail:
+    type: string
+    description: Основной e-mail адрес аккаунта
+    example: "email@example.com"
+  barBelow:
+    type: object
+    description: Блок с предупреждениями о конце подписки и подарках
+    $ref: 'Alert.yaml'
