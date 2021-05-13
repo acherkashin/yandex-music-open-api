@@ -485,6 +485,45 @@ paths:
           description: Ok
           content: {}
 
+  /users/{userId}/playlists/{kind}/recommendations:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        name: kind
+        description: Идентификатор плейлиста
+        schema:
+          type: number
+          example: 1000
+    get:
+      description: Получение рекомендаций для плейлиста
+      tags:
+        - "user"
+        - "playlists"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    $ref: '#/components/schemas/PlaylistRecommendations'
+        
+
   /users/{userId}/likes/tracks/add-multiple:
     parameters:
       - in: path
@@ -1259,4 +1298,16 @@ components:
             - $ref:  "#/components/schemas/Album"
             - $ref:  "#/components/schemas/Playlist"
             # - $ref:  "#/components/schemas/Video" TODO: https://github.com/MarshalX/yandex-music-api/blob/dcb012f6e3b24c141f5517bddb4655a88fe856c8/yandex_music/search/best.py#L27
+    PlaylistRecommendations:
+      type: object
+      description: рекомендации для плейлиста
+      properties:
+        batch_id:
+          type: string
+          description: Уникальный идентификатор партии треков
+        tracks:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/Track"
               
