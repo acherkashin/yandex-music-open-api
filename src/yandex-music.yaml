@@ -17,8 +17,9 @@ tags:
 
 paths:
   /account/settings:
-    description: Получение настроек текущего пользователя
+    description: Настройки текущего пользователя
     get:
+      summary: Получение настроек текущего пользователя 
       tags: 
         - account
       security:
@@ -32,11 +33,55 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    $ref: '#/components/schemas/UserSettings'
+    post:
+      summary: Изменение настроек текущего пользователя
+      parameters:
+      - in: query
+        name: data
+        description: Словарь параметров и значений
+        schema:
+          type: object
+          additionalProperties: true
+          example:
+            theme: "black"
+            volumePercents: 80
+            adsDisabled: true
+      tags: 
+        - account
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                description: Настройки пользователя или "None"
+                type: object
+                properties:
+                  invocationInfo:
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: object
-                    $ref: '#/components/schemas/UserSettings'
+                    oneOf:
+                      - $ref: '#/components/schemas/UserSettings'
+                      - type: string
+                        example: "None" 
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Настройки пользователя или "None"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: '#/components/schemas/InvocationInfo'
+                  error:
+                    $ref: '#/components/schemas/Error'                  
 
   /account/status:
     description: Get account status for current user
@@ -54,10 +99,8 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
-                    type: object
                     $ref: '#/components/schemas/Status'
         400:
           description: Bad Request
@@ -214,7 +257,6 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: array
@@ -297,11 +339,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
-                    type: object
-                    $ref: '#components/schemas/Suggestions'
+                    $ref: '#/components/schemas/Suggestions'
                   
 
   /users/{userId}/playlists/{kind}:
@@ -439,11 +479,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
-                    type: object
-                    $ref: '#components/schemas/Playlist'
+                    $ref: '#/components/schemas/Playlist'
 
   /users/{userId}/playlists/{kind}/delete:
     parameters:
@@ -530,10 +568,8 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
-                    type: object
                     $ref: '#/components/schemas/PlaylistRecommendations'
 
   /users/{userId}/playlists/{kind}/visibility:
@@ -581,11 +617,10 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: object
-                    $ref: '#components/schemas/Playlist'
+                    $ref: '#/components/schemas/Playlist'
         400:
           description: Bad Request
           content:
@@ -594,15 +629,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: '#/components/schemas/InvocationInfo'
                   error:
-                    type: object
-                    properties:
-                      name: 
-                        type: string
-                      message:
-                        type: string
+                    $ref: '#/components/schemas/Error' 
 
   /users/{userId}/likes/tracks/add-multiple:
     parameters:
@@ -931,6 +960,9 @@ components:
           type: string
         theme: 
           type: string
+          enum:
+            - "black"
+            - "default"
           description: Тема оформления.
           example: "black"
         promosDisabled:
@@ -951,6 +983,15 @@ components:
           type: string
         "req-id":
           type: number
+    Error:
+      type: object
+      properties:
+        name: 
+          type: string
+          example: "validate"
+        message:
+          type: string
+          example: "Parameters requirements are not met"
     Account:
       type: object
       description: Основная информация об аккаунте
