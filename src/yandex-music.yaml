@@ -414,6 +414,7 @@ paths:
           type: number
           example: 1000
     post:
+      summary: Изменение названия плейлиста.
       tags:
         - "user"
         - "playlists"
@@ -424,13 +425,25 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-            # TODO: test
-            example: '{"value" : "new-name"}'
+              type: object
+              properties:
+                value: 
+                  type: string
+                  example: new-name
       responses:
         200:
-          description: Ok
-          content: {}
+          description: Изменение видимости плейлиста
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    $ref: '#components/schemas/Playlist'
 
   /users/{userId}/playlists/{kind}/delete:
     parameters:
