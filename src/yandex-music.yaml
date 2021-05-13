@@ -522,7 +522,74 @@ paths:
                   result:
                     type: object
                     $ref: '#/components/schemas/PlaylistRecommendations'
-        
+
+  /users/{userId}/playlists/{kind}/visibility:
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: path
+        required: true
+        name: kind
+        description: Идентификатор плейлиста
+        schema:
+          type: number
+          example: 1000
+    post:
+      summary: Изменение видимости плейлиста
+      description: Необходимо передать "public" или "private" в качестве значения 
+      tags:
+        - "user"
+        - "playlists"
+      security:
+        - oAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                  enum:
+                    - "public"
+                    - "private"
+      responses:
+        200:
+          description: Изменение видимости плейлиста
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    $ref: '#components/schemas/Playlist'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  error:
+                    type: object
+                    properties:
+                      name: 
+                        type: string
+                      message:
+                        type: string
 
   /users/{userId}/likes/tracks/add-multiple:
     parameters:
