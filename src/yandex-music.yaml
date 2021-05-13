@@ -36,7 +36,7 @@ paths:
                     $ref: '#/components/schemas/InvocationInfo'
                   result:
                     type: object
-                    $ref: '#components/schemas/UserSettings'
+                    $ref: '#/components/schemas/UserSettings'
 
   /account/status:
     description: Get account status for current user
@@ -896,9 +896,61 @@ components:
           scopes: {}
   schemas:
     UserSettings:
-      $ref: './models/UserSettings.yaml'
+      type: object
+      properties: 
+        uid:
+          type: number
+        lastFmScrobblingEnabled:
+          type: boolean
+          example: false
+        facebookScrobblingEnabled:
+          type: boolean
+          example: false
+        shuffleEnabled:
+          type: boolean
+          example: false
+        addNewTrackOnPlaylistTop:
+          type: boolean
+          example: false
+        volumePercents:
+          type: boolean
+          example: 75
+        userMusicVisibility:
+          type: string
+          example: "PUBLIC"
+        userSocialVisibility:
+          type: string
+          example: "PUBLIC"
+        adsDisabled:
+          type: boolean
+          example: true
+        modified:
+          type: string
+          example: "2019-04-14T14:55:50+00:00"
+        rbtDisabled:
+          type: string
+        theme: 
+          type: string
+          description: Тема оформления.
+          example: "black"
+        promosDisabled:
+          type: boolean
+          example: true
+        autoPlayRadio:
+          type: boolean
+          example: true
+        syncQueueEnabled:
+          type: boolean
+          example: false
     InvocationInfo:
-      $ref: './models/InvocationInfo.yaml'
+      type: object
+      properties:
+        "exec-duration-millis":
+          type: number
+        hostname:
+          type: string
+        "req-id":
+          type: number
     Account:
       type: object
       description: Основная информация об аккаунте

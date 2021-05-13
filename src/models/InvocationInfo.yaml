@@ -1,8 +1,0 @@
-type: object
-properties:
-  "exec-duration-millis":
-    type: number
-  hostname:
-    type: string
-  "req-id":
-    type: number
