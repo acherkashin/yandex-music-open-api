@@ -277,6 +277,32 @@ paths:
         405:
           description: "Method Not Allowed"
           content: {}
+  
+  /search/suggest:
+    parameters:
+      - in: query
+        required: true
+        name: part
+        description: Часть поискового запроса
+        schema:
+          type: string
+          example: Король
+    get:
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: object
+                    $ref: '#components/schemas/Suggestions'
+                  
 
   /users/{userId}/playlists/{kind}:
     parameters:
@@ -1207,3 +1233,30 @@ components:
         uri:
           type: string
           description: Ссылка, куда ведет кнопка
+    Suggestions:
+      type: object
+      description: подсказки при поиске
+      properties:
+        best: 
+          type: object
+        suggestions:
+          type: array
+          items:
+            type: string
+    Best:
+      type: object
+      description: лучший результат поиска
+      properties:
+        type:
+          type: string
+          description: Тип лучшего результата
+        text: 
+          type: string
+        result:
+          oneOf:
+            - $ref:  "#/components/schemas/Track"
+            - $ref:  "#/components/schemas/Artist"
+            - $ref:  "#/components/schemas/Album"
+            - $ref:  "#/components/schemas/Playlist"
+            # - $ref:  "#/components/schemas/Video" TODO: https://github.com/MarshalX/yandex-music-api/blob/dcb012f6e3b24c141f5517bddb4655a88fe856c8/yandex_music/search/best.py#L27
+              
