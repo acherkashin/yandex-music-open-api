@@ -35,6 +35,26 @@ paths:
                   result:
                     type: object
                     $ref: '#components/schemas/Settings'
+  
+  /permission-alerts:
+    description: Получение оповещений. Нет обязательных параметров.
+    get:
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content: 
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/PermissionAlerts"
 
   /account/settings:
     description: Получение настроек текущего пользователя
@@ -1609,7 +1629,7 @@ components:
             type: string
     LicenceTextPart:
       type: object
-      description: представляющий часть текста с ссылкой на лицензионное соглашение
+      description: часть текста с ссылкой на лицензионное соглашение
       properties:
         text: 
           description: Часть текста.
@@ -1617,4 +1637,12 @@ components:
         url: 
           description: Ссылка на лицензионное соглашение.
           type: string
+    PermissionAlerts:
+      type: object
+      description: оповещения
+      properties:
+        alerts: 
+          type: array
+          items:
+            type: string
 
