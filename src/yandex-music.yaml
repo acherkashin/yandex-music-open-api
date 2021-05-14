@@ -16,10 +16,30 @@ tags:
   - name: "rotor"
 
 paths:
+  /settings:
+    description: Получение предложений по покупке. Нет обязательных параметров
+    get:
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: '#components/schemas/Settings'
+
   /account/settings:
     description: Получение настроек текущего пользователя
     get:
-      tags: 
+      tags:
         - account
       security:
         - oAuth: []
@@ -33,10 +53,10 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/UserSettings'
+                    $ref: "#/components/schemas/UserSettings"
 
   /account/status:
     description: Get account status for current user
@@ -48,17 +68,17 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/Status'
+                    $ref: "#/components/schemas/Status"
         400:
           description: Bad Request
           content: {}
@@ -208,18 +228,18 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Playlist'
+                      $ref: "#/components/schemas/Playlist"
         400:
           description: Bad Request
           content: {}
@@ -277,7 +297,7 @@ paths:
         405:
           description: "Method Not Allowed"
           content: {}
-  
+
   /search/suggest:
     parameters:
       - in: query
@@ -298,11 +318,10 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#components/schemas/Suggestions'
-                  
+                    $ref: "#components/schemas/Suggestions"
 
   /users/{userId}/playlists/{kind}:
     parameters:
@@ -427,7 +446,7 @@ paths:
             schema:
               type: object
               properties:
-                value: 
+                value:
                   type: string
                   example: new-name
       responses:
@@ -440,10 +459,10 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#components/schemas/Playlist'
+                    $ref: "#components/schemas/Playlist"
 
   /users/{userId}/playlists/{kind}/delete:
     parameters:
@@ -531,10 +550,10 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/PlaylistRecommendations'
+                    $ref: "#/components/schemas/PlaylistRecommendations"
 
   /users/{userId}/playlists/{kind}/visibility:
     parameters:
@@ -554,7 +573,7 @@ paths:
           example: 1000
     post:
       summary: Изменение видимости плейлиста
-      description: Необходимо передать "public" или "private" в качестве значения 
+      description: Необходимо передать "public" или "private" в качестве значения
       tags:
         - "user"
         - "playlists"
@@ -582,10 +601,10 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#components/schemas/Playlist'
+                    $ref: "#components/schemas/Playlist"
         400:
           description: Bad Request
           content:
@@ -595,11 +614,11 @@ paths:
                 properties:
                   invocationInfo:
                     type: object
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   error:
                     type: object
                     properties:
-                      name: 
+                      name:
                         type: string
                       message:
                         type: string
@@ -816,8 +835,8 @@ paths:
 
   /rotor/account/status:
     description: "Получение статуса пользователя с дополнителными полями"
-    get: 
-      tags: 
+    get:
+      tags:
         - "rotor"
         - "account"
       security:
@@ -850,16 +869,16 @@ paths:
 
   /rotor/stations/dashboard:
     description: "Получение рекомендованных станций текущего пользователя"
-    get: 
+    get:
       security:
-          - oAuth: []
+        - oAuth: []
       tags:
         - "rotor"
       responses:
         200:
           description: Ok
           content: {}
-  
+
   /rotor/station/{station}/feedback:
     description: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
     parameters:
@@ -871,15 +890,15 @@ paths:
           type: string
     post:
       tags:
-          - "rotor"
+        - "rotor"
       requestBody:
         required: true
         content:
-          # TODO: complete parameters 
+          # TODO: complete parameters
           application/x-www-form-urlencoded:
             schema:
               type: string
-              example: ''
+              example: ""
       responses:
         200:
           description: Ok
@@ -897,7 +916,7 @@ components:
   schemas:
     UserSettings:
       type: object
-      properties: 
+      properties:
         uid:
           type: number
         lastFmScrobblingEnabled:
@@ -929,7 +948,7 @@ components:
           example: "2019-04-14T14:55:50+00:00"
         rbtDisabled:
           type: string
-        theme: 
+        theme:
           type: string
           description: Тема оформления.
           example: "black"
@@ -993,7 +1012,7 @@ components:
             type: object
             properties:
               phone:
-                type: string 
+                type: string
     Album:
       type: object
       properties:
@@ -1040,7 +1059,7 @@ components:
           type: array
           items:
             type: object
-            $ref: '#/components/schemas/Artist'
+            $ref: "#/components/schemas/Artist"
         labels:
           type: array
           items:
@@ -1075,7 +1094,7 @@ components:
             type: array
             items:
               type: object
-              $ref: '#/components/schemas/Track'
+              $ref: "#/components/schemas/Track"
     Artist:
       type: object
       properties:
@@ -1084,7 +1103,7 @@ components:
         cover:
           type: object
           nullable: true
-          $ref: '#/components/schemas/Cover'
+          $ref: "#/components/schemas/Cover"
         decomposed:
           type: array
           nullable: true
@@ -1105,7 +1124,7 @@ components:
           nullable: true
           items:
             type: object
-            $ref: '#/components/schemas/Track'
+            $ref: "#/components/schemas/Track"
         ticketsAvailable:
           description: Имеются ли в продаже билеты на концерт
           nullable: true
@@ -1131,7 +1150,7 @@ components:
         itemsUri:
           type: array
           nullable: true
-          items: 
+          items:
             type: string
         uri:
           type: string
@@ -1163,16 +1182,16 @@ components:
           type: array
           items:
             type: object
-            $ref: '#/components/schemas/Album'
+            $ref: "#/components/schemas/Album"
         artists:
           type: array
           items:
             type: object
-            $ref: '#/components/schemas/Artist'
+            $ref: "#/components/schemas/Artist"
         available:
           type: boolean
         availableForPremiumUsers:
-          type: boolean 
+          type: boolean
         availableFullWithoutPermission:
           type: boolean
         coverUri:
@@ -1181,7 +1200,7 @@ components:
         durationMs:
           type: number
         fileSize:
-          type: number 
+          type: number
         id:
           type: string
         lyricsAvailable:
@@ -1228,8 +1247,8 @@ components:
         track:
           description: Null when tracks are not riched
           type: object
-          $ref: '#/components/schemas/Track'
-    Playlist: 
+          $ref: "#/components/schemas/Track"
+    Playlist:
       description: play list data
       type: object
       properties:
@@ -1245,7 +1264,7 @@ components:
           type: boolean
         cover:
           type: object
-          $ref: '#/components/schemas/Cover'
+          $ref: "#/components/schemas/Cover"
         created:
           type: string
         modified:
@@ -1266,7 +1285,7 @@ components:
           type: string
         owner:
           type: object
-          $ref: '#/components/schemas/Owner'
+          $ref: "#/components/schemas/Owner"
         prerolls:
           type: array
           items:
@@ -1300,19 +1319,19 @@ components:
           nullable: true
           items:
             type: object
-            $ref: '#/components/schemas/TrackItem' 
+            $ref: "#/components/schemas/TrackItem"
     Status:
       type: object
       properties:
         account:
           type: object
-          $ref: '#/components/schemas/Account'
+          $ref: "#/components/schemas/Account"
         permissions:
           type: object
-          $ref: '#/components/schemas/Permissions'
+          $ref: "#/components/schemas/Permissions"
         subscription:
           type: object
-          $ref: '#/components/schemas/Subscription'
+          $ref: "#/components/schemas/Subscription"
         subeditor:
           type: boolean
           description: Наличие статуса модератора проверки корректности информации
@@ -1336,7 +1355,7 @@ components:
         barBelow:
           type: object
           description: Блок с предупреждениями о конце подписки и подарках
-          $ref: '#/components/schemas/Alert'
+          $ref: "#/components/schemas/Alert"
     Permissions:
       type: object
       description: Информация о правах пользователя, их изначальных значениях и даты окончания
@@ -1347,11 +1366,27 @@ components:
         values:
           type: array
           items:
-            enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+            enum:
+              [
+                "landing-play",
+                "feed-play",
+                "radio-play",
+                "mix-play",
+                "radio-skips",
+                "play-radio-full-tracks",
+              ]
         default:
           type: array
           items:
-            enum: ["landing-play","feed-play","radio-play","mix-play","radio-skips","play-radio-full-tracks"]
+            enum:
+              [
+                "landing-play",
+                "feed-play",
+                "radio-play",
+                "mix-play",
+                "radio-skips",
+                "play-radio-full-tracks",
+              ]
     Subscription:
       type: object
       description: Информация о подписках пользователя
@@ -1384,7 +1419,7 @@ components:
           example: "Promo_rk360"
         button:
           type: object
-          $ref: '#/components/schemas/AlertButton'
+          $ref: "#/components/schemas/AlertButton"
         closeButton:
           type: boolean
           description: Наличие кнопки "Закрыть"
@@ -1408,7 +1443,7 @@ components:
       type: object
       description: подсказки при поиске
       properties:
-        best: 
+        best:
           type: object
         suggestions:
           type: array
@@ -1421,14 +1456,14 @@ components:
         type:
           type: string
           description: Тип лучшего результата
-        text: 
+        text:
           type: string
         result:
           oneOf:
-            - $ref:  "#/components/schemas/Track"
-            - $ref:  "#/components/schemas/Artist"
-            - $ref:  "#/components/schemas/Album"
-            - $ref:  "#/components/schemas/Playlist"
+            - $ref: "#/components/schemas/Track"
+            - $ref: "#/components/schemas/Artist"
+            - $ref: "#/components/schemas/Album"
+            - $ref: "#/components/schemas/Playlist"
             # - $ref:  "#/components/schemas/Video" TODO: https://github.com/MarshalX/yandex-music-api/blob/dcb012f6e3b24c141f5517bddb4655a88fe856c8/yandex_music/search/best.py#L27
     PlaylistRecommendations:
       type: object
@@ -1442,4 +1477,144 @@ components:
           items:
             type: object
             $ref: "#/components/schemas/Track"
-              
+    Settings:
+      type: object
+      description: Предложения по покупке
+      properties:
+        inAppProducts:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/Product"
+        nativeProducts:
+          type: array
+          items:
+            type: object
+            $ref: "#/components/schemas/Product"
+        webPaymentUrl:
+          type: string
+        webPaymentMonthProductPrice:
+          type: object
+          $ref: "#/components/schemas/Price"
+        promoCodesEnabled:
+          type: boolean
+    Price:
+      type: object
+      description: цена
+      properties:
+        amount:
+          description: Количество единиц
+          type: number
+        currency:
+          description: Валюта
+          type: string
+    Product:
+      type: object
+      description: продаваемый продукт
+      properties:
+        productId:
+          description: Уникальный идентификатор.
+          type: string
+        type:
+          description: Тип продаваемого.
+          type: string
+        commonPeriodDuration:
+          description: Длительность общего периода.
+          type: string
+        duration:
+          description: Длительность.
+          type: number
+        trialDuration:
+          description: Длительность испытательного срока.
+          type: number
+        price:
+          description: Цена.
+          type: object
+          $ref: "#/components/schemas/Price"
+        feature:
+          description: Предоставляемая возможность.
+          type: string
+        debug:
+          description: Отладочный продукт.
+          type: boolean
+        plus:
+          description: Даёт ли подписку "Плюс".
+          type: boolean
+        cheapest:
+          description: Самый дешёвый (лучшее предложение).
+          type: boolean
+        title:
+          description: Заголовок продукта.
+          type: string
+        familySub:
+          description: Семейная ли подписка.
+          type: boolean
+        fbImage:
+          description: Картинка для превью на facebook.
+          type: string
+        fbName:
+          description: Заголовок превью на facebook.
+          type: string
+        family:
+          description: Доступно ли для семьи.
+          type: boolean
+        features:
+          description: Список предоставляемых возможностей.
+          type: array
+          items:
+            type: string
+        description:
+          description: Описание.
+          type: string
+        available:
+          description: Доступна ли покупка.
+          type: boolean
+        trialAvailable:
+          description: Доступен ли пробный период.
+          type: boolean
+        trialPeriodDuration:
+          description: Длительность пробного периода.
+          type: string
+        introPeriodDuration:
+          description: Длительность вступительного периода TODO.
+          type: string
+        introPrice:
+          description: Цена вступительного периода.
+          type: object
+          $ref: "#/components/schemas/Price"
+        startPeriodDuration:
+          description: Длительность первого срока (за меньшую цену).
+          type: string
+        startPrice:
+          description: Цена за первый срок.
+          type: object
+          $ref: "#/components/schemas/Price"
+        licenceTextParts:
+          description: Длительность пробного периода.
+          type: object
+          $ref: "#/components/schemas/LicenceTextPart"
+        vendorTrialAvailable:
+          description: Доступен испытательный срок продавца TODO.
+          type: boolean
+        buttonText:
+          description: Текст кнопки.
+          type: string
+        buttonAdditionalText:
+          description: Дополнительный текст кнопки.
+          type: string
+        paymentMethodTypes:
+          description: Способы оплаты.
+          type: array
+          items:
+            type: string
+    LicenceTextPart:
+      type: object
+      description: представляющий часть текста с ссылкой на лицензионное соглашение
+      properties:
+        text: 
+          description: Часть текста.
+          type: string
+        url: 
+          description: Ссылка на лицензионное соглашение.
+          type: string
+
