@@ -866,6 +866,34 @@ paths:
           description: Ok
           content: {}
 
+  /tracks/{trackId}/supplement:
+    description: Получение дополнительной информации о треке.
+    summary: Получение дополнительной информации о треке.
+    parameters:
+      - in: path
+        required: true
+        name: trackId
+        schema:
+          type: string
+          example: 32326555
+    get:
+      tags:
+        - "tracks"
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: '#/components/schemas/Supplement'
+                
   /artists/{artistId}/track-ids-by-rating:
     parameters:
       - in: path
@@ -1784,4 +1812,75 @@ components:
         accountStatus:
           type: object
           description: Информация об аккаунте пользователя.
-          $ref: "#/components/schemas/Status" 
+          $ref: "#/components/schemas/Status"
+    Supplement:
+      type: object
+      description: дополнительная информация о треке
+      properties:
+        id: 
+          type: number 
+          description: Уникальный идентификатор дополнительной информации.
+        lyrics: 
+          type: object
+          description: Текст песни.
+          $ref: "#/components/schemas/Lyrics"
+        videos: 
+          type: object
+          description: Видео.
+          $ref: "#/components/schemas/VideoSupplement"
+        radioIsAvailable: 
+          type: boolean
+          description: Доступно ли радио.
+        description: 
+          type: string
+          description: Полное описание эпизода подкаста.
+    Lyrics:
+      type: object
+      description: текст трека
+      properties:
+        id:
+          type: number 
+          description: Уникальный идентификатор текста трека.
+        lyrics: 
+          type: string
+          description: Первые строки текст песни.
+        hasRights:
+          type: boolean 
+          description: Есть ли права.
+        fullLyrics:
+          type: string 
+          description: Текст песни.
+        textLanguage: 
+          type: string 
+          description: Язык текста.
+        showTranslation:
+          type: boolean 
+          description: Доступен ли перевод.
+        url: 
+          type: string 
+          description: Ссылка на источник перевода. Обычно genius.com.
+    VideoSupplement:
+      type: object
+      description: видеоклипы
+      properties:
+        cover: 
+          type: string
+          description: URL на обложку видео.
+        provider: 
+          type: string
+          description: Сервис поставляющий видео.
+        title: 
+          type: string
+          description: Название видео.
+        providerVideoId: 
+          type: string
+          description: Уникальный идентификатор видео на сервисе.
+        url: 
+          type: string
+          description: URL на видео.
+        embedUrl: 
+          type: string
+          description: URL на видео, находящегося на серверах Яндекса.
+        embed: 
+          type: string
+          description: HTML тег для встраивания видео.
