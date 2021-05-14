@@ -38,21 +38,22 @@ paths:
                     $ref: '#/components/schemas/UserSettings'
     post:
       summary: Изменение настроек текущего пользователя
-      parameters:
-      - in: query
-        name: data
-        description: Словарь параметров и значений
-        schema:
-          type: object
-          additionalProperties: true
-          example:
-            theme: "black"
-            volumePercents: 80
-            adsDisabled: true
       tags: 
         - account
       security:
         - oAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              description: Словарь параметров и значений
+              type: object
+              additionalProperties: true
+              example:
+                theme: "black"
+                volumePercents: 80
+                adsDisabled: true
       responses:
         200:
           description: Ok
