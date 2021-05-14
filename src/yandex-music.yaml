@@ -112,6 +112,28 @@ paths:
                     type: object
                     $ref: "#/components/schemas/PromoCodeStatus"
 
+  /feed/wizard/is-passed:
+    get:
+      security:
+      - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    properties:
+                      isWizardPassed:
+                        type: boolean
+                        example: true
+
   /account/settings:
     description: Получение настроек текущего пользователя
     get:
