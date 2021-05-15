@@ -14,6 +14,7 @@ tags:
   - name: "landing"
   - name: "artists"
   - name: "rotor"
+  - name: "tags"
 
 paths:
   /settings:
@@ -232,6 +233,35 @@ paths:
         200:
           description: Ok
           content: {}
+
+  /tags/{tagId}/playlist-ids:
+    summary: Получение тега (подборки)
+    parameters:
+      - in: path
+        name: tagId
+        schema:
+          type: string
+        required: true
+        example: "рок"
+    get:
+      tags:
+        - "tags"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/TagResult"
 
   /albums/{albumId}/:
     parameters:
@@ -1092,11 +1122,9 @@ components:
           type: boolean
           example: 75
         userMusicVisibility:
-          type: string
-          example: "PUBLIC"
+          $ref: "#/components/schemas/VisibilityEnum"
         userSocialVisibility:
-          type: string
-          example: "PUBLIC"
+          $ref: "#/components/schemas/VisibilityEnum"
         adsDisabled:
           type: boolean
           example: true
@@ -1121,6 +1149,12 @@ components:
         syncQueueEnabled:
           type: boolean
           example: false
+    VisibilityEnum:
+      type: string
+      enum:
+        - "private"
+        - "public"
+      example: "public"
     InvocationInfo:
       type: object
       properties:
@@ -1884,3 +1918,47 @@ components:
         embed: 
           type: string
           description: HTML тег для встраивания видео.
+
+    TagResult:
+      type: object
+      description: Класс, представляющий тег и его плейлисты
+      properties:
+        tag:
+          $ref: "#/components/schemas/Tag"
+        ids:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlaylistId"
+    Tag:
+      type: object
+      description: Тег
+      required:
+        - id
+        - value
+        - name
+        - ogDescription
+      properties:
+        id:
+          type: string
+          description: Уникальный идентификатор тега
+        value:
+          type: string
+          description: Значение тега (название в lower case)
+        name:
+          type: string
+          description: Название тега (отображаемое)
+        ogDescription:
+          type: string
+          description: Описание тега для OpenGraph
+        ogImage:
+          type: string
+          description: Ссылка на изображение для OpenGraph
+    PlaylistId:
+      type: object
+      properties:
+        uid:
+          type: integer
+          description: Уникальный идентификатор пользователя владеющим плейлистом
+        kind:
+          type: integer
+          description: Уникальный идентификатор плейлиста
