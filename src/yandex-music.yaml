@@ -924,6 +924,34 @@ paths:
                     type: object
                     $ref: '#/components/schemas/Supplement'
                 
+  /tracks/{trackId}/similar:
+    summary: Получение похожих треков
+    description: Получение похожих треков
+    parameters:
+      - in: path
+        required: true
+        name: trackId
+        schema:
+          type: string
+          example: 32326555
+    get:
+      tags:
+        - tracks
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: '#/components/schemas/SimilarTracks'
+
   /artists/{artistId}/track-ids-by-rating:
     parameters:
       - in: path
@@ -1962,3 +1990,17 @@ components:
         kind:
           type: integer
           description: Уникальный идентификатор плейлиста
+    SimilarTracks:
+      type: object
+      description: список похожих треков на другой трек
+      properties:
+        track:
+          type: object
+          description: трек
+          $ref: "#/components/schemas/Track"
+        similarTracks:
+          type: array
+          description: Похожие треки
+          items:
+            $ref: "#/components/schemas/Track"
+
