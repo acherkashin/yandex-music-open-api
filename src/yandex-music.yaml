@@ -439,6 +439,40 @@ paths:
           description: "Method Not Allowed"
           content: {}
 
+  /users/{userId}/dislikes/tracks:
+    description: Получение треков с отметкой "Не рекомендовать"
+    summary: Получение треков с отметкой "Не рекомендовать"
+    parameters:
+      - in: path
+        required: true
+        name: userId
+        description: Идентификатор пользователя
+        schema:
+          type: number
+          example: 541320800
+      - in: query
+        required: false
+        name: if_modified_since_revision
+        description: TODO
+        schema: 
+          type: number
+    get:
+      tags:
+        - "user"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    $ref: '#/components/schemas/TracksList'
   /search/suggest:
     parameters:
       - in: query
@@ -1925,4 +1959,20 @@ components:
           description: Похожие треки
           items:
             $ref: "#/components/schemas/Track"
+    TracksList:
+      type: object
+      description: список треков
+      properties:
+        uid: 
+          type: number
+          description: Уникальный идентификатор пользователя
+        revisions: 
+          type: number
+          description: Актуальность данных TODO
+        tracks: 
+          type: array
+          description: Список треков в укороченной версии
+          items:
+            # TODO: add TrackShort type
+            type: object
 
