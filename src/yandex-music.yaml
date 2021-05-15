@@ -35,7 +35,7 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#components/schemas/Settings'
+                    $ref: '#/components/schemas/Settings'
   
   /permission-alerts:
     description: Получение оповещений. Нет обязательных параметров.
