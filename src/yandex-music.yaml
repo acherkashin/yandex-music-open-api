@@ -195,7 +195,6 @@ paths:
           content:
             application/json:
               schema:
-                description: Настройки пользователя или "None"
                 type: object
                 properties:
                   invocationInfo:
@@ -985,6 +984,90 @@ paths:
                   result:
                     type: object
                     $ref: '#/components/schemas/SimilarTracks'
+
+  /play-audio:
+    description: Метод для отправки текущего состояния прослушиваемого трека
+    post:
+      tags: 
+        - tracks
+      security:
+        - oAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - from
+              type: object
+              properties:
+                track-id:
+                  description: Уникальный идентификатор трека
+                  oneOf:
+                    - type: string
+                    - type: number
+                from-cache:
+                  type: boolean
+                  description: Проигрывается ли трек с кеша
+                from:
+                  type: string
+                  description: Наименования клиента с которого происходит прослушивание
+                play-id:
+                  type: string
+                  description: Уникальный идентификатор проигрывания
+                uid:
+                  type: number
+                  description: Уникальный идентификатор пользователя
+                timestamp:
+                  type: string
+                  description: Текущая дата и время в ISO
+                  example: "2021-03-17T18:13:40.000+00:00"
+                track-length-seconds:
+                  type: number
+                  description: Продолжительность трека в секундах
+                total-played-seconds:
+                  type: number
+                  description: Продолжительность трека в секундах
+                end-position-seconds:
+                  type: number
+                  description: Продолжительность трека в секундах
+                album-id:
+                  description: Уникальный идентификатор альбома
+                  oneOf:
+                    - type: string
+                    - type: number
+                playlist-id:
+                  type: string
+                  description: Уникальный идентификатор проигрывания
+                client-now:
+                  type: string
+                  description: Текущая дата и время клиента в ISO
+                  example: "2021-03-17T18:13:40.000+00:00"
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                description: Возвращает строку "ok" при успешном выполнении запроса
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: '#/components/schemas/InvocationInfo'
+                  result:
+                    type: string
+                    example: ok
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: '#/components/schemas/InvocationInfo'
+                  error:
+                    $ref: '#/components/schemas/Error'
 
   /artists/{artistId}/track-ids-by-rating:
     parameters:
