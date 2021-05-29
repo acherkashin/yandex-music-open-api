@@ -276,7 +276,17 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/Album"
 
   /albums/{albumId}/with-tracks:
     parameters:
@@ -290,9 +300,19 @@ paths:
       tags:
         - "albums"
       responses:
-        200:
-          description: Ok
-          content: {}
+          200:
+            description: Ok
+            content: 
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    invocationInfo:
+                      type: object
+                      $ref: "#/components/schemas/InvocationInfo"
+                    result:
+                      type: object
+                      $ref: "#/components/schemas/Album"
 
   /albums:
     post:
@@ -1366,49 +1386,58 @@ components:
       properties:
         id:
           type: number
+          description: Идентификатор альбома
         error:
-          description: Getting album error
+          description: Ошибка получения альбома
           type: string
           nullable: true
         title:
+          description: Название альбома
           type: string
         "type":
+          description: Тип альбома
           type: string
           enum: ["single", "podcast"]
         metaType:
+          description: Мета тип
           type: string
           enum: ["single", "podcast", "music"]
         year:
-          description: Release year
+          description: Год релиза
           type: number
         releaseDate:
-          description: Release date in ISO 8601 format
+          description: Дата релиза в формате ISO 8601
           type: string
         coverUri:
+          description: Ссылка на обложку
           type: string
         ogImage:
+          description: Ссылка на превью Open Graph
           type: string
         genre:
-          description: Music genre
+          description: Жанр музыки
           type: string
         buy:
           type: array
           items:
             type: object
         trackCount:
+          description: Количество треков.
           type: number
         recent:
-          description: Is new album
+          description: Является ли альбом новым
           type: boolean
         veryImportant:
-          description: Whether album is popular for listeners
+          description:  Популярен ли альбом у слушателей
           type: boolean
         artists:
+          description: Артисты
           type: array
           items:
             type: object
             $ref: "#/components/schemas/Artist"
         labels:
+          description: Лейблы
           type: array
           items:
             type: object
@@ -1418,19 +1447,24 @@ components:
               name:
                 type: string
         available:
+          description: Доступен ли альбом
           type: boolean
         availableForPremiumUsers:
+          description: Доступен ли альбом для пользователей с подпиской
           type: boolean
         availableForMobile:
+          description: Доступен ли альбом из приложения для телефона
           type: boolean
         availablePartially:
+          description: Доступен ли альбом частично для пользователей без подписки
           type: boolean
         bests:
-          description: the best tracks ids
+          description: ID лучших треков альбома
           type: array
           items:
             type: number
         prerolls:
+          description: Прероллы 
           type: array
           items:
             type: object
