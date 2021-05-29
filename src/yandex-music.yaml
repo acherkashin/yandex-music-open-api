@@ -323,12 +323,29 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-            example: '{"album-ids" : "13984185,13730064,13963354,13546288,13937809"}'
+              type: object
+              properties:
+                "album-ids": 
+                  type: array
+                  items:
+                    type: string
+                  example: [13984185,13730064,13963354,13546288,13937809]
       responses:
-        200:
-          description: Ok
-          content: {}
+          200:
+            description: Ok
+            content: 
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    invocationInfo:
+                      type: object
+                      $ref: "#/components/schemas/InvocationInfo"
+                    result:
+                      type: array
+                      items:
+                        type: object
+                        $ref: "#/components/schemas/Album"
 
   /landing3:
     parameters:
