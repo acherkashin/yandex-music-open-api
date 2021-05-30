@@ -939,8 +939,16 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-              example: '{"track-ids": "7019818,29238706", "with-positions": false}'
+              type: object
+              properties:
+                'track-ids':
+                  type: array
+                  items:
+                    type: string
+                  example: [7019818,29238706]
+                'with-positions':
+                  type: boolean
+                  example: false
       responses:
         200:
           description: Ok
