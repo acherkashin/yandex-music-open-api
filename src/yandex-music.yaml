@@ -942,20 +942,41 @@ paths:
               type: object
               properties:
                 'track-ids':
+                  description: Уникальные идентификаторы треков
                   type: array
                   items:
                     type: string
                   example: [7019818,29238706]
                 'with-positions':
+                  description: С позициями
                   type: boolean
                   example: false
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Track'
         400:
           description: Bad Request
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: '#/components/schemas/InvocationInfo'
+                  error:
+                    $ref: '#/components/schemas/Error'        
 
   /tracks/{trackId}/download-info:
     parameters:
