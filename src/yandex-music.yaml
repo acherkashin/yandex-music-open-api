@@ -921,13 +921,42 @@ paths:
           type: number
           example: 541320800
     get:
+      summary: Получение треков с отметкой "Мне нравится"
       tags:
         - "user"
         - "tracks"
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    properties:
+                      library:
+                        $ref: "#/components/schemas/TracksList"
+                  
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      message:
+                        type: string
 
   /tracks/:
     post:
@@ -2229,8 +2258,20 @@ components:
           type: array
           description: Список треков в укороченной версии
           items:
-            # TODO: add TrackShort type
-            type: object
+            $ref: "#/components/schemas/TrackShort"
+    TrackShort:
+      type: object
+      description: Укороченная версия трека с неполными данными
+      properties:
+        id:
+          type: string
+          description: Уникальный идентификатор трека
+        albumId:
+          type: string
+          description: Уникальный идентификатор альбома
+        timestamp:
+          type: string
+          description: Дата 
     DownloadInfo:
       type: object
       description: информация о вариантах загрузки трека
