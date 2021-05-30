@@ -2315,28 +2315,28 @@ components:
         best:
           $ref: "#/components/schemas/Best"
         albums:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
         artists:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные артисты
         playlists:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
         tracks:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные треки
         videos:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные видео
         users:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные пользователи
         podcasts:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные подкасты
         podcast_episodes:
-          type: object
+          $ref: "#/components/schemas/SearchResult"
           description: Найденные выпуски подкастов
         type:
           $ref: "#/components/schemas/SearchType"
@@ -2360,6 +2360,30 @@ components:
       type: string
       enum: ["artist", "album", "track", "podcast", "all"]
       default: "all"
+    SearchResult:
+      type: object
+      properties:
+        type: 
+          type: string
+          description: Тип результата
+        total: 
+          type: number
+          description: Количество результатов
+        perPage:
+          type: number
+          description: Максимальное количество результатов на странице.
+        order:
+          type: number
+          description: Позиция блока
+        results:
+          type: array
+          items:
+            oneOf:
+            - $ref: "#/components/schemas/Track"
+            - $ref: "#/components/schemas/Artist"
+            - $ref: "#/components/schemas/Album"
+            - $ref: "#/components/schemas/Playlist"
+            # - $ref: "#/components/schemas/Video"
     BadRequest:
       type: object
       properties:
