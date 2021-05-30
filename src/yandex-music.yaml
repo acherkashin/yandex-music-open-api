@@ -491,7 +491,7 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Playlist"
-                
+
   /users/{userId}/playlists/list:
     parameters:
       - in: path
@@ -1944,7 +1944,7 @@ components:
             - $ref: "#/components/schemas/Artist"
             - $ref: "#/components/schemas/Album"
             - $ref: "#/components/schemas/Playlist"
-            # - $ref:  "#/components/schemas/Video" TODO: https://github.com/MarshalX/yandex-music-api/blob/dcb012f6e3b24c141f5517bddb4655a88fe856c8/yandex_music/search/best.py#L27
+            - $ref:  "#/components/schemas/Video"
     PlaylistRecommendations:
       type: object
       description: рекомендации для плейлиста
@@ -2195,7 +2195,45 @@ components:
         embed:
           type: string
           description: HTML тег для встраивания видео.
-
+    Video:
+      type: object
+      description: Видео
+      properties:
+        title:
+          type: string
+          description: Название видео
+        cover:
+          type: string
+          description: Ссылка на изображение
+        embedUrl:
+          type: string
+          description: Ссылка на видео
+        provider:
+          type: string
+          description: Сервис поставляющий видео
+        providerVideoId:
+          type: string
+          description: Уникальный идентификатор видео на сервисе.
+        youtubeUrl:
+          type: string
+          description: Ссылка на видео Youtube
+        thumbnailUrl:
+          type: string
+          description: Ссылка на изображение
+        duration:
+          type: number
+          description: Длительность видео в секундах
+        text:
+          type: string
+          description: Текст
+        htmlAutoPlayVideoPlayer:
+          type: string
+          description: HTML тег для встраивания в разметку страницы
+        regions:
+          type: array
+          items:
+            type: string
+          example: ["RUSSIA_PREMIUM", "RUSSIA"]
     TagResult:
       type: object
       description: Класс, представляющий тег и его плейлисты
@@ -2279,7 +2317,7 @@ components:
           description: Уникальный идентификатор альбома
         timestamp:
           type: string
-          description: Дата 
+          description: Дата
     DownloadInfo:
       type: object
       description: информация о вариантах загрузки трека
@@ -2309,7 +2347,7 @@ components:
         searchResultId:
           type: string
           description: ID запроса
-        text: 
+        text:
           type: string
           description: Текст запроса
         best:
@@ -2350,10 +2388,10 @@ components:
         misspellCorrected:
           type: boolean
           description: Был ли исправлен запрос
-        misspellOriginal: 
+        misspellOriginal:
           type: string
           description: Оригинальный запрос
-        nocorrect: 
+        nocorrect:
           type: boolean
           description: Было ли отключено исправление результата
     SearchType:
@@ -2363,10 +2401,10 @@ components:
     SearchResult:
       type: object
       properties:
-        type: 
+        type:
           type: string
           description: Тип результата
-        total: 
+        total:
           type: number
           description: Количество результатов
         perPage:
@@ -2379,11 +2417,11 @@ components:
           type: array
           items:
             oneOf:
-            - $ref: "#/components/schemas/Track"
-            - $ref: "#/components/schemas/Artist"
-            - $ref: "#/components/schemas/Album"
-            - $ref: "#/components/schemas/Playlist"
-            # - $ref: "#/components/schemas/Video"
+              - $ref: "#/components/schemas/Track"
+              - $ref: "#/components/schemas/Artist"
+              - $ref: "#/components/schemas/Album"
+              - $ref: "#/components/schemas/Playlist"
+              - $ref: "#/components/schemas/Video"
     BadRequest:
       type: object
       properties:
