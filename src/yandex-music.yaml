@@ -469,20 +469,29 @@ paths:
       - in: query
         name: type
         schema:
-          type: string
-          enum: ["artist", "album", "track", "podcast", "all"]
-          default: "all"
+          $ref: "#/components/schemas/SearchType"
       - in: query
         name: nococrrect
         schema:
           type: boolean
           default: false
     get:
+      summary: Осуществление поиска по запросу и типу, получение результатов
       responses:
         200:
           description: Ok
-          content: {}
-
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Playlist"
+                
   /users/{userId}/playlists/list:
     parameters:
       - in: path
@@ -940,7 +949,6 @@ paths:
                     properties:
                       library:
                         $ref: "#/components/schemas/TracksList"
-                  
         404:
           description: Not Found
           content:
@@ -2294,6 +2302,64 @@ components:
         bitrateInKbps:
           type: number
           description: Битрейт аудиофайла в кбит/с
+    Search:
+      type: object
+      description: Результаты поиска
+      properties:
+        searchResultId:
+          type: string
+          description: ID запроса
+        text: 
+          type: string
+          description: Текст запроса
+        best:
+          $ref: "#/components/schemas/Best"
+        albums:
+          type: object
+          description: Найденные альбомы
+        artists:
+          type: object
+          description: Найденные артисты
+        playlists:
+          type: object
+          description: Найденные альбомы
+        tracks:
+          type: object
+          description: Найденные треки
+        videos:
+          type: object
+          description: Найденные видео
+        users:
+          type: object
+          description: Найденные пользователи
+        podcasts:
+          type: object
+          description: Найденные подкасты
+        podcast_episodes:
+          type: object
+          description: Найденные выпуски подкастов
+        type:
+          $ref: "#/components/schemas/SearchType"
+          description: Тип результата по которому искали
+        page:
+          type: number
+          description: Текущая страница
+        perPage:
+          type: number
+          description: Результатов на странице
+        misspellCorrected:
+          type: boolean
+          description: Был ли исправлен запрос
+        misspellOriginal: 
+          type: string
+          description: Оригинальный запрос
+        nocorrect: 
+          type: boolean
+          description: Было ли отключено исправление результата
+    SearchType:
+      type: string
+      enum: ["artist", "album", "track", "podcast", "all"]
+      default: "all"
     BadRequest:
       type: object
       properties:
