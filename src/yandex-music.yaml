@@ -1145,12 +1145,23 @@ paths:
           type: string
           example: 218099
     get:
+      summary: Получение популярных треков для артиста
       tags:
         - "artists"
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  artist:
+                    $ref: "#/components/schemas/Artist"
+                  tracks:
+                    type: array
+                    items:
+                      type: string
 
   /artists/{artistId}/brief-info:
     parameters:
@@ -2227,7 +2238,7 @@ components:
         codec:
           type: string
           description: Кодек аудиофайла
-        gain: 
+        gain:
           type: boolean
           description: Усиление
         preview:
