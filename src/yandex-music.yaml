@@ -982,13 +982,24 @@ paths:
           type: string
           example: "78550148"
     get:
+      summary: Получение информации о доступных вариантах загрузки трека.
       tags:
         - "user"
         - "tracks"
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/DownloadInfo"
 
   /tracks/{trackId}/supplement:
     description: Получение дополнительной информации о треке.
@@ -2209,6 +2220,28 @@ components:
           items:
             # TODO: add TrackShort type
             type: object
+    DownloadInfo:
+      type: object
+      description: информация о вариантах загрузки трека
+      properties:
+        codec:
+          type: string
+          description: Кодек аудиофайла
+        gain: 
+          type: boolean
+          description: Усиление
+        preview:
+          type: string
+          description: Предварительный просмотр
+        downloadInfoUrl:
+          type: string
+          description: Ссылка на XML документ содержащий данные для загрузки трека
+        direct:
+          type: boolean
+          description: Прямая ли ссылка
+        bitrateInKbps:
+          type: number
+          description: Битрейт аудиофайла в кбит/с
     BadRequest:
       type: object
       properties:
