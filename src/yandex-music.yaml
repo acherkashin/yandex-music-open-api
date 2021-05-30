@@ -35,8 +35,8 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/Settings'
-  
+                    $ref: "#/components/schemas/Settings"
+
   /permission-alerts:
     description: Получение оповещений. Нет обязательных параметров.
     get:
@@ -45,9 +45,9 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   invocationInfo:
@@ -67,9 +67,9 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
-              schema: 
+              schema:
                 type: object
                 properties:
                   invocationInfo:
@@ -78,7 +78,7 @@ paths:
                   result:
                     type: object
                     $ref: "#/components/schemas/Experiments"
-  
+
   /account/consume-promo-code:
     description: Активация промо-кода
     post:
@@ -116,7 +116,7 @@ paths:
   /feed/wizard/is-passed:
     get:
       security:
-      - oAuth: []
+        - oAuth: []
       responses:
         200:
           description: Ok
@@ -138,8 +138,8 @@ paths:
   /account/settings:
     description: Настройки текущего пользователя
     get:
-      summary: Получение настроек текущего пользователя 
-      tags: 
+      summary: Получение настроек текущего пользователя
+      tags:
         - account
       security:
         - oAuth: []
@@ -152,12 +152,12 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/UserSettings'
+                    $ref: "#/components/schemas/UserSettings"
     post:
       summary: Изменение настроек текущего пользователя
-      tags: 
+      tags:
         - account
       security:
         - oAuth: []
@@ -183,24 +183,19 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
                     oneOf:
-                      - $ref: '#/components/schemas/UserSettings'
+                      - $ref: "#/components/schemas/UserSettings"
                       - type: string
-                        example: "None" 
+                        example: "None"
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
-                  error:
-                    $ref: '#/components/schemas/Error'                  
+                $ref: "#/components/schemas/BadRequest"
 
   /account/status:
     description: Get account status for current user
@@ -218,12 +213,15 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/Status'
+                    $ref: "#/components/schemas/Status"
         400:
           description: Bad Request
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
   /feed:
     get:
       security:
@@ -276,7 +274,7 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
                 type: object
@@ -300,19 +298,19 @@ paths:
       tags:
         - "albums"
       responses:
-          200:
-            description: Ok
-            content: 
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    invocationInfo:
-                      type: object
-                      $ref: "#/components/schemas/InvocationInfo"
-                    result:
-                      type: object
-                      $ref: "#/components/schemas/Album"
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/Album"
 
   /albums:
     post:
@@ -325,27 +323,27 @@ paths:
             schema:
               type: object
               properties:
-                "album-ids": 
+                "album-ids":
                   type: array
                   items:
                     type: string
-                  example: [13984185,13730064,13963354,13546288,13937809]
+                  example: [13984185, 13730064, 13963354, 13546288, 13937809]
       responses:
-          200:
-            description: Ok
-            content: 
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    invocationInfo:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
                       type: object
-                      $ref: "#/components/schemas/InvocationInfo"
-                    result:
-                      type: array
-                      items:
-                        type: object
-                        $ref: "#/components/schemas/Album"
+                      $ref: "#/components/schemas/Album"
 
   /landing3:
     parameters:
@@ -442,14 +440,17 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: array
                     items:
                       $ref: "#/components/schemas/Playlist"
         400:
           description: Bad Request
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
 
   /search:
     parameters:
@@ -520,7 +521,7 @@ paths:
         required: false
         name: if_modified_since_revision
         description: TODO
-        schema: 
+        schema:
           type: number
     get:
       tags:
@@ -536,9 +537,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/TracksList'
+                    $ref: "#/components/schemas/TracksList"
   /search/suggest:
     parameters:
       - in: query
@@ -558,10 +559,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/Suggestions'
-                  
+                    $ref: "#/components/schemas/Suggestions"
 
   /users/{userId}/playlists/{kind}:
     parameters:
@@ -653,6 +653,10 @@ paths:
           description: Ok
         400:
           description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
         401:
           description: Unauthorized
 
@@ -698,9 +702,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/Playlist'
+                    $ref: "#/components/schemas/Playlist"
 
   /users/{userId}/playlists/{kind}/delete:
     parameters:
@@ -787,9 +791,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    $ref: '#/components/schemas/PlaylistRecommendations'
+                    $ref: "#/components/schemas/PlaylistRecommendations"
 
   /users/{userId}/playlists/{kind}/visibility:
     parameters:
@@ -836,21 +840,16 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/Playlist'
+                    $ref: "#/components/schemas/Playlist"
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
-                  error:
-                    $ref: '#/components/schemas/Error' 
+                $ref: "#/components/schemas/BadRequest"
 
   /users/{userId}/likes/tracks/add-multiple:
     parameters:
@@ -932,6 +931,7 @@ paths:
 
   /tracks/:
     post:
+      summary: Получение треков
       tags:
         - "tracks"
       requestBody:
@@ -941,13 +941,13 @@ paths:
             schema:
               type: object
               properties:
-                'track-ids':
+                "track-ids":
                   description: Уникальные идентификаторы треков
                   type: array
                   items:
                     type: string
-                  example: [7019818,29238706]
-                'with-positions':
+                  example: [7019818, 29238706]
+                "with-positions":
                   description: С позициями
                   type: boolean
                   example: false
@@ -965,18 +965,13 @@ paths:
                   result:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Track'
+                      $ref: "#/components/schemas/Track"
         400:
           description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
-                  error:
-                    $ref: '#/components/schemas/Error'        
+                $ref: "#/components/schemas/BadRequest"
 
   /tracks/{trackId}/download-info:
     parameters:
@@ -1021,8 +1016,8 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/Supplement'
-                
+                    $ref: "#/components/schemas/Supplement"
+
   /tracks/{trackId}/similar:
     summary: Получение похожих треков
     description: Получение похожих треков
@@ -1049,12 +1044,12 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: '#/components/schemas/SimilarTracks'
+                    $ref: "#/components/schemas/SimilarTracks"
 
   /play-audio:
     description: Метод для отправки текущего состояния прослушиваемого трека
     post:
-      tags: 
+      tags:
         - tracks
       security:
         - oAuth: []
@@ -1119,7 +1114,7 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
+                    $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: string
                     example: ok
@@ -1128,12 +1123,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: '#/components/schemas/InvocationInfo'
-                  error:
-                    $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/BadRequest"
 
   /artists/{artistId}/track-ids-by-rating:
     parameters:
@@ -1244,8 +1234,11 @@ paths:
           description: Ok
           content: {}
         400:
-          description: Bad request
-          content: {}
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
 
   /rotor/stations/list:
     description: "Получение всех радиостанций с настройками пользователя"
@@ -1378,7 +1371,7 @@ components:
     Error:
       type: object
       properties:
-        name: 
+        name:
           type: string
           example: "validate"
         message:
@@ -1474,7 +1467,7 @@ components:
           description: Является ли альбом новым
           type: boolean
         veryImportant:
-          description:  Популярен ли альбом у слушателей
+          description: Популярен ли альбом у слушателей
           type: boolean
         artists:
           description: Артисты
@@ -1510,7 +1503,7 @@ components:
           items:
             type: number
         prerolls:
-          description: Прероллы 
+          description: Прероллы
           type: array
           items:
             type: object
@@ -2039,17 +2032,17 @@ components:
       type: object
       description: часть текста с ссылкой на лицензионное соглашение
       properties:
-        text: 
+        text:
           description: Часть текста.
           type: string
-        url: 
+        url:
           description: Ссылка на лицензионное соглашение.
           type: string
     PermissionAlerts:
       type: object
       description: оповещения
       properties:
-        alerts: 
+        alerts:
           type: array
           items:
             type: string
@@ -2076,21 +2069,21 @@ components:
       type: object
       description: дополнительная информация о треке
       properties:
-        id: 
-          type: number 
+        id:
+          type: number
           description: Уникальный идентификатор дополнительной информации.
-        lyrics: 
+        lyrics:
           type: object
           description: Текст песни.
           $ref: "#/components/schemas/Lyrics"
-        videos: 
+        videos:
           type: object
           description: Видео.
           $ref: "#/components/schemas/VideoSupplement"
-        radioIsAvailable: 
+        radioIsAvailable:
           type: boolean
           description: Доступно ли радио.
-        description: 
+        description:
           type: string
           description: Полное описание эпизода подкаста.
     Lyrics:
@@ -2098,49 +2091,49 @@ components:
       description: текст трека
       properties:
         id:
-          type: number 
+          type: number
           description: Уникальный идентификатор текста трека.
-        lyrics: 
+        lyrics:
           type: string
           description: Первые строки текст песни.
         hasRights:
-          type: boolean 
+          type: boolean
           description: Есть ли права.
         fullLyrics:
-          type: string 
+          type: string
           description: Текст песни.
-        textLanguage: 
-          type: string 
+        textLanguage:
+          type: string
           description: Язык текста.
         showTranslation:
-          type: boolean 
+          type: boolean
           description: Доступен ли перевод.
-        url: 
-          type: string 
+        url:
+          type: string
           description: Ссылка на источник перевода. Обычно genius.com.
     VideoSupplement:
       type: object
       description: видеоклипы
       properties:
-        cover: 
+        cover:
           type: string
           description: URL на обложку видео.
-        provider: 
+        provider:
           type: string
           description: Сервис поставляющий видео.
-        title: 
+        title:
           type: string
           description: Название видео.
-        providerVideoId: 
+        providerVideoId:
           type: string
           description: Уникальный идентификатор видео на сервисе.
-        url: 
+        url:
           type: string
           description: URL на видео.
-        embedUrl: 
+        embedUrl:
           type: string
           description: URL на видео, находящегося на серверах Яндекса.
-        embed: 
+        embed:
           type: string
           description: HTML тег для встраивания видео.
 
@@ -2204,16 +2197,22 @@ components:
       type: object
       description: список треков
       properties:
-        uid: 
+        uid:
           type: number
           description: Уникальный идентификатор пользователя
-        revisions: 
+        revisions:
           type: number
           description: Актуальность данных TODO
-        tracks: 
+        tracks:
           type: array
           description: Список треков в укороченной версии
           items:
             # TODO: add TrackShort type
             type: object
-
+    BadRequest:
+      type: object
+      properties:
+        invocationInfo:
+          $ref: "#/components/schemas/InvocationInfo"
+        error:
+          $ref: "#/components/schemas/Error"
