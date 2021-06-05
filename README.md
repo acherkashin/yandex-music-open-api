@@ -45,10 +45,12 @@ Linux:
 TODO
 ```
 
+# Roadmap
 
-Также для обхода CORS можно использовать следующий [Google Chrome Extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf/related?hl=en). Для успешной работы необходимо добавить `https://api.music.yandex.net:443/` в "6. Whitelisted domains from - Allow CORS"
-
-Для тестирования CORS используйте [следующую ссылку](https://webbrowsertools.com/test-cors/).
+- [ ] Опубликовывать Yandex Music Api на хостинг
+- [ ] Добавить описание использования [OpenAPI Genrator](https://openapi-generator.tech/)
+- [ ] Публиковать Npm, Nuget, ... модули
+- [ ] Добавить линтер 
 
 # Помощь
 
