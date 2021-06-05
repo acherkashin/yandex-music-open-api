@@ -597,7 +597,10 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Playlist"
 
   /users/{userId}/playlists:
     parameters:
