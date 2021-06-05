@@ -870,6 +870,7 @@ paths:
           type: number
           example: 541320800
     post:
+      summary: Пометить треки как "Мне нравится"
       tags:
         - "user"
         - "tracks"
@@ -880,12 +881,28 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-            example: '{"track-ids" : "7019818,29238706"}'
+              type: object
+              properties:
+                "track-ids":
+                  type: array
+                  items:
+                    type: string
+                  example: [7019818, 29238706, 83063895]
       responses:
         200:
           description: Ok
-          content: {}
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result: 
+                    type: object
+                    properties:
+                      revision:
+                        type: number
         401:
           description: Unauthorized
           content: {}
@@ -1944,7 +1961,7 @@ components:
             - $ref: "#/components/schemas/Artist"
             - $ref: "#/components/schemas/Album"
             - $ref: "#/components/schemas/Playlist"
-            - $ref:  "#/components/schemas/Video"
+            - $ref: "#/components/schemas/Video"
     PlaylistRecommendations:
       type: object
       description: рекомендации для плейлиста
