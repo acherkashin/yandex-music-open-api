@@ -429,8 +429,13 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-              example: '{"playlistIds": "103372440:1878,460140864:1000"}'
+              type: object
+              properties:
+                playListIds: 
+                  type: array
+                  items:
+                    type: string
+                  example: ["103372440:1878","460140864:1000"]
       responses:
         200:
           description: Ok
@@ -502,6 +507,7 @@ paths:
           type: number
           example: 541320800
     get:
+      summary: Получение списка плейлистов пользователя.
       tags:
         - "user"
         - "playlists"
@@ -510,7 +516,17 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Playlist"
         405:
           description: "Method Not Allowed"
           content: {}
@@ -589,6 +605,7 @@ paths:
           type: number
           example: 1000
     get:
+      summary: Получение плейлиста по уникальному идентификатору
       tags:
         - "user"
         - "playlists"
