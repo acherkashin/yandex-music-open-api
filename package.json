@@ -1,30 +1,34 @@
 {
   "name": "yandex-music-open-api",
   "version": "0.0.1",
+  "homepage": "http://acherkashin.github.io/yandex-music-open-api",
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open",
     "chrome:win": ".\\run-chrome-windows.ps1",
-    "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server"
+    "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server",
+    "predeploy": "webpack",
+    "deploy": "gh-pages -d dist"
   },
   "author": "Cherkashin Alexander",
   "license": "Apache-2.0",
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^2.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "json-refs": "^3.0.15",
+    "style-loader": "^0.23.1",
+    "synchronized-promise": "^0.3.1",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.11.2",
-    "yamljs": "^0.3.0",
-    "json-refs": "^3.0.15",
-    "style-loader": "^0.23.1",
     "yaml-loader": "^0.5.0",
-    "css-loader": "^2.1.0",
-    "json-loader": "^0.5.7",
-    "synchronized-promise": "^0.3.1"
+    "yamljs": "^0.3.0"
   },
   "dependencies": {
+    "gh-pages": "^3.2.3",
     "swagger-ui": "^3.20.7"
   },
   "main": "webpack.config.js",
