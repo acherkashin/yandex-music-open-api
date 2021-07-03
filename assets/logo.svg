@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 254000 254000"
+    shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality"
+    fill-rule="evenodd" clip-rule="evenodd">
+    <defs>
+        <style>
+            .small-circle {
+                stroke: #ff3334;
+                stroke-width: 2000;
+            }
+        </style>
+        <mask id="cut-circle">
+            <ellipse fill="white" cx="114724" cy="136518" rx="106256" ry="109177" stroke-width="2000"
+                stroke-miterlimit="22.926" />
+            <ellipse fill="black" cx="114300" cy="137583" rx="43179" ry="44450" />
+            <path fill="black" d="M116521 113891l68540.598-69155.725L209089.97 68549.92l-68540.598 69155.725z" />
+        </mask>
+    </defs>
+    <ellipse cx="114724" cy="136518" rx="106256" ry="109177" fill="#fc0" stroke="#fc0" stroke-width="2000"
+        stroke-miterlimit="22.926" mask="url(#cut-circle)" />
+    <path class="small-circle" fill="#ff3334"
+        d="M107581 130814l97621.847-92695.967 12826.086 13507.668-97621.846 92695.966z" />
+    <ellipse cx="219709" cy="36407" rx="29210" ry="29633" stroke="#ff3334" fill="#ff3334" stroke-width="1998"
+        stroke-miterlimit="22.926" />
+    <ellipse class=" small-circle" cx="114724" cy="136518" rx="29210" ry="29633" fill="#ff3334" />
+</svg>
