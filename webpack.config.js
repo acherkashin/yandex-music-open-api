@@ -39,6 +39,10 @@ module.exports = {
         // that file handles the OAuth2 redirect after authenticating the end-user.
         from: 'node_modules/swagger-ui/dist/oauth2-redirect.html',
         to: './'
+      },
+      {
+        from: './assets/logo.svg',
+        to: './assets/logo.svg',
       }
     ]),
     new HtmlWebpackPlugin({
