@@ -4,6 +4,7 @@ info:
   description: "Swagger документация для Yandex Music API."
   version: 1.0.0
 servers:
+  - url: https://yandex-music-cors-proxy.herokuapp.com/https://api.music.yandex.net:443/
   - url: https://api.music.yandex.net:443/
   - url: http://api.music.yandex.net:443/
 tags:
@@ -22,6 +23,7 @@ paths:
     get:
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -42,6 +44,7 @@ paths:
     get:
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -64,6 +67,7 @@ paths:
         - account
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -86,6 +90,7 @@ paths:
         - account
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -117,6 +122,7 @@ paths:
     get:
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -143,6 +149,7 @@ paths:
         - account
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -161,6 +168,7 @@ paths:
         - account
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -204,6 +212,7 @@ paths:
         - "account"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -226,6 +235,7 @@ paths:
     get:
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -245,6 +255,7 @@ paths:
         - "tags"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -362,6 +373,7 @@ paths:
         - "landing"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -513,6 +525,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -553,6 +566,7 @@ paths:
         - "user"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -611,6 +625,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -652,6 +667,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -712,6 +728,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -757,6 +774,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -811,6 +829,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -848,6 +867,7 @@ paths:
         - "playlists"
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -896,6 +916,7 @@ paths:
         - "tracks"
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -942,6 +963,7 @@ paths:
         - "tracks"
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -1138,6 +1160,7 @@ paths:
         - tracks
       security:
         - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
@@ -1325,6 +1348,7 @@ paths:
         - "account"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -1359,6 +1383,7 @@ paths:
     get:
       security:
         - oAuth: []
+        - oAuthProxied: []
       tags:
         - "rotor"
       responses:
@@ -1393,6 +1418,13 @@ paths:
 
 components:
   securitySchemes:
+    oAuthProxied:
+      type: oauth2
+      description: Authentication via proxy server to bypass cors
+      flows:
+        password:
+          tokenUrl: https://yandex-music-cors-proxy.herokuapp.com/https://oauth.yandex.ru/token
+          scopes: {}  
     oAuth:
       type: oauth2
       description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
