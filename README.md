@@ -55,6 +55,7 @@ TODO
 ## Помощь
 
 Все вопросы касающиеся yandex music api, могут быть заданы в [Telegram чате](https://t.me/yandex_music_api).
+Поддержать автора можно подписавшись на его [Telegram канал](https://t.me/cherkashindev).
 
 ## Благодарность
 
