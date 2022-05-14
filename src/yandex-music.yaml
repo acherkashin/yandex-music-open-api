@@ -1098,8 +1098,6 @@ paths:
                     $ref: "#/components/schemas/DownloadInfo"
 
   /tracks/{trackId}/supplement:
-    description: Получение дополнительной информации о треке.
-    summary: Получение дополнительной информации о треке.
     parameters:
       - in: path
         required: true
@@ -1108,6 +1106,8 @@ paths:
           type: string
           example: 32326555
     get:
+      description: Получение дополнительной информации о треке (Текст песни, видео, и т.д.).
+      summary: Получение дополнительной информации о треке (Текст песни, видео, и т.д.).
       tags:
         - "tracks"
       responses:
@@ -1126,8 +1126,6 @@ paths:
                     $ref: "#/components/schemas/Supplement"
 
   /tracks/{trackId}/similar:
-    summary: Получение похожих треков
-    description: Получение похожих треков
     parameters:
       - in: path
         required: true
@@ -1136,6 +1134,8 @@ paths:
           type: string
           example: 32326555
     get:
+      summary: Получение похожих треков
+      description: Получение похожих треков
       tags:
         - tracks
       responses:
