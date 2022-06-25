@@ -1340,6 +1340,32 @@ paths:
           description: Ok
           content: {}
 
+  /rotor/station/{rotorID}/tracks:
+    description: "Получение цепочки треков определённой станции"
+    parameters:
+      - in: query
+        required: false
+        name: rotorID
+        description: "ID радиостанции, для примера: user:onyourwave это моя волна"
+        schema:
+          type: string
+          example: user:onyourwave
+    get:
+      tags:
+        - "rotor"
+      security:
+        - oAuth: []
+      responses:
+        200:
+          description: Ok
+          content: {}
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+
   /rotor/account/status:
     description: "Получение статуса пользователя с дополнителными полями"
     get:
