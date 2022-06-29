@@ -1080,7 +1080,6 @@ paths:
     get:
       summary: Получение информации о доступных вариантах загрузки трека.
       tags:
-        - "user"
         - "tracks"
       responses:
         200:
