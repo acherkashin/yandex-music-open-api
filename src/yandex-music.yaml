@@ -1341,20 +1341,34 @@ paths:
           content: {}
 
   /rotor/station/{rotorID}/tracks:
-    description: "Получение цепочки треков определённой станции"
     parameters:
-      - in: query
+      - in: path
         required: false
         name: rotorID
         description: "ID радиостанции, для примера: user:onyourwave это моя волна"
         schema:
           type: string
           example: user:onyourwave
+      - in: query
+        required: false
+        name: settings2
+        description: "Использовать ли второй набор настроек. Все официальные клиенты выполняют запросы с `settings2 = True`."
+        schema:
+          type: boolean
+          example: true
+      - in: query
+        required: false
+        name: queue
+        description: "Уникальной идентификатор трека, который только что был."
+        schemas:
+          type: string
     get:
+      summary: "Получение цепочки треков определённой станции"
       tags:
         - "rotor"
       security:
         - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
@@ -1367,8 +1381,8 @@ paths:
                 $ref: "#/components/schemas/BadRequest"
 
   /rotor/account/status:
-    description: "Получение статуса пользователя с дополнителными полями"
     get:
+      summary: "Получение статуса пользователя с дополнителными полями"
       tags:
         - "rotor"
         - "account"
@@ -1387,7 +1401,6 @@ paths:
                 $ref: "#/components/schemas/BadRequest"
 
   /rotor/stations/list:
-    description: "Получение всех радиостанций с настройками пользователя"
     parameters:
       - in: query
         required: false
@@ -1397,6 +1410,7 @@ paths:
           type: string
           example: ru
     get:
+      summary: "Получение всех радиостанций с настройками пользователя"
       tags:
         - "rotor"
       responses:
@@ -1405,8 +1419,8 @@ paths:
           content: {}
 
   /rotor/stations/dashboard:
-    description: "Получение рекомендованных станций текущего пользователя"
     get:
+      summary: "Получение рекомендованных станций текущего пользователя"
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -1418,7 +1432,6 @@ paths:
           content: {}
 
   /rotor/station/{station}/feedback:
-    description: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
     parameters:
       - in: path
         required: true
@@ -1427,6 +1440,7 @@ paths:
         schema:
           type: string
     post:
+      summary: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
       tags:
         - "rotor"
       requestBody:
