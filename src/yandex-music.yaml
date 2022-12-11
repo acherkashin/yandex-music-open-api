@@ -993,6 +993,9 @@ paths:
       tags:
         - "user"
         - "tracks"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
