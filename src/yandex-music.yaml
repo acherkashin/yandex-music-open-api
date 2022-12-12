@@ -4,7 +4,7 @@ info:
   description: "Swagger документация для Yandex Music API."
   version: 1.0.0
 servers:
-  - url: https://yandex-music-cors-proxy.herokuapp.com/https://api.music.yandex.net:443/
+  - url: https://yandex-music-cors-proxy.onrender.com/https://api.music.yandex.net:443/
   - url: https://api.music.yandex.net:443/
   - url: http://api.music.yandex.net:443/
 tags:
@@ -1465,7 +1465,7 @@ components:
       description: Authentication via proxy server to bypass cors
       flows:
         password:
-          tokenUrl: https://yandex-music-cors-proxy.herokuapp.com/https://oauth.yandex.ru/token
+          tokenUrl: https://yandex-music-cors-proxy.onrender.com/https://oauth.yandex.ru/token
           scopes: {}  
     oAuth:
       type: oauth2
