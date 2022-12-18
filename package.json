@@ -8,7 +8,8 @@
     "chrome:win": ".\\run-chrome-windows.ps1",
     "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server",
     "predeploy": "webpack",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "schema": "openapi --input ./src/yandex-music.yaml --output ./generated --client fetch"
   },
   "author": "Cherkashin Alexander",
   "license": "Apache-2.0",
@@ -19,6 +20,7 @@
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "json-refs": "^3.0.15",
+    "openapi-typescript-codegen": "^0.23.0",
     "style-loader": "^0.23.1",
     "synchronized-promise": "^0.3.1",
     "webpack": "^4.29.3",
