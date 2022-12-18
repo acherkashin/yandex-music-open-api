@@ -52,6 +52,24 @@ TODO
 - [ ] Публиковать Npm, Nuget, ... модули
 - [ ] Добавить линтер 
 
+## Использование Yandex Music Api
+
+```js
+const { YandexMusicClient } = require('./YandexMusicClient');
+
+const client = new YandexMusicClient({
+    BASE: "https://api.music.yandex.net:443",
+    HEADERS: {
+        'Authorization': "OAuth <your token>"
+    }
+})
+
+client.default.getFeed().then(result => {
+    console.log(result);
+});
+
+```
+
 ## Помощь
 
 Все вопросы касающиеся yandex music api, могут быть заданы в [Telegram чате](https://t.me/yandex_music_api).
