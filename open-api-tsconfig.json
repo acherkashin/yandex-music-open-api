@@ -6,7 +6,8 @@
       "outDir": "./lib",
       "strict": true,
       "baseUrl": ".",
-      "lib": ["dom", "dom.iterable", "esnext"]
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "allowSyntheticDefaultImports": true
     },
     "include": ["./generated/*.ts"],
     "exclude": ["node_modules"]
