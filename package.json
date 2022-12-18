@@ -9,7 +9,7 @@
     "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server",
     "predeploy": "webpack",
     "deploy": "gh-pages -d dist",
-    "schema": "openapi --input ./src/yandex-music.yaml --output ./generated --client fetch"
+    "schema": "openapi --input ./src/yandex-music.yaml --output ./generated --client fetch && tsc -p open-api-tsconfig.json"
   },
   "author": "Cherkashin Alexander",
   "license": "Apache-2.0",
@@ -23,6 +23,7 @@
     "openapi-typescript-codegen": "^0.23.0",
     "style-loader": "^0.23.1",
     "synchronized-promise": "^0.3.1",
+    "typescript": "^4.9.4",
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.11.2",

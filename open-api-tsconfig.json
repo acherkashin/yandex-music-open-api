@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "esnext",
+      "declaration": true,
+      "outDir": "./lib",
+      "strict": true,
+      "baseUrl": ".",
+      "lib": ["dom", "dom.iterable", "esnext"]
+    },
+    "include": ["./generated/*.ts"],
+    "exclude": ["node_modules"]
+  }
+  
