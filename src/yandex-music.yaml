@@ -367,7 +367,7 @@ paths:
           single:
             value: "new-releases"
           multiple:
-            value: "new-playlists, new-playlists"
+            value: "new-playlists,new-playlists"
     get:
       tags:
         - "landing"
@@ -377,7 +377,15 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/LandingResult"
           headers:
             "X-Yandex-Music-Device":
               schema:
@@ -443,11 +451,11 @@ paths:
             schema:
               type: object
               properties:
-                playListIds: 
+                playListIds:
                   type: array
                   items:
                     type: string
-                  example: ["103372440:1878","460140864:1000"]
+                  example: ["103372440:1878", "460140864:1000"]
       responses:
         200:
           description: Ok
@@ -629,7 +637,7 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Playlist"
@@ -932,14 +940,14 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
                 type: object
                 properties:
                   invocationInfo:
                     $ref: "#/components/schemas/InvocationInfo"
-                  result: 
+                  result:
                     type: object
                     properties:
                       revision:
@@ -1466,7 +1474,7 @@ components:
       flows:
         password:
           tokenUrl: https://yandex-music-cors-proxy.onrender.com/https://oauth.yandex.ru/token
-          scopes: {}  
+          scopes: {}
     oAuth:
       type: oauth2
       description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
@@ -2540,3 +2548,47 @@ components:
           $ref: "#/components/schemas/InvocationInfo"
         error:
           $ref: "#/components/schemas/Error"
+    LandingResult:
+      type: object
+      properties:
+        pumpkin:
+          type: boolean
+        contentId:
+          type: string
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/LandingBlock"
+    LandingBlock:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          description: the follwing values are allowed or combination of these values separated by comman - personal-playlists, podcasts, play-context, chart, new-playlists, new-releases, promotions
+          type: string
+        typeForFrom: 
+          $ref: "#/components/schemas/LandingBlockType"
+        description:
+          type: string
+        entities:
+          type: array
+          items:
+            # TODO: need to complete
+            type: object
+    LandingBlockType:
+      type: string
+      enum:
+        - "personalplaylists"
+        - "promotions"
+        - "new-releases"
+        - "new-playlists"
+        - "mixes"
+        - "chart"
+        - "artists"
+        - "albums"
+        - "playlists"
+        - "play_contexts"
+        - "podcasts"
