@@ -497,6 +497,40 @@ paths:
                         items:
                           type: number
 
+  /landing3/podcasts:
+    get:
+      operationId: getNewPodcasts
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [type, typeForFrom, title, podcasts]
+                    properties:
+                      type:
+                        type: string
+                        enum: [non-music_main_podcasts]
+                      typeForFrom: 
+                        type: string
+                      title: 
+                        type: string
+                      podcasts:
+                        type: array
+                        items:
+                          type: number
+
   /landing3/new-playlists:
     get:
       operationId: getNewPlaylists
