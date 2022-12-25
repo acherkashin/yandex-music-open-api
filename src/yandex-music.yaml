@@ -30,6 +30,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -51,6 +54,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -74,6 +80,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -109,6 +118,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -129,6 +141,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -156,6 +171,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -187,6 +205,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 description: Настройки пользователя или "None"
                 type: object
                 properties:
@@ -219,6 +240,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -262,6 +286,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -288,6 +315,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -314,6 +344,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -345,6 +378,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -380,6 +416,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -404,10 +443,28 @@ paths:
             [
               "new-playlists",
               "new-releases",
-              "new-playlists",
               "chart",
               "podcasts",
             ]
+    get:
+      operationId: getLandingBlock
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
 
   /landing3/chart/{chartType}:
     parameters:
@@ -453,6 +510,7 @@ paths:
           type: string
           example: 103372440:1878,460140864:1000
     post:
+      operationId: getByIds
       tags:
         - "playlists"
       requestBody:
@@ -473,6 +531,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -519,6 +580,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -551,6 +615,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -592,6 +659,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -614,6 +684,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -651,6 +724,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 $ref: "#/components/schemas/Playlist"
 
   /users/{userId}/playlists:
@@ -764,6 +840,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -855,6 +934,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -905,6 +987,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -954,6 +1039,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1021,6 +1109,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1075,6 +1166,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1109,6 +1203,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1137,6 +1234,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1165,6 +1265,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1239,6 +1342,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 description: Возвращает строку "ok" при успешном выполнении запроса
                 type: object
                 properties:
@@ -1272,6 +1378,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   artist:
