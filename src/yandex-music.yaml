@@ -439,13 +439,7 @@ paths:
         required: true
         schema:
           type: string
-          enum:
-            [
-              "new-playlists",
-              "new-releases",
-              "chart",
-              "podcasts",
-            ]
+          enum: ["new-playlists", "new-releases", "chart", "podcasts"]
     get:
       operationId: getLandingBlock
       tags:
@@ -513,18 +507,6 @@ paths:
       operationId: getByIds
       tags:
         - "playlists"
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                playListIds:
-                  type: array
-                  items:
-                    type: string
-                  example: ["103372440:1878", "460140864:1000"]
       responses:
         200:
           description: Ok
@@ -1957,6 +1939,7 @@ components:
         type:
           type: string
     TrackItem:
+      required: [id, playCount, recent, timestamp]
       type: object
       properties:
         id:
@@ -1973,6 +1956,30 @@ components:
           $ref: "#/components/schemas/Track"
     Playlist:
       description: play list data
+      required:
+        - "playlistUuid"
+        - "description"
+        - "descriptionFormatted"
+        - "available"
+        - "collective"
+        - "created"
+        - "modified"
+        - "backgroundColor"
+        - "textColor"
+        - "durationMs"
+        - "isBanner"
+        - "isPremiere"
+        - "kind"
+        - "owner"
+        - "revision"
+        - "snapshot"
+        - "tags"
+        - "title"
+        - "trackCount"
+        - "uid"
+        - "visibility"
+        - "likesCount"
+        - "tracks"
       type: object
       properties:
         playlistUuid:
@@ -1988,6 +1995,10 @@ components:
         cover:
           type: object
           $ref: "#/components/schemas/Cover"
+        coverWithoutText:
+          type: object
+          description: В большинстве случаев отсутствует. Есть в плейлисте дня, дежавю, премьера и т.д.
+          $ref: "#/components/schemas/Cover"
         created:
           type: string
         modified:
@@ -1998,7 +2009,7 @@ components:
           type: string
         durationMs:
           type: number
-        isBunner:
+        isBanner:
           type: boolean
         isPremiere:
           type: boolean
@@ -2039,7 +2050,6 @@ components:
           type: number
         tracks:
           type: array
-          nullable: true
           items:
             type: object
             $ref: "#/components/schemas/TrackItem"
@@ -2693,7 +2703,7 @@ components:
         type:
           description: the follwing values are allowed or combination of these values separated by comman - personal-playlists, podcasts, play-context, chart, new-playlists, new-releases, promotions
           type: string
-        typeForFrom: 
+        typeForFrom:
           $ref: "#/components/schemas/LandingBlockType"
         description:
           type: string
@@ -2702,7 +2712,7 @@ components:
           items:
             # TODO: need to complete
             oneOf:
-            - $ref: "#/components/schemas/LandingPodcastItem"
+              - $ref: "#/components/schemas/LandingPodcastItem"
     LandingBlockType:
       type: string
       enum:
@@ -2721,8 +2731,8 @@ components:
       type: object
       properties:
         type:
-          type: string 
-        description: 
+          type: string
+        description:
           type: string
         descriptionFormatted:
           type: string
@@ -2734,7 +2744,7 @@ components:
             podcast:
               type: object
               $ref: "#/components/schemas/Album"
-            description: 
+            description:
               type: string
             descriptionFormatted:
               type: string
@@ -2751,17 +2761,17 @@ components:
         - "menu"
         - "chart"
       properties:
-        id: 
+        id:
           type: string
-        type: 
+        type:
           type: string
-          enum: 
+          enum:
             - "chart"
         typeForFrom:
           type: string
-        title: 
+        title:
           type: string
-        chartDescription: 
+        chartDescription:
           type: string
         menu:
           required:
@@ -2770,16 +2780,16 @@ components:
           properties:
             menu:
               type: object
-              $ref: "#/components/schemas/MenuItem"   
+              $ref: "#/components/schemas/MenuItem"
         chart:
           type: object
           $ref: "#/components/schemas/Playlist"
     MenuItem:
       type: object
       properties:
-        title: 
+        title:
           type: string
-        url: 
+        url:
           type: string
-        selected: 
+        selected:
           type: boolean
