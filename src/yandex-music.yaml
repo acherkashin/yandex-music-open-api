@@ -423,7 +423,18 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/FullChartResult"
 
   /genres:
     get:
@@ -1539,6 +1550,10 @@ components:
       example: "public"
     InvocationInfo:
       type: object
+      required:
+        - "exec-duration-millis"
+        - "hostname"
+        - "req-id"
       properties:
         "exec-duration-millis":
           type: number
@@ -2577,7 +2592,8 @@ components:
           type: array
           items:
             # TODO: need to complete
-            type: object
+            oneOf:
+            - $ref: "#/components/schemas/LandingPodcastItem"
     LandingBlockType:
       type: string
       enum:
@@ -2592,3 +2608,69 @@ components:
         - "playlists"
         - "play_contexts"
         - "podcasts"
+    LandingPodcastItem:
+      type: object
+      properties:
+        type:
+          type: string 
+        description: 
+          type: string
+        descriptionFormatted:
+          type: string
+        lastUpdated:
+          type: string
+        data:
+          type: object
+          properties:
+            podcast:
+              type: object
+              $ref: "#/components/schemas/Album"
+            description: 
+              type: string
+            descriptionFormatted:
+              type: string
+            lastUpdated:
+              type: string
+    FullChartResult:
+      type: object
+      required:
+        - "id"
+        - "type"
+        - "typeForFrom"
+        - "title"
+        - "chartDescription"
+        - "menu"
+        - "chart"
+      properties:
+        id: 
+          type: string
+        type: 
+          type: string
+          enum: 
+            - "chart"
+        typeForFrom:
+          type: string
+        title: 
+          type: string
+        chartDescription: 
+          type: string
+        menu:
+          required:
+            - "menu"
+          type: object
+          properties:
+            menu:
+              type: object
+              $ref: "#/components/schemas/MenuItem"   
+        chart:
+          type: object
+          $ref: "#/components/schemas/Playlist"
+    MenuItem:
+      type: object
+      properties:
+        title: 
+          type: string
+        url: 
+          type: string
+        selected: 
+          type: boolean

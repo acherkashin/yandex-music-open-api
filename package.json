@@ -9,7 +9,7 @@
     "chrome:mac": "open -na Google\\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials --app \"http://localhost:8080\" && webpack-dev-server",
     "predeploy": "webpack",
     "deploy": "gh-pages -d dist",
-    "schema": "openapi --input ./src/yandex-music.yaml --output ./generated --client axios --name YandexMusicClient && tsc -p open-api-tsconfig.json"
+    "schema": "openapi --input ./src/yandex-music.yaml --output ./generated --client axios --name YandexMusicClient --useUnionTypes && tsc -p open-api-tsconfig.json"
   },
   "author": "Cherkashin Alexander",
   "license": "Apache-2.0",

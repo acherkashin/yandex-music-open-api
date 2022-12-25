@@ -8,5 +8,8 @@
   },
   "author": "",
   "license": "ISC",
-  "types": "./index.d.ts"
+  "types": "./index.d.ts",
+  "dependencies": {
+    "form-data": "^4.0.0"
+  }
 }
