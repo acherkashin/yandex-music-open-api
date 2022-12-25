@@ -405,6 +405,7 @@ paths:
           multiple:
             value: "new-playlists,new-playlists"
     get:
+      operationId: getLandingBlocks
       tags:
         - "landing"
       security:
@@ -460,6 +461,78 @@ paths:
                   result:
                     type: object
 
+  /landing3/new-releases:
+    get:
+      operationId: getNewReleases
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [id, type, typeForFrom, title, newReleases]
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum: [new-releases]
+                      typeForFrom: 
+                        type: string
+                      title: 
+                        type: string
+                      newReleases:
+                        type: array
+                        items:
+                          type: number
+
+  /landing3/new-playlists:
+    get:
+      operationId: getNewPlaylists
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [id, type, typeForFrom, title, newPlaylists]
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum: [new-playlists]
+                      typeForFrom: 
+                        type: string
+                      title: 
+                        type: string
+                      newPlaylists:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/NewPlaylistItem"
+
   /landing3/chart/{chartType}:
     parameters:
       - in: path
@@ -469,6 +542,7 @@ paths:
           type: string
           enum: ["russia", "world"]
     get:
+      operationId: getChart
       tags:
         - "landing"
       responses:
@@ -2793,3 +2867,15 @@ components:
           type: string
         selected:
           type: boolean
+    NewPlaylistItem:
+      type: object
+      required:
+        - "uid"
+        - "kind"
+      properties:
+        uid:
+          description: id пользователя
+          type: number
+        kind:
+          description: id плейлиста
+          type: number
