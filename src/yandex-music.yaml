@@ -263,7 +263,46 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required: [invocationInfo, result]
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required:
+                      - canGetMoreEvents
+                      - days
+                      - generatedPlaylists
+                      - headlines
+                      - isWizardPassed
+                      - pumpkin
+                      - today
+                    properties:
+                      canGetMoreEvents:
+                        type: boolean
+                      days:
+                        type: array
+                        items:
+                          type: object
+                      generatedPlaylists:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/GeneratedPlaylistLandingBlock"
+                      headlines:
+                        type: array
+                        items:
+                          type: object
+                      isWizardPassed:
+                        type: boolean
+                      pumpkin:
+                        type: boolean
+                      today:
+                        type: string
 
   /tags/{tagId}/playlist-ids:
     summary: Получение тега (подборки)
@@ -389,7 +428,6 @@ paths:
                   result:
                     type: array
                     items:
-                      type: object
                       $ref: "#/components/schemas/Album"
 
   /landing3:
@@ -1303,7 +1341,7 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
-                    $ref: "#/components/schemas/DownloadInfo"
+                    $ref: "#/components/schemas/TrackDownloadInfo"
 
   /tracks/{trackId}/supplement:
     parameters:
@@ -1460,6 +1498,7 @@ paths:
           example: 218099
     get:
       summary: Получение популярных треков для артиста
+      operationId: getPopularTracks
       tags:
         - "artists"
       responses:
@@ -1473,12 +1512,19 @@ paths:
                   - "result"
                 type: object
                 properties:
-                  artist:
-                    $ref: "#/components/schemas/Artist"
-                  tracks:
-                    type: array
-                    items:
-                      type: string
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [artist, tracks]
+                    properties:
+                      artist:
+                        $ref: "#/components/schemas/Artist"
+                      tracks:
+                        type: array
+                        items:
+                          type: string
 
   /artists/{artistId}/brief-info:
     parameters:
@@ -1910,6 +1956,12 @@ components:
               $ref: "#/components/schemas/Track"
     Artist:
       type: object
+      required:
+        - "id"
+        - "composer"
+        - "genres"
+        - "name"
+        - "various"
       properties:
         composer:
           type: boolean
@@ -1927,7 +1979,9 @@ components:
           items:
             type: object
         id:
-          type: string
+          oneOf:
+            - type: string
+            - type: number
         name:
           type: string
         various:
@@ -1949,7 +2003,7 @@ components:
             type: string
     Cover:
       type: object
-      required: [custom, type,]
+      required: [custom, type]
       properties:
         custom:
           type: boolean
@@ -1974,6 +2028,7 @@ components:
           description: If exists other properties is missing
     Owner:
       type: object
+      required: [login, name, sex, uid, verified]
       properties:
         login:
           type: string
@@ -2672,12 +2727,14 @@ components:
         timestamp:
           type: string
           description: Дата
-    DownloadInfo:
+    TrackDownloadInfo:
       type: object
       description: информация о вариантах загрузки трека
+      required: [codec, gain, preview, downloadInfoUrl, direct, bitrateInKbps]
       properties:
         codec:
           type: string
+          enum: [mp3, aac]
           description: Кодек аудиофайла
         gain:
           type: boolean
@@ -2785,6 +2842,7 @@ components:
           $ref: "#/components/schemas/Error"
     LandingResult:
       type: object
+      required: [pumpkin, contentId, blocks]
       properties:
         pumpkin:
           type: boolean
@@ -2935,7 +2993,7 @@ components:
                   type: string
                 updated:
                   type: boolean
-                value: 
+                value:
                   type: number
     GeneratedPlaylistLandingBlock:
       type: object
@@ -2954,14 +3012,14 @@ components:
       type: object
       required: [bgColor, position, progress, listeners, shift]
       properties:
-          bgColor:
-            type: string
-          position:
-            type: number
-          progress:
-            type: string
-            enum: [same, up, down]
-          listeners:
-            type: number
-          shift:
-            type: number
+        bgColor:
+          type: string
+        position:
+          type: number
+        progress:
+          type: string
+          enum: [same, up, down]
+        listeners:
+          type: number
+        shift:
+          type: number
