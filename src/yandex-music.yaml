@@ -488,9 +488,9 @@ paths:
                       type:
                         type: string
                         enum: [new-releases]
-                      typeForFrom: 
+                      typeForFrom:
                         type: string
-                      title: 
+                      title:
                         type: string
                       newReleases:
                         type: array
@@ -522,9 +522,9 @@ paths:
                       type:
                         type: string
                         enum: [non-music_main_podcasts]
-                      typeForFrom: 
+                      typeForFrom:
                         type: string
-                      title: 
+                      title:
                         type: string
                       podcasts:
                         type: array
@@ -558,9 +558,9 @@ paths:
                       type:
                         type: string
                         enum: [new-playlists]
-                      typeForFrom: 
+                      typeForFrom:
                         type: string
-                      title: 
+                      title:
                         type: string
                       newPlaylists:
                         type: array
@@ -1949,31 +1949,28 @@ components:
             type: string
     Cover:
       type: object
+      required: [custom, type,]
       properties:
         custom:
           type: boolean
-          nullable: true
         dir:
+          description: Существует когда поле type = "pic"
           type: string
-          nullable: true
-        "type":
-          nullable: true
+        type:
           type: string
           enum: ["pic", "mosaic"]
         itemsUri:
+          description: Существует когда поле type = "mosaic"
           type: array
-          nullable: true
           items:
             type: string
         uri:
+          description: Существует когда поле type = "pic"
           type: string
-          nullable: true
         version:
           type: string
-          nullable: true
         error:
           type: string
-          nullable: true
           description: If exists other properties is missing
     Owner:
       type: object
@@ -2102,10 +2099,6 @@ components:
           type: boolean
         cover:
           type: object
-          $ref: "#/components/schemas/Cover"
-        coverWithoutText:
-          type: object
-          description: В большинстве случаев отсутствует. Есть в плейлисте дня, дежавю, премьера и т.д.
           $ref: "#/components/schemas/Cover"
         created:
           type: string
@@ -2913,3 +2906,62 @@ components:
         kind:
           description: id плейлиста
           type: number
+    GeneratedPlaylist:
+      description: Плейлист дня, дежавю, премьера, ...
+      allOf:
+        - $ref: "#/components/schemas/Playlist"
+        - type: object
+          properties:
+            animatedCoverUri:
+              description: Доступно для плейлиста дня
+              type: string
+            coverWithoutText:
+              $ref: "#/components/schemas/Cover"
+            everPlayed:
+              type: boolean
+            generatedPlaylistType:
+              type: string
+            idForFrom:
+              type: string
+            madeFor:
+              type: object
+            playCounter:
+              type: object
+              required: [description, descriptionNext, updated, value]
+              properties:
+                description:
+                  type: string
+                descriptionNext:
+                  type: string
+                updated:
+                  type: boolean
+                value: 
+                  type: number
+    GeneratedPlaylistLandingBlock:
+      type: object
+      required: [notify, ready, type, data]
+      properties:
+        notify:
+          type: boolean
+        ready:
+          type: boolean
+        type:
+          type: string
+          enum: [playlistOfTheDay]
+        data:
+          $ref: "#/components/schemas/GeneratedPlaylist"
+    Chart:
+      type: object
+      required: [bgColor, position, progress, listeners, shift]
+      properties:
+          bgColor:
+            type: string
+          position:
+            type: number
+          progress:
+            type: string
+            enum: [same, up, down]
+          listeners:
+            type: number
+          shift:
+            type: number
