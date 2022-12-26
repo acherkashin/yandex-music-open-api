@@ -677,49 +677,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BadRequest"
 
-  /search:
-    parameters:
-      - in: query
-        name: text
-        description: Текст запроса
-        schema:
-          type: string
-          example: Король и Шут
-      - in: query
-        name: page
-        description: Номер страницы выдачи
-        schema:
-          type: number
-          example: 0
-      - in: query
-        name: type
-        schema:
-          $ref: "#/components/schemas/SearchType"
-      - in: query
-        name: nococrrect
-        schema:
-          type: boolean
-          default: false
-    get:
-      summary: Осуществление поиска по запросу и типу, получение результатов
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                required:
-                  - "invocationInfo"
-                  - "result"
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: "#/components/schemas/InvocationInfo"
-                  result:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Playlist"
-
   /users/{userId}/playlists/list:
     parameters:
       - in: path
@@ -796,6 +753,53 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     $ref: "#/components/schemas/TracksList"
+  /search:
+    parameters:
+      - in: query
+        name: text
+        required: true
+        description: Текст запроса
+        schema:
+          type: string
+          example: Король и Шут
+      - in: query
+        name: page
+        required: true
+        description: Номер страницы выдачи
+        schema:
+          type: number
+          example: 0
+      - in: query
+        name: type
+        required: true
+        schema:
+          $ref: "#/components/schemas/SearchType"
+      - in: query
+        name: nococrrect
+        schema:
+          type: boolean
+          default: false
+    get:
+      tags:
+        - "search"
+      operationId: "search"
+      summary: Осуществление поиска по запросу и типу, получение результатов
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Search"
+
   /search/suggest:
     parameters:
       - in: query
@@ -806,6 +810,8 @@ paths:
           type: string
           example: Король
     get:
+      tags:
+        - "search"
       responses:
         200:
           description: Ok
@@ -1860,6 +1866,29 @@ components:
                 type: string
     Album:
       type: object
+      required:
+        - "id"
+        - "title"
+        - "type"
+        - "metaType"
+        - "year"
+        - "releaseDate"
+        - "coverUri"
+        - "ogImage"
+        - "genre"
+        - "buy"
+        - "trackCount"
+        - "recent"
+        - "veryImportant"
+        - "artists"
+        - "labels"
+        - "available"
+        - "availableForPremiumUsers"
+        - "availableForMobile"
+        - "availablePartially"
+        - "bests"
+        - "prerolls"
+        - "volumes"
       properties:
         id:
           type: number
@@ -2042,6 +2071,26 @@ components:
           type: boolean
     Track:
       type: object
+      required:
+        - "albums"
+        - "artists"
+        - "available"
+        - "availableForPremiumUsers"
+        - "availableFullWithoutPermission"
+        - "coverUri"
+        - "durationMs"
+        - "fileSize"
+        - "id"
+        - "lyricsAvailable"
+        - "major"
+        - "normalization"
+        - "ogImage"
+        - "previewDurationMs"
+        - "realId"
+        - "rememberPosition"
+        - "storageDir"
+        - "title"
+        - "type"
       properties:
         albums:
           type: array
@@ -2072,6 +2121,7 @@ components:
           type: boolean
         major:
           type: object
+          required: [id, name]
           properties:
             id:
               type: number
@@ -2079,6 +2129,7 @@ components:
               type: string
         normalization:
           type: object
+          required: [gain, peak]
           properties:
             gain:
               type: number
@@ -2753,6 +2804,17 @@ components:
           description: Битрейт аудиофайла в кбит/с
     Search:
       type: object
+      required:
+        - "albums"
+        - "artists"
+        - "best"
+        - "playlists"
+        - "searchRequestId"
+        - "misspellCorrected"
+        - "nocorrect"
+        - "text"
+        - "podcast_episodes"
+        - "tracks"
       description: Результаты поиска
       properties:
         searchResultId:
@@ -2764,38 +2826,91 @@ components:
         best:
           $ref: "#/components/schemas/Best"
         albums:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Album"
         artists:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные артисты
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Artist"
         playlists:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Playlist"
         tracks:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные треки
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Track"
         videos:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные видео
-        users:
-          $ref: "#/components/schemas/SearchResult"
-          description: Найденные пользователи
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Video"
         podcasts:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные подкасты
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
         podcast_episodes:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные выпуски подкастов
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
         type:
           $ref: "#/components/schemas/SearchType"
-          description: Тип результата по которому искали
+          description: Тип результата по которому искали. Доступно, при использовании параметра type.
         page:
           type: number
-          description: Текущая страница
+          description: Текущая страница. Доступно, при использовании параметра type.
         perPage:
           type: number
-          description: Результатов на странице
+          description: Результатов на странице. Доступно, при использовании параметра type.
         misspellCorrected:
           type: boolean
           description: Был ли исправлен запрос
@@ -2811,6 +2926,11 @@ components:
       default: "all"
     SearchResult:
       type: object
+      required:
+        - "type"
+        - "total"
+        - "perPage"
+        - "order"
       properties:
         type:
           type: string
@@ -2824,15 +2944,6 @@ components:
         order:
           type: number
           description: Позиция блока
-        results:
-          type: array
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/Track"
-              - $ref: "#/components/schemas/Artist"
-              - $ref: "#/components/schemas/Album"
-              - $ref: "#/components/schemas/Playlist"
-              - $ref: "#/components/schemas/Video"
     BadRequest:
       type: object
       properties:
