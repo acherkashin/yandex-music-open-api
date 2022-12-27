@@ -398,16 +398,21 @@ paths:
                     $ref: "#/components/schemas/Album"
 
   /albums:
-    parameters:
-      - in: query
-        name: album-ids
-        schema:
-          type: string
-          example: "24238367,24283038,24378886,24376958,24310351,24342301"
     post:
-      operationId: getAlbums
+      operationId: getByIds
       tags:
         - "albums"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: ["album-ids"]
+              properties:
+                "album-ids":
+                  type: string
+                  example: "18837614,23899279,23754447,21808509,23529901,22231572,10935745,23342620,23190604,23240656"
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -440,8 +445,8 @@ paths:
         examples:
           single:
             value: "new-releases"
-          multiple:
-            value: "new-playlists,new-playlists"
+          all:
+            value: "personalplaylists,promotions,new-releases,new-playlists,mixes,chart,artists,albums,playlists,play_contexts,podcasts"
     get:
       operationId: getLandingBlocks
       tags:
@@ -642,6 +647,7 @@ paths:
 
   /playlists/list:
     description: Получение полной информации о плейлистах по их идентификатору
+    # TODO: необходимо использовать application/x-www-form-urlencoded чтобы обойти ограничение на длину URL.
     parameters:
       - in: query
         name: playlistIds
@@ -3134,3 +3140,34 @@ components:
           type: number
         shift:
           type: number
+    Promotion:
+      type: object
+      required:
+        - "promoId"
+        - "title"
+        - "subtitle"
+        - "heading"
+        - "urlScheme"
+        - "url"
+        - "textColor"
+        - "gradient"
+        - "image"
+      properties:
+        promoId:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        heading:
+          type: string
+        urlScheme:
+          type: string
+        url:
+          type: string
+        textColor:
+          type: string
+        gradient:
+          type: string
+        image:
+          type: string
