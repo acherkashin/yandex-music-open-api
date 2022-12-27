@@ -346,6 +346,7 @@ paths:
         required: true
         example: 7019818
     get:
+      operationId: getAlbumById
       tags:
         - "albums"
       responses:
@@ -375,6 +376,7 @@ paths:
         required: true
         example: 7019818
     get:
+      operationId: getAlbumsWithTracks
       tags:
         - "albums"
       responses:
@@ -396,21 +398,19 @@ paths:
                     $ref: "#/components/schemas/Album"
 
   /albums:
+    parameters:
+      - in: query
+        name: album-ids
+        schema:
+          type: string
+          example: "24238367,24283038,24378886,24376958,24310351,24342301"
     post:
+      operationId: getAlbums
       tags:
         - "albums"
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                "album-ids":
-                  type: array
-                  items:
-                    type: string
-                  example: [13984185, 13730064, 13963354, 13546288, 13937809]
+      security:
+        - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
