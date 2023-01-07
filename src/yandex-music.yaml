@@ -30,6 +30,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -51,6 +54,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -74,6 +80,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -109,6 +118,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -129,6 +141,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -156,6 +171,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -187,6 +205,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 description: Настройки пользователя или "None"
                 type: object
                 properties:
@@ -219,6 +240,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -239,7 +263,46 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required: [invocationInfo, result]
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required:
+                      - canGetMoreEvents
+                      - days
+                      - generatedPlaylists
+                      - headlines
+                      - isWizardPassed
+                      - pumpkin
+                      - today
+                    properties:
+                      canGetMoreEvents:
+                        type: boolean
+                      days:
+                        type: array
+                        items:
+                          type: object
+                      generatedPlaylists:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/GeneratedPlaylistLandingBlock"
+                      headlines:
+                        type: array
+                        items:
+                          type: object
+                      isWizardPassed:
+                        type: boolean
+                      pumpkin:
+                        type: boolean
+                      today:
+                        type: string
 
   /tags/{tagId}/playlist-ids:
     summary: Получение тега (подборки)
@@ -262,6 +325,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -280,6 +346,7 @@ paths:
         required: true
         example: 7019818
     get:
+      operationId: getAlbumById
       tags:
         - "albums"
       responses:
@@ -288,6 +355,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -306,6 +376,7 @@ paths:
         required: true
         example: 7019818
     get:
+      operationId: getAlbumsWithTracks
       tags:
         - "albums"
       responses:
@@ -314,6 +385,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -325,6 +399,7 @@ paths:
 
   /albums:
     post:
+      operationId: getByIds
       tags:
         - "albums"
       requestBody:
@@ -333,18 +408,23 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
+              required: ["album-ids"]
               properties:
                 "album-ids":
-                  type: array
-                  items:
-                    type: string
-                  example: [13984185, 13730064, 13963354, 13546288, 13937809]
+                  type: string
+                  example: "18837614,23899279,23754447,21808509,23529901,22231572,10935745,23342620,23190604,23240656"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
       responses:
         200:
           description: Ok
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -353,7 +433,6 @@ paths:
                   result:
                     type: array
                     items:
-                      type: object
                       $ref: "#/components/schemas/Album"
 
   /landing3:
@@ -366,9 +445,10 @@ paths:
         examples:
           single:
             value: "new-releases"
-          multiple:
-            value: "new-playlists, new-playlists"
+          all:
+            value: "personalplaylists,promotions,new-releases,new-playlists,mixes,chart,artists,albums,playlists,play_contexts,podcasts"
     get:
+      operationId: getLandingBlocks
       tags:
         - "landing"
       security:
@@ -377,7 +457,18 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/LandingResult"
           headers:
             "X-Yandex-Music-Device":
               schema:
@@ -392,14 +483,132 @@ paths:
         required: true
         schema:
           type: string
-          enum:
-            [
-              "new-playlists",
-              "new-releases",
-              "new-playlists",
-              "chart",
-              "podcasts",
-            ]
+          enum: ["new-playlists", "new-releases", "chart", "podcasts"]
+    get:
+      operationId: getLandingBlock
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+
+  /landing3/new-releases:
+    get:
+      operationId: getNewReleases
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [id, type, typeForFrom, title, newReleases]
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum: [new-releases]
+                      typeForFrom:
+                        type: string
+                      title:
+                        type: string
+                      newReleases:
+                        type: array
+                        items:
+                          type: number
+
+  /landing3/podcasts:
+    get:
+      operationId: getNewPodcasts
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [type, typeForFrom, title, podcasts]
+                    properties:
+                      type:
+                        type: string
+                        enum: [non-music_main_podcasts]
+                      typeForFrom:
+                        type: string
+                      title:
+                        type: string
+                      podcasts:
+                        type: array
+                        items:
+                          type: number
+
+  /landing3/new-playlists:
+    get:
+      operationId: getNewPlaylists
+      tags:
+        - "landing"
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [id, type, typeForFrom, title, newPlaylists]
+                    properties:
+                      id:
+                        type: string
+                      type:
+                        type: string
+                        enum: [new-playlists]
+                      typeForFrom:
+                        type: string
+                      title:
+                        type: string
+                      newPlaylists:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/NewPlaylistItem"
 
   /landing3/chart/{chartType}:
     parameters:
@@ -410,12 +619,24 @@ paths:
           type: string
           enum: ["russia", "world"]
     get:
+      operationId: getChart
       tags:
         - "landing"
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/FullChartResult"
 
   /genres:
     get:
@@ -426,6 +647,7 @@ paths:
 
   /playlists/list:
     description: Получение полной информации о плейлистах по их идентификатору
+    # TODO: необходимо использовать application/x-www-form-urlencoded чтобы обойти ограничение на длину URL.
     parameters:
       - in: query
         name: playlistIds
@@ -434,26 +656,18 @@ paths:
           type: string
           example: 103372440:1878,460140864:1000
     post:
+      operationId: getByIds
       tags:
         - "playlists"
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                playListIds: 
-                  type: array
-                  items:
-                    type: string
-                  example: ["103372440:1878","460140864:1000"]
       responses:
         200:
           description: Ok
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -469,46 +683,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/BadRequest"
 
-  /search:
-    parameters:
-      - in: query
-        name: text
-        description: Текст запроса
-        schema:
-          type: string
-          example: Король и Шут
-      - in: query
-        name: page
-        description: Номер страницы выдачи
-        schema:
-          type: number
-          example: 0
-      - in: query
-        name: type
-        schema:
-          $ref: "#/components/schemas/SearchType"
-      - in: query
-        name: nococrrect
-        schema:
-          type: boolean
-          default: false
-    get:
-      summary: Осуществление поиска по запросу и типу, получение результатов
-      responses:
-        200:
-          description: Ok
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  invocationInfo:
-                    $ref: "#/components/schemas/InvocationInfo"
-                  result:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Playlist"
-
   /users/{userId}/playlists/list:
     parameters:
       - in: path
@@ -519,6 +693,7 @@ paths:
           type: number
           example: 541320800
     get:
+      operationId: getPlayLists
       summary: Получение списка плейлистов пользователя.
       tags:
         - "user"
@@ -532,6 +707,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -573,12 +751,62 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     $ref: "#/components/schemas/TracksList"
+  /search:
+    parameters:
+      - in: query
+        name: text
+        required: true
+        description: Текст запроса
+        schema:
+          type: string
+          example: Король и Шут
+      - in: query
+        name: page
+        required: true
+        description: Номер страницы выдачи
+        schema:
+          type: number
+          example: 0
+      - in: query
+        name: type
+        required: true
+        schema:
+          $ref: "#/components/schemas/SearchType"
+      - in: query
+        name: nococrrect
+        schema:
+          type: boolean
+          default: false
+    get:
+      tags:
+        - "search"
+      operationId: "search"
+      summary: Осуществление поиска по запросу и типу, получение результатов
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Search"
+
   /search/suggest:
     parameters:
       - in: query
@@ -589,12 +817,17 @@ paths:
           type: string
           example: Король
     get:
+      tags:
+        - "search"
       responses:
         200:
           description: Ok
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -619,6 +852,7 @@ paths:
           type: number
           example: 1000
     get:
+      operationId: getPlaylistById
       summary: Получение плейлиста по уникальному идентификатору
       tags:
         - "user"
@@ -629,11 +863,19 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Playlist"
-
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Playlist"
+            
   /users/{userId}/playlists:
     parameters:
       - in: path
@@ -745,6 +987,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -836,6 +1081,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -886,6 +1134,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -910,6 +1161,7 @@ paths:
           type: number
           example: 541320800
     post:
+      operationId: likeTracks
       summary: Пометить треки как "Мне нравится"
       tags:
         - "user"
@@ -932,14 +1184,17 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
                     $ref: "#/components/schemas/InvocationInfo"
-                  result: 
+                  result:
                     type: object
                     properties:
                       revision:
@@ -958,6 +1213,7 @@ paths:
           type: number
           example: 541320800
     post:
+      operationId: removeLikedTracks
       tags:
         - "user"
         - "tracks"
@@ -969,8 +1225,13 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-            example: '{"track-ids" : "7019818,29238706"}'
+              type: object
+              properties:
+                "track-ids":
+                  type: array
+                  items:
+                    type: string
+                  example: [7019818, 29238706, 83063895]
       responses:
         200:
           description: Ok
@@ -989,6 +1250,7 @@ paths:
           type: number
           example: 541320800
     get:
+      operationId: getLikedTracksIds
       summary: Получение треков с отметкой "Мне нравится"
       tags:
         - "user"
@@ -1002,12 +1264,16 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
+                    required: [library]
                     properties:
                       library:
                         $ref: "#/components/schemas/TracksList"
@@ -1030,6 +1296,7 @@ paths:
 
   /tracks/:
     post:
+      operationId: getTracks
       summary: Получение треков
       tags:
         - "tracks"
@@ -1056,6 +1323,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1081,6 +1351,7 @@ paths:
           type: string
           example: "78550148"
     get:
+      operationId: "getDownloadInfo"
       summary: Получение информации о доступных вариантах загрузки трека.
       tags:
         - "tracks"
@@ -1090,14 +1361,19 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
                     type: object
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    type: object
-                    $ref: "#/components/schemas/DownloadInfo"
+                    type: array
+                    items:
+                      type: object
+                      $ref: "#/components/schemas/TrackDownloadInfo"
 
   /tracks/{trackId}/supplement:
     parameters:
@@ -1118,6 +1394,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1146,6 +1425,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
                   invocationInfo:
@@ -1220,6 +1502,9 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 description: Возвращает строку "ok" при успешном выполнении запроса
                 type: object
                 properties:
@@ -1245,6 +1530,7 @@ paths:
           example: 218099
     get:
       summary: Получение популярных треков для артиста
+      operationId: getPopularTracks
       tags:
         - "artists"
       responses:
@@ -1253,14 +1539,24 @@ paths:
           content:
             application/json:
               schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
                 type: object
                 properties:
-                  artist:
-                    $ref: "#/components/schemas/Artist"
-                  tracks:
-                    type: array
-                    items:
-                      type: string
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    required: [artist, tracks]
+                    properties:
+                      artist:
+                        $ref: "#/components/schemas/Artist"
+                      tracks:
+                        type: array
+                        items:
+                          type: string
 
   /artists/{artistId}/brief-info:
     parameters:
@@ -1466,7 +1762,7 @@ components:
       flows:
         password:
           tokenUrl: https://yandex-music-cors-proxy.onrender.com/https://oauth.yandex.ru/token
-          scopes: {}  
+          scopes: {}
     oAuth:
       type: oauth2
       description: This API uses OAuth 2 with the implicit grant flow. [More info](https://api.example.com/docs/auth)
@@ -1531,6 +1827,10 @@ components:
       example: "public"
     InvocationInfo:
       type: object
+      required:
+        - "exec-duration-millis"
+        - "hostname"
+        - "req-id"
       properties:
         "exec-duration-millis":
           type: number
@@ -1592,6 +1892,29 @@ components:
                 type: string
     Album:
       type: object
+      required:
+        - "id"
+        - "title"
+        - "type"
+        - "metaType"
+        - "year"
+        - "releaseDate"
+        - "coverUri"
+        - "ogImage"
+        - "genre"
+        - "buy"
+        - "trackCount"
+        - "recent"
+        - "veryImportant"
+        - "artists"
+        - "labels"
+        - "available"
+        - "availableForPremiumUsers"
+        - "availableForMobile"
+        - "availablePartially"
+        - "bests"
+        - "prerolls"
+        - "volumes"
       properties:
         id:
           type: number
@@ -1688,6 +2011,12 @@ components:
               $ref: "#/components/schemas/Track"
     Artist:
       type: object
+      required:
+        - "id"
+        - "composer"
+        - "genres"
+        - "name"
+        - "various"
       properties:
         composer:
           type: boolean
@@ -1705,7 +2034,9 @@ components:
           items:
             type: object
         id:
-          type: string
+          oneOf:
+            - type: string
+            - type: number
         name:
           type: string
         various:
@@ -1727,34 +2058,32 @@ components:
             type: string
     Cover:
       type: object
+      required: [custom, type]
       properties:
         custom:
           type: boolean
-          nullable: true
         dir:
+          description: Существует когда поле type = "pic"
           type: string
-          nullable: true
-        "type":
-          nullable: true
+        type:
           type: string
           enum: ["pic", "mosaic"]
         itemsUri:
+          description: Существует когда поле type = "mosaic"
           type: array
-          nullable: true
           items:
             type: string
         uri:
+          description: Существует когда поле type = "pic"
           type: string
-          nullable: true
         version:
           type: string
-          nullable: true
         error:
           type: string
-          nullable: true
           description: If exists other properties is missing
     Owner:
       type: object
+      required: [login, name, sex, uid, verified]
       properties:
         login:
           type: string
@@ -1768,6 +2097,26 @@ components:
           type: boolean
     Track:
       type: object
+      required:
+        - "albums"
+        - "artists"
+        - "available"
+        - "availableForPremiumUsers"
+        - "availableFullWithoutPermission"
+        - "coverUri"
+        - "durationMs"
+        - "fileSize"
+        - "id"
+        - "lyricsAvailable"
+        - "major"
+        - "normalization"
+        - "ogImage"
+        - "previewDurationMs"
+        - "realId"
+        - "rememberPosition"
+        - "storageDir"
+        - "title"
+        - "type"
       properties:
         albums:
           type: array
@@ -1798,6 +2147,7 @@ components:
           type: boolean
         major:
           type: object
+          required: [id, name]
           properties:
             id:
               type: number
@@ -1805,6 +2155,7 @@ components:
               type: string
         normalization:
           type: object
+          required: [gain, peak]
           properties:
             gain:
               type: number
@@ -1825,6 +2176,7 @@ components:
         type:
           type: string
     TrackItem:
+      required: [id, playCount, recent, timestamp]
       type: object
       properties:
         id:
@@ -1841,6 +2193,30 @@ components:
           $ref: "#/components/schemas/Track"
     Playlist:
       description: play list data
+      required:
+        - "playlistUuid"
+        - "description"
+        - "descriptionFormatted"
+        - "available"
+        - "collective"
+        - "created"
+        - "modified"
+        - "backgroundColor"
+        - "textColor"
+        - "durationMs"
+        - "isBanner"
+        - "isPremiere"
+        - "kind"
+        - "owner"
+        - "revision"
+        - "snapshot"
+        - "tags"
+        - "title"
+        - "trackCount"
+        - "uid"
+        - "visibility"
+        - "likesCount"
+        - "tracks"
       type: object
       properties:
         playlistUuid:
@@ -1866,7 +2242,7 @@ components:
           type: string
         durationMs:
           type: number
-        isBunner:
+        isBanner:
           type: boolean
         isPremiere:
           type: boolean
@@ -1907,7 +2283,6 @@ components:
           type: number
         tracks:
           type: array
-          nullable: true
           items:
             type: object
             $ref: "#/components/schemas/TrackItem"
@@ -2404,6 +2779,7 @@ components:
     TracksList:
       type: object
       description: список треков
+      required: [uid, revisions, tracks]
       properties:
         uid:
           type: number
@@ -2419,6 +2795,7 @@ components:
     TrackShort:
       type: object
       description: Укороченная версия трека с неполными данными
+      required: [id, albumId, timestamp]
       properties:
         id:
           type: string
@@ -2429,12 +2806,14 @@ components:
         timestamp:
           type: string
           description: Дата
-    DownloadInfo:
+    TrackDownloadInfo:
       type: object
       description: информация о вариантах загрузки трека
+      required: [codec, gain, preview, downloadInfoUrl, direct, bitrateInKbps]
       properties:
         codec:
           type: string
+          enum: [mp3, aac]
           description: Кодек аудиофайла
         gain:
           type: boolean
@@ -2453,6 +2832,17 @@ components:
           description: Битрейт аудиофайла в кбит/с
     Search:
       type: object
+      required:
+        - "albums"
+        - "artists"
+        - "best"
+        - "playlists"
+        - "searchRequestId"
+        - "misspellCorrected"
+        - "nocorrect"
+        - "text"
+        - "podcast_episodes"
+        - "tracks"
       description: Результаты поиска
       properties:
         searchResultId:
@@ -2464,38 +2854,91 @@ components:
         best:
           $ref: "#/components/schemas/Best"
         albums:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Album"
         artists:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные артисты
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Artist"
         playlists:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные альбомы
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Playlist"
         tracks:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные треки
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Track"
         videos:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные видео
-        users:
-          $ref: "#/components/schemas/SearchResult"
-          description: Найденные пользователи
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Video"
         podcasts:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные подкасты
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
         podcast_episodes:
-          $ref: "#/components/schemas/SearchResult"
           description: Найденные выпуски подкастов
+          allOf:
+            - $ref: "#/components/schemas/SearchResult"
+            - type: object
+              required: [results]
+              properties:
+                results:
+                  type: array
+                  items:
+                    type: object
         type:
           $ref: "#/components/schemas/SearchType"
-          description: Тип результата по которому искали
+          description: Тип результата по которому искали. Доступно, при использовании параметра type.
         page:
           type: number
-          description: Текущая страница
+          description: Текущая страница. Доступно, при использовании параметра type.
         perPage:
           type: number
-          description: Результатов на странице
+          description: Результатов на странице. Доступно, при использовании параметра type.
         misspellCorrected:
           type: boolean
           description: Был ли исправлен запрос
@@ -2511,6 +2954,11 @@ components:
       default: "all"
     SearchResult:
       type: object
+      required:
+        - "type"
+        - "total"
+        - "perPage"
+        - "order"
       properties:
         type:
           type: string
@@ -2524,15 +2972,6 @@ components:
         order:
           type: number
           description: Позиция блока
-        results:
-          type: array
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/Track"
-              - $ref: "#/components/schemas/Artist"
-              - $ref: "#/components/schemas/Album"
-              - $ref: "#/components/schemas/Playlist"
-              - $ref: "#/components/schemas/Video"
     BadRequest:
       type: object
       properties:
@@ -2540,3 +2979,286 @@ components:
           $ref: "#/components/schemas/InvocationInfo"
         error:
           $ref: "#/components/schemas/Error"
+    LandingResult:
+      type: object
+      required: [pumpkin, contentId, blocks]
+      properties:
+        pumpkin:
+          type: boolean
+        contentId:
+          type: string
+        blocks:
+          type: array
+          items:
+            $ref: "#/components/schemas/LandingBlock"
+    LandingBlock:
+      type: object
+      required:
+        - "id"
+        - "title"
+        - "type"
+        - "typeForFrom"
+        - "description"
+        - "entities"
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          description: the follwing values are allowed or combination of these values separated by comman - personal-playlists, podcasts, play-context, chart, new-playlists, new-releases, promotions
+          type: string
+        typeForFrom:
+          $ref: "#/components/schemas/LandingBlockType"
+        description:
+          type: string
+        entities:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/LandingPodcastItem"
+              - $ref: "#/components/schemas/LandingBlockItem"
+    LandingBlockItem:
+      type: object
+      required: [id, type, data]
+      properties:
+        id:
+          type: string
+        type:
+          $ref: "#/components/schemas/LandingBlockType"
+        data:
+          type: object
+          oneOf:
+            - $ref: "#/components/schemas/Album"
+            - $ref: "#/components/schemas/Playlist"
+            - $ref: "#/components/schemas/Promotion"
+            - $ref: "#/components/schemas/MixLink"
+            - $ref: "#/components/schemas/GeneratedPlaylistLandingBlock"
+            - $ref: "#/components/schemas/ChartItem"
+    LandingBlockType:
+      type: string
+      enum:
+        - "personalplaylists"
+        - "promotions"
+        - "new-releases"
+        - "new-playlists"
+        - "mixes"
+        - "chart"
+        - "artists"
+        - "albums"
+        - "playlists"
+        - "play_contexts"
+        - "podcasts"
+    LandingPodcastItem:
+      type: object
+      required:
+        - "type"
+        - "description"
+        - "descriptionFormatted"
+        - "lastUpdated"
+        - "data"
+      properties:
+        type:
+          type: string
+        description:
+          type: string
+        descriptionFormatted:
+          type: string
+        lastUpdated:
+          type: string
+        data:
+          type: object
+          required:
+            - "podcast"
+            - "description"
+            - "descriptionFormatted"
+            - "lastUpdated"
+          properties:
+            podcast:
+              type: object
+              $ref: "#/components/schemas/Album"
+            description:
+              type: string
+            descriptionFormatted:
+              type: string
+            lastUpdated:
+              type: string
+    FullChartResult:
+      type: object
+      required:
+        - "id"
+        - "type"
+        - "typeForFrom"
+        - "title"
+        - "chartDescription"
+        - "menu"
+        - "chart"
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - "chart"
+        typeForFrom:
+          type: string
+        title:
+          type: string
+        chartDescription:
+          type: string
+        menu:
+          required:
+            - "menu"
+          type: object
+          properties:
+            menu:
+              type: object
+              $ref: "#/components/schemas/MenuItem"
+        chart:
+          type: object
+          $ref: "#/components/schemas/Playlist"
+    MenuItem:
+      type: object
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        selected:
+          type: boolean
+    NewPlaylistItem:
+      type: object
+      required:
+        - "uid"
+        - "kind"
+      properties:
+        uid:
+          description: id пользователя
+          type: number
+        kind:
+          description: id плейлиста
+          type: number
+    GeneratedPlaylist:
+      description: Плейлист дня, дежавю, премьера, ...
+      allOf:
+        - $ref: "#/components/schemas/Playlist"
+        - type: object
+          properties:
+            animatedCoverUri:
+              description: Доступно для плейлиста дня
+              type: string
+            coverWithoutText:
+              $ref: "#/components/schemas/Cover"
+            everPlayed:
+              type: boolean
+            generatedPlaylistType:
+              type: string
+            idForFrom:
+              type: string
+            madeFor:
+              type: object
+            playCounter:
+              type: object
+              required: [description, descriptionNext, updated, value]
+              properties:
+                description:
+                  type: string
+                descriptionNext:
+                  type: string
+                updated:
+                  type: boolean
+                value:
+                  type: number
+    GeneratedPlaylistLandingBlock:
+      type: object
+      required: [notify, ready, type, data]
+      properties:
+        notify:
+          type: boolean
+        ready:
+          type: boolean
+        type:
+          type: string
+          enum: [playlistOfTheDay]
+        data:
+          $ref: "#/components/schemas/GeneratedPlaylist"
+    Chart:
+      type: object
+      required: [bgColor, position, progress, listeners, shift]
+      properties:
+        bgColor:
+          type: string
+        position:
+          type: number
+        progress:
+          type: string
+          enum: [same, up, down]
+        listeners:
+          type: number
+        shift:
+          type: number
+    Promotion:
+      type: object
+      required:
+        - "promoId"
+        - "title"
+        - "subtitle"
+        - "heading"
+        - "urlScheme"
+        - "url"
+        - "textColor"
+        - "gradient"
+        - "image"
+      properties:
+        promoId:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        heading:
+          type: string
+        urlScheme:
+          type: string
+        url:
+          type: string
+        textColor:
+          type: string
+        gradient:
+          type: string
+        image:
+          type: string
+    MixLink:
+      type: object
+      required:
+        - "title"
+        - "url"
+        - "urlScheme"
+        - "textColor"
+        - "backgroundColor"
+        - "coverWhite"
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        urlScheme:
+          type: string
+        textColor:
+          type: string
+        backgroundColor:  
+          type: string
+        coverWhite:
+          type: string
+    ChartItem:
+      required:
+        - "track"
+        - "chart"
+      allOf:
+        - $ref: '#/components/schemas/TrackItem'
+        - type: object
+          properties:
+            # track:
+            #   $ref: '#/components/schemas/Track'
+            chart:
+              $ref: '#/components/schemas/Chart'

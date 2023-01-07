@@ -107,3 +107,6 @@ dist
 .dccache
 
 .DS_Store
+
+# Generated typescript client proxy
+generated

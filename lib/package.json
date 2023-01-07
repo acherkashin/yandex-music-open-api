@@ -1,0 +1,12 @@
+{
+  "name": "yandex-music-client",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "types": "./index.d.ts",
+  "dependencies": {
+    "form-data": "^4.0.0"
+  }
+}
