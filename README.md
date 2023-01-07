@@ -52,6 +52,13 @@ TODO
 - [ ] Публиковать Npm, Nuget, ... модули
 - [ ] Добавить линтер 
 
+
+### Open API генератор
+
+## Кастомный request.ts файл 
+
+Необходимо использовать кастомный `request.ts` файл [из-за известного бага в `openapi-typescript-codegen` модуле](https://github.com/ferdikoomen/openapi-typescript-codegen/issues/1000#issuecomment-1374436662).
+
 ## Использование Yandex Music Api
 
 ```js
