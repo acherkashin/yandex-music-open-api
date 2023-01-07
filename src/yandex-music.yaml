@@ -1236,6 +1236,7 @@ paths:
           type: number
           example: 541320800
     get:
+      operationId: getLikedTracksIds
       summary: Получение треков с отметкой "Мне нравится"
       tags:
         - "user"
@@ -1258,6 +1259,7 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     type: object
+                    required: [library]
                     properties:
                       library:
                         $ref: "#/components/schemas/TracksList"
@@ -2762,6 +2764,7 @@ components:
     TracksList:
       type: object
       description: список треков
+      required: [uid, revisions, tracks]
       properties:
         uid:
           type: number
@@ -2777,6 +2780,7 @@ components:
     TrackShort:
       type: object
       description: Укороченная версия трека с неполными данными
+      required: [id, albumId, timestamp]
       properties:
         id:
           type: string
