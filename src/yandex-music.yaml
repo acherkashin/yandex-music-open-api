@@ -693,6 +693,7 @@ paths:
           type: number
           example: 541320800
     get:
+      operationId: getPlayLists
       summary: Получение списка плейлистов пользователя.
       tags:
         - "user"
