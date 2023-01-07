@@ -851,6 +851,7 @@ paths:
           type: number
           example: 1000
     get:
+      operationId: getPlaylistById
       summary: Получение плейлиста по уникальному идентификатору
       tags:
         - "user"
@@ -867,8 +868,13 @@ paths:
                 required:
                   - "invocationInfo"
                   - "result"
-                $ref: "#/components/schemas/Playlist"
-
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Playlist"
+            
   /users/{userId}/playlists:
     parameters:
       - in: path
