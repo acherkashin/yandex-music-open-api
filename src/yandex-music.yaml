@@ -2993,6 +2993,13 @@ components:
             $ref: "#/components/schemas/LandingBlock"
     LandingBlock:
       type: object
+      required:
+        - "id"
+        - "title"
+        - "type"
+        - "typeForFrom"
+        - "description"
+        - "entities"
       properties:
         id:
           type: string
@@ -3008,9 +3015,26 @@ components:
         entities:
           type: array
           items:
-            # TODO: need to complete
             oneOf:
               - $ref: "#/components/schemas/LandingPodcastItem"
+              - $ref: "#/components/schemas/LandingBlockItem"
+    LandingBlockItem:
+      type: object
+      required: [id, type, data]
+      properties:
+        id:
+          type: string
+        type:
+          $ref: "#/components/schemas/LandingBlockType"
+        data:
+          type: object
+          oneOf:
+            - $ref: "#/components/schemas/Album"
+            - $ref: "#/components/schemas/Playlist"
+            - $ref: "#/components/schemas/Promotion"
+            - $ref: "#/components/schemas/MixLink"
+            - $ref: "#/components/schemas/GeneratedPlaylistLandingBlock"
+            - $ref: "#/components/schemas/ChartItem"
     LandingBlockType:
       type: string
       enum:
@@ -3027,6 +3051,12 @@ components:
         - "podcasts"
     LandingPodcastItem:
       type: object
+      required:
+        - "type"
+        - "description"
+        - "descriptionFormatted"
+        - "lastUpdated"
+        - "data"
       properties:
         type:
           type: string
@@ -3038,6 +3068,11 @@ components:
           type: string
         data:
           type: object
+          required:
+            - "podcast"
+            - "description"
+            - "descriptionFormatted"
+            - "lastUpdated"
           properties:
             podcast:
               type: object
@@ -3193,3 +3228,37 @@ components:
           type: string
         image:
           type: string
+    MixLink:
+      type: object
+      required:
+        - "title"
+        - "url"
+        - "urlScheme"
+        - "textColor"
+        - "backgroundColor"
+        - "coverWhite"
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        urlScheme:
+          type: string
+        textColor:
+          type: string
+        backgroundColor:  
+          type: string
+        coverWhite:
+          type: string
+    ChartItem:
+      required:
+        - "track"
+        - "chart"
+      allOf:
+        - $ref: '#/components/schemas/TrackItem'
+        - type: object
+          properties:
+            # track:
+            #   $ref: '#/components/schemas/Track'
+            chart:
+              $ref: '#/components/schemas/Chart'
