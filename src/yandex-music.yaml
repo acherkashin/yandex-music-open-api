@@ -1289,6 +1289,7 @@ paths:
 
   /tracks/:
     post:
+      operationId: getTracks
       summary: Получение треков
       tags:
         - "tracks"
