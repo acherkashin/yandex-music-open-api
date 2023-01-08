@@ -78,6 +78,7 @@ paths:
   /settings:
     description: Получение предложений по покупке. Нет обязательных параметров
     get:
+      operationId: getSettings
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -102,6 +103,7 @@ paths:
   /permission-alerts:
     description: Получение оповещений. Нет обязательных параметров.
     get:
+      operationId: getPermissionAlerts
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -126,6 +128,7 @@ paths:
   /account/experiments:
     description: Получение значений экспериментальных функций аккаунта
     get:
+      operationId: getAccountExperiments
       tags:
         - account
       security:
@@ -152,6 +155,7 @@ paths:
   /account/consume-promo-code:
     description: Активация промо-кода
     post:
+      operationId: activatePromoCode
       tags:
         - account
       security:
@@ -189,6 +193,7 @@ paths:
 
   /feed/wizard/is-passed:
     get:
+      #TODO: add operationId
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -216,6 +221,7 @@ paths:
   /account/settings:
     description: Настройки текущего пользователя
     get:
+      operationId: getAccountSettings
       summary: Получение настроек текущего пользователя
       tags:
         - account
@@ -238,6 +244,7 @@ paths:
                   result:
                     $ref: "#/components/schemas/UserSettings"
     post:
+      operationId: changeAccountSettings
       summary: Изменение настроек текущего пользователя
       tags:
         - account
@@ -286,6 +293,7 @@ paths:
   /account/status:
     description: Get account status for current user
     get:
+      operationId: getAccountStatus
       tags:
         - "account"
       security:
@@ -314,6 +322,7 @@ paths:
                 $ref: "#/components/schemas/BadRequest"
   /feed:
     get:
+      operationId: getFeed
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -371,6 +380,7 @@ paths:
         required: true
         example: "рок"
     get:
+      # TODO: add operationId
       tags:
         - "tags"
       security:
@@ -459,7 +469,7 @@ paths:
   /albums:
     post:
       summary: Получение альбомов по идентификаторам
-      operationId: getByIds
+      operationId: getAlbumsByIds
       tags:
         - "albums"
       requestBody:
@@ -709,7 +719,7 @@ paths:
   /playlists/list:
     post:
       summary: Получение полной информации о плейлистах по их идентификатору
-      operationId: getByIds
+      operationId: getPlaylistsByIds
       tags:
         - "playlists"
       requestBody:
@@ -885,6 +895,7 @@ paths:
           type: string
           example: Король
     get:
+      # TODO: add operationId
       tags:
         - "search"
       responses:
@@ -1517,7 +1528,7 @@ paths:
           type: string
           example: "78550148"
     get:
-      operationId: "getDownloadInfo"
+      operationId: getDownloadInfo
       summary: Получение информации о доступных вариантах загрузки трека.
       tags:
         - "tracks"
@@ -1736,6 +1747,7 @@ paths:
           type: string
           example: 218099
     get:
+      # TODO: add operationId
       tags:
         - "artists"
       responses:
@@ -1764,6 +1776,7 @@ paths:
           type: number
           example: 20
     get:
+      operationId: getArtistTracks
       tags:
         - "artists"
       responses:
@@ -1800,6 +1813,7 @@ paths:
             - "year"
             - "rating"
     get:
+      # TODO: add operationId
       tags:
         - "artists"
       responses:
@@ -1830,6 +1844,7 @@ paths:
         schema:
           type: string
     get:
+      operationId: getStationTracks
       summary: "Получение цепочки треков определённой станции"
       tags:
         - "rotor"
@@ -1849,6 +1864,7 @@ paths:
 
   /rotor/account/status:
     get:
+      # TODO: add operationId
       summary: "Получение статуса пользователя с дополнителными полями"
       tags:
         - "rotor"
@@ -1877,6 +1893,7 @@ paths:
           type: string
           example: ru
     get:
+      operationId: getStationsList
       summary: "Получение всех радиостанций с настройками пользователя"
       tags:
         - "rotor"
@@ -1887,6 +1904,7 @@ paths:
 
   /rotor/stations/dashboard:
     get:
+      # TODO: add operationId
       summary: "Получение рекомендованных станций текущего пользователя"
       security:
         - oAuth: []
@@ -1907,6 +1925,7 @@ paths:
         schema:
           type: string
     post:
+      # TODO: add operationId
       summary: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
       tags:
         - "rotor"
