@@ -1168,10 +1168,7 @@ paths:
               type: object
               properties:
                 value:
-                  type: string
-                  enum:
-                    - "public"
-                    - "private"
+                  $ref: "#/components/schemas/VisibilityEnum"
       responses:
         200:
           description: Изменение видимости плейлиста
