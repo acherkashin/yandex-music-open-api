@@ -1086,8 +1086,9 @@ paths:
           type: number
           example: 1000
     post:
-      operationId: addTracksToPlaylist
+      operationId: changePlaylistTracks
       summary: Добавление треков в плейлист
+      description: Используй '{"diff":{"op":"insert","at":0,"tracks":[{"id":"20599729","albumId":"2347459"}]}}' - для добавления, {"diff":{"op":"delete","from":0,"to":1,"tracks":[{"id":"20599729","albumId":"2347459"}]}} - для удаления треков
       tags:
         - "user"
         - "playlists"
@@ -1102,11 +1103,19 @@ paths:
               type: object
               properties:
                 diff:
-                  type: string
-                  example: '{"diff":{"op":"insert","at":0,"tracks":[{"id":"20599729","albumId":"2347459"}]}}'
+                  type: string                    
                 revision:
                   type: string
-                  example: 0
+                  example: "0"
+            examples:
+              insert:
+                value:
+                  diff: '{"diff":{"op":"insert","at":0,"tracks":[{"id":"20599729","albumId":"2347459"}]}}'
+                  revision: "0"
+              remove:
+                value:
+                  diff: '{"diff":{"op":"delete","from":0,"to":1,"tracks":[{"id":"20599729","albumId":"2347459"}]}}'
+                  revision: "0"
       responses:
         200:
           description: Ok
