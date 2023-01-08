@@ -913,7 +913,20 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Playlist"
 
   /users/{userId}/playlists/create:
     parameters:
@@ -928,16 +941,36 @@ paths:
       tags:
         - "user"
         - "playlists"
+      summary: Создание нового плейлиста
+      security:
+        - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: string
-              example: '{"title" : "Название плейлиста", "visibility": "public"}'
+              type: object
+              properties:
+                title:
+                  type: string
+                visibility:
+                  $ref: "#/components/schemas/VisibilityEnum"
       responses:
         200:
           description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Playlist"
         400:
           description: Bad Request
           content:
@@ -1013,7 +1046,7 @@ paths:
         schema:
           type: number
           example: 1000
-    delete:
+    post:
       tags:
         - "user"
         - "playlists"
@@ -1023,7 +1056,18 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: string
 
   # TODO: Complete
   /users/{userId}/playlists/{kind}/change-relative:
