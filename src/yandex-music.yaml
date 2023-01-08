@@ -723,8 +723,6 @@ paths:
           content: {}
 
   /users/{userId}/dislikes/tracks:
-    description: Получение треков с отметкой "Не рекомендовать"
-    summary: Получение треков с отметкой "Не рекомендовать"
     parameters:
       - in: path
         required: true
@@ -740,6 +738,8 @@ paths:
         schema:
           type: number
     get:
+      operationId: getDislikedTracksIds
+      summary: Получение треков с отметкой "Не рекомендовать"
       tags:
         - "user"
       security:
@@ -904,6 +904,8 @@ paths:
           type: boolean
           example: false
     get:
+      operationId: getPlaylistsByIds
+      summary: Получение плейлистов по идентификаторам
       tags:
         - "user"
         - "playlists"
@@ -938,6 +940,7 @@ paths:
           type: number
           example: 541320800
     post:
+      operationId: createPlaylist
       tags:
         - "user"
         - "playlists"
@@ -997,6 +1000,7 @@ paths:
           type: number
           example: 1000
     post:
+      operationId: renamePlaylist
       summary: Изменение названия плейлиста.
       tags:
         - "user"
@@ -1047,6 +1051,8 @@ paths:
           type: number
           example: 1000
     post:
+      operationId: deletePlaylist
+      summary: Удаление плейлиста
       tags:
         - "user"
         - "playlists"
@@ -1161,7 +1167,8 @@ paths:
           type: number
           example: 1000
     get:
-      description: Получение рекомендаций для плейлиста
+      operationId: getRecommendations
+      summary: Получение рекомендаций для плейлиста
       tags:
         - "user"
         - "playlists"
@@ -1201,6 +1208,7 @@ paths:
           type: number
           example: 1000
     post:
+      operationId: changePlaylistVisibility
       summary: Изменение видимости плейлиста
       description: Необходимо передать "public" или "private" в качестве значения
       tags:
@@ -1304,6 +1312,7 @@ paths:
           example: 541320800
     post:
       operationId: removeLikedTracks
+      summary: Удаление треков из списка "Мне нравится"
       tags:
         - "user"
         - "tracks"
