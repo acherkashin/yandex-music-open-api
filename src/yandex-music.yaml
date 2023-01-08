@@ -643,25 +643,33 @@ paths:
 
   /genres:
     get:
+      operationId: getGenres
       responses:
         200:
           description: Ok
           content: {}
 
   /playlists/list:
-    # TODO: необходимо использовать application/x-www-form-urlencoded чтобы обойти ограничение на длину URL.
-    parameters:
-      - in: query
-        name: playlistIds
-        description: uid владельца плейлиста и kind плейлиста через двоеточие и запятую
-        schema:
-          type: string
-          example: 103372440:1878,460140864:1000
     post:
       summary: Получение полной информации о плейлистах по их идентификатору
       operationId: getByIds
       tags:
         - "playlists"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                playlistIds:
+                  type: array
+                  description: uid владельца плейлиста и kind плейлиста через двоеточие и запятую
+                  example:
+                    - "103372440:1878"
+                    - "460140864:1000"
+                  items:
+                    type: string
       responses:
         200:
           description: Ok
@@ -878,7 +886,7 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     $ref: "#/components/schemas/Playlist"
-            
+
   /users/{userId}/playlists:
     parameters:
       - in: path
@@ -1112,7 +1120,7 @@ paths:
               type: object
               properties:
                 diff:
-                  type: string                    
+                  type: string
                 revision:
                   type: string
                   example: "0"
@@ -1151,7 +1159,6 @@ paths:
                     type: string
                   message:
                     type: string
-
 
   /users/{userId}/playlists/{kind}/recommendations:
     parameters:
@@ -3350,7 +3357,7 @@ components:
           type: string
         textColor:
           type: string
-        backgroundColor:  
+        backgroundColor:
           type: string
         coverWhite:
           type: string
@@ -3359,10 +3366,10 @@ components:
         - "track"
         - "chart"
       allOf:
-        - $ref: '#/components/schemas/TrackItem'
+        - $ref: "#/components/schemas/TrackItem"
         - type: object
           properties:
             # track:
             #   $ref: '#/components/schemas/Track'
             chart:
-              $ref: '#/components/schemas/Chart'
+              $ref: "#/components/schemas/Chart"
