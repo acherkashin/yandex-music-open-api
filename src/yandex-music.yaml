@@ -1740,7 +1740,7 @@ paths:
   /rotor/station/{rotorID}/tracks:
     parameters:
       - in: path
-        required: false
+        required: true
         name: rotorID
         description: "ID радиостанции, для примера: user:onyourwave это моя волна"
         schema:
@@ -1757,7 +1757,7 @@ paths:
         required: false
         name: queue
         description: "Уникальной идентификатор трека, который только что был."
-        schemas:
+        schema:
           type: string
     get:
       summary: "Получение цепочки треков определённой станции"
@@ -1846,8 +1846,7 @@ paths:
           # TODO: complete parameters
           application/x-www-form-urlencoded:
             schema:
-              type: string
-              example: ""
+              type: object
       responses:
         200:
           description: Ok
