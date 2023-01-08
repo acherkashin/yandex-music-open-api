@@ -16,7 +16,6 @@ module.exports = {
         test: /\.yaml$/,
         type: 'json',
         use: [
-          { loader: './webpack/loader.js' },
           { loader: 'yaml-loader' },
         ]
       },
