@@ -347,6 +347,7 @@ paths:
         example: 7019818
     get:
       operationId: getAlbumById
+      summary: Получение альбома по идентификатору
       tags:
         - "albums"
       responses:
@@ -376,6 +377,7 @@ paths:
         required: true
         example: 7019818
     get:
+      summary: Получение альбома с треками
       operationId: getAlbumsWithTracks
       tags:
         - "albums"
@@ -399,6 +401,7 @@ paths:
 
   /albums:
     post:
+      summary: Получение альбомов по идентификаторам
       operationId: getByIds
       tags:
         - "albums"
@@ -646,7 +649,6 @@ paths:
           content: {}
 
   /playlists/list:
-    description: Получение полной информации о плейлистах по их идентификатору
     # TODO: необходимо использовать application/x-www-form-urlencoded чтобы обойти ограничение на длину URL.
     parameters:
       - in: query
@@ -656,6 +658,7 @@ paths:
           type: string
           example: 103372440:1878,460140864:1000
     post:
+      summary: Получение полной информации о плейлистах по их идентификатору
       operationId: getByIds
       tags:
         - "playlists"
@@ -1483,6 +1486,7 @@ paths:
           type: string
           example: 32326555
     get:
+      operationId: getTrackSupplement
       description: Получение дополнительной информации о треке (Текст песни, видео, и т.д.).
       summary: Получение дополнительной информации о треке (Текст песни, видео, и т.д.).
       tags:
@@ -1514,6 +1518,7 @@ paths:
           type: string
           example: 32326555
     get:
+      operationId: getSimilarTracks
       summary: Получение похожих треков
       description: Получение похожих треков
       tags:
@@ -1537,8 +1542,9 @@ paths:
                     $ref: "#/components/schemas/SimilarTracks"
 
   /play-audio:
-    description: Метод для отправки текущего состояния прослушиваемого трека
     post:
+      summary: Метод для отправки текущего состояния прослушиваемого трека
+      operationId: playAudio
       tags:
         - tracks
       security:
