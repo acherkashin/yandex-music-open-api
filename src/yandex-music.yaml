@@ -18,6 +18,63 @@ tags:
   - name: "tags"
 
 paths:
+  /token:
+    servers:
+      - url: https://yandex-music-cors-proxy.onrender.com/https://oauth.yandex.ru
+      - url: https://oauth.yandex.ru
+    post:
+      summary: Получение токена по логину и паролю
+      operationId: getToken
+      tags:
+        - "user"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - "grant_type"
+                - "client_id"
+                - "client_secret"
+                - "username"
+                - "password"
+              properties:
+                grant_type:
+                  type: string
+                  enum: ["password"]
+                client_id:
+                  type: string
+                  enum: ["23cabbbdc6cd418abb4b39c32c41195d"]
+                client_secret:
+                  type: string
+                  enum: ["53bc75238f0c4d08a118e51fe9203300"]
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - "access_token"
+                  - "expires_in"
+                  - "token_type"
+                  - "uid"
+                properties:
+                  access_token: 
+                    type: string
+                  expires_in: 
+                    type: number
+                  token_type: 
+                    type: string
+                  uid:
+                    type: number
+
   /settings:
     description: Получение предложений по покупке. Нет обязательных параметров
     get:
