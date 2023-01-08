@@ -2,10 +2,18 @@
 
 JavaScript client for Yandex Music generated from [OpenAPI Schema](https://github.com/acherkashin/yandex-music-open-api).
 
-## Hot to use 
+
+## Installation
+
+```
+npm i yandex-music-client
+```
+
+## Usage
 
 ```typescript
 import { getToken } from 'yandex-music-client/token';
+import { YandexMusicClient } from 'yandex-music-client/YandexMusicClient'
 
 const token = await getToken('your email', 'your password');
 
