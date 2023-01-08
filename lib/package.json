@@ -1,5 +1,8 @@
 {
   "name": "yandex-music-client",
+  "repository": {
+    "url": "https://github.com/acherkashin/yandex-music-open-api/tree/main/lib"
+  },
   "version": "0.0.3",
   "description": "",
   "main": "index.js",
