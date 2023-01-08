@@ -10,14 +10,14 @@
     "wrapper",
     "yandex.music"
   ],
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "main": "index.js",
   "author": "",
   "license": "ISC",
   "types": "./index.d.ts",
   "dependencies": {
-    "form-data": "^4.0.0",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "form-data": "^4.0.0"
   }
 }
