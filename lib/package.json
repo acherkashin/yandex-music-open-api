@@ -3,6 +3,13 @@
   "repository": {
     "url": "https://github.com/acherkashin/yandex-music-open-api/tree/main/lib"
   },
+  "keywords": [
+    "yandex",
+    "music",
+    "api",
+    "wrapper",
+    "yandex.music"
+  ],
   "version": "0.0.5",
   "description": "",
   "main": "index.js",

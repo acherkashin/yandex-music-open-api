@@ -2,6 +2,13 @@
   "name": "yandex-music-open-api",
   "version": "0.0.1",
   "homepage": "http://acherkashin.github.io/yandex-music-open-api",
+  "keywords": [
+    "yandex",
+    "music",
+    "api",
+    "openapi",
+    "openapi generator"
+  ],
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open",
