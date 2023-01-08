@@ -11,7 +11,9 @@ npm i yandex-music-client
 
 ## Usage
 
-```typescript
+### Creating Client
+
+```ts
 import { getToken } from 'yandex-music-client/token';
 import { YandexMusicClient } from 'yandex-music-client/YandexMusicClient'
 
@@ -23,6 +25,22 @@ const client = new YandexMusicClient({
         'Authorization': `OAuth ${config.token}`
       },
 });
+```
+
+### Getting new releases
+
+```ts
+// ...
 
 client.landing.getNewReleases();
+```
+
+### Getting track URL
+
+```typescript
+import { getTrackUrl } from 'yandex-music-client/trackUrl';
+ 
+// ...
+
+getTrackUrl(client, trackId);
 ```
