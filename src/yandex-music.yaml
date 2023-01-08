@@ -1069,7 +1069,6 @@ paths:
                   result:
                     type: string
 
-  # TODO: Complete
   /users/{userId}/playlists/{kind}/change-relative:
     parameters:
       - in: path
@@ -1087,13 +1086,54 @@ paths:
           type: number
           example: 1000
     post:
+      operationId: addTracksToPlaylist
+      summary: Добавление треков в плейлист
       tags:
         - "user"
         - "playlists"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                diff:
+                  type: string
+                  example: '{"diff":{"op":"insert","at":0,"tracks":[{"id":"20599729","albumId":"2347459"}]}}'
+                revision:
+                  type: string
+                  example: 0
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/Playlist"
+        412:
+          description: Wrong revision
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  message:
+                    type: string
+
 
   /users/{userId}/playlists/{kind}/recommendations:
     parameters:
