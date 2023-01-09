@@ -1,8 +1,2 @@
-# Ignore everything in this directory
-*
-# Except a few specific files
-!.npmignore
-!.gitignore
-!package.json
-!yarn.lock
-!README.md
+*.js
+*.d.ts
