@@ -9,6 +9,31 @@ npm install
 npm start
 ```
 
+## Прокси сервер
+
+По умолчанию, все запросы отправляются по следующему адресу https://yandex-music-cors-proxy.onrender.com/https://api.music.yandex.net:443/
+- https://yandex-music-cors-proxy.onrender.com/ - прокси сервер, используемый для обхода [CORS](https://habr.com/ru/company/macloud/blog/553826/), исходники можно посмотреть [здесь](https://github.com/acherkashin/yandex-music-cors-proxy)
+- https://api.music.yandex.net:443/ - адрес Яндекс.Музыки
+
+Если вы не доверяете прокси серверу, то для обхода данной проблемы можно использовать следующий способ запуска Google Chrome. Сначала закройте все инстансы Google Chrome, затем перейдите в папку с Google Chrome и запустите его с флагом `--disable-web-security`. При запуске Google Chrome вы увидите сообщение `Вы используете неподдерживаемый флаг командной строки: -disable-web-security. Стабильность и безопасность будут нарушены.`, данное сообщение можете игнорировать. 
+
+**Mac OS** 
+
+```
+open -na Google\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security --disable-site-isolation-trials
+```
+
+**Windows**
+
+```
+cd C:\Program Files (x86)\Google\Chrome\Application
+.\Chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+```
+
+После запуска, можете выбрать сервер напрямую адрес Яндекс.Музыки в верхней части схемы - `https://api.music.yandex.net:443/`
+
+![Yandex Music Server](./assets/ym-server.png)
+
 ### Open API генератор
 
 #### Кастомный request.ts файл 
