@@ -44,10 +44,17 @@ cd C:\Program Files (x86)\Google\Chrome\Application
 
 Как использовать клиент Яндекс.Музыки для JavaScript [описано здесь]('./lib/README.md').
 
+#### Генерация клиентов с помощью [openapi-generator](https://openapi-generator.tech/docs/usage)
+
+1. Установить [openapi-generator](https://openapi-generator.tech/docs/installation)
+2. Скачать **./src/yandex-music.yaml*
+3. Выбрать нужный генератор, выбрать можно из списка - `openapi-generator  list`
+4. Сгенерировать клиент `openapi-generator generate -i yandex-music.yaml -g csharp-netcore -o ./dotnet-client`, `csharp-netcore` - генератор для C#
+
 ## Roadmap
 
 - [x] Опубликовывать Yandex Music Api на хостинг
-- [ ] Добавить описание использования [OpenAPI Genrator](https://openapi-generator.tech/)
+- [x] Добавить описание использования [OpenAPI Genrator](https://openapi-generator.tech/)
 - [ ] Публиковать Npm, Nuget, ... модули
 - [ ] Добавить линтер 
 
