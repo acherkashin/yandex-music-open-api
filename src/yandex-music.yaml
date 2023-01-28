@@ -983,7 +983,7 @@ paths:
           type: boolean
           example: false
     get:
-      operationId: getPlaylistsByIds
+      operationId: getUserPlaylistsByIds
       summary: Получение плейлистов по идентификаторам
       tags:
         - "user"
