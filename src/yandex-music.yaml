@@ -1636,9 +1636,7 @@ paths:
               properties:
                 track-id:
                   description: Уникальный идентификатор трека
-                  oneOf:
-                    - type: string
-                    - type: number
+                  type: string
                 from-cache:
                   type: boolean
                   description: Проигрывается ли трек с кеша
@@ -1666,9 +1664,7 @@ paths:
                   description: Продолжительность трека в секундах
                 album-id:
                   description: Уникальный идентификатор альбома
-                  oneOf:
-                    - type: string
-                    - type: number
+                  type: string
                 playlist-id:
                   type: string
                   description: Уникальный идентификатор проигрывания

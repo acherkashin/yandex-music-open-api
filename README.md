@@ -48,8 +48,8 @@ cd C:\Program Files (x86)\Google\Chrome\Application
 
 1. Установить [openapi-generator](https://openapi-generator.tech/docs/installation)
 2. Скачать **./src/yandex-music.yaml*
-3. Выбрать нужный генератор, выбрать можно из списка - `openapi-generator  list`
-4. Сгенерировать клиент `openapi-generator generate -i yandex-music.yaml -g csharp-netcore -o ./dotnet-client`, `csharp-netcore` - генератор для C#
+3. Выбрать нужный генератор, выбрать можно из [списка](https://openapi-generator.tech/docs/generators)
+4. Сгенерировать клиент `openapi-generator generate -i yandex-music.yaml -g csharp-netcore -o ./dotnet-proxies --additional-properties=targetFramework=net6.0`, `csharp-netcore` - [генератор для C#](https://openapi-generator.tech/docs/generators/csharp-netcore/)
 
 ## Roadmap
 
