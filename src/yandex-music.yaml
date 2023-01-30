@@ -2020,7 +2020,7 @@ components:
         hostname:
           type: string
         "req-id":
-          type: number
+          type: string
     Error:
       type: object
       properties:
