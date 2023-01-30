@@ -51,6 +51,29 @@ cd C:\Program Files (x86)\Google\Chrome\Application
 3. Выбрать нужный генератор, выбрать можно из [списка](https://openapi-generator.tech/docs/generators)
 4. Сгенерировать клиент `openapi-generator generate -i yandex-music.yaml -g csharp-netcore -o ./dotnet-proxies --additional-properties=targetFramework=net6.0`, `csharp-netcore` - [генератор для C#](https://openapi-generator.tech/docs/generators/csharp-netcore/)
 
+```csharp
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Api;
+
+var userApi = new UserApi("https://oauth.yandex.ru");
+
+var token = userApi.GetToken(
+    "password",
+    "23cabbbdc6cd418abb4b39c32c41195d",
+    "53bc75238f0c4d08a118e51fe9203300",
+    "<your email>",
+    "<password>"
+);
+
+Console.WriteLine($"Token: {token.AccessToken}");
+
+GlobalConfiguration.Instance.DefaultHeaders["Authorization"] = $"OAuth {token.AccessToken}";
+
+var landingApi = new LandingApi("https://api.music.yandex.net:443");
+var releases = landingApi.GetNewReleases();
+Console.WriteLine($"Releases Count: {releases.Result.NewReleases.Count}");
+```
+
 ## Roadmap
 
 - [x] Опубликовывать Yandex Music Api на хостинг
