@@ -66,11 +66,11 @@ paths:
                   - "token_type"
                   - "uid"
                 properties:
-                  access_token: 
+                  access_token:
                     type: string
-                  expires_in: 
+                  expires_in:
                     type: number
-                  token_type: 
+                  token_type:
                     type: string
                   uid:
                     type: number
@@ -1850,7 +1850,7 @@ paths:
       responses:
         200:
           description: Ok
-          content: 
+          content:
             application/json:
               schema:
                 $ref: "#/components/schemas/StationTracksResult"
@@ -3451,6 +3451,7 @@ components:
             chart:
               $ref: "#/components/schemas/Chart"
     StationTracksResult:
+      type: object
       required:
         - "id"
         - "sequence"
@@ -3477,6 +3478,7 @@ components:
         radioSessionId:
           type: string
     Sequence:
+      type: object
       description: Класс, представляющий звено последовательности радио станции
       required:
         - "type"
@@ -3484,13 +3486,14 @@ components:
         - "liked"
         - "trackParameters"
       properties:
-        type: 
+        type:
           type: string
         track:
           $ref: "#/components/schemas/Track"
-        liked: 
+        liked:
           type: boolean
         trackParameters:
+          type: object
           required:
             - "bpm"
             - "hue"
@@ -3502,8 +3505,3 @@ components:
               type: number
             energy:
               type: number
-          
-
-        
-        
-      
