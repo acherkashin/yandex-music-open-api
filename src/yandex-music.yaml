@@ -1853,7 +1853,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StationTracksResult"
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/StationTracksResult"
         400:
           description: Bad Request
           content:
@@ -3470,14 +3480,16 @@ components:
             tag:
               type: string
         sequence:
-          $ref: "#/components/schemas/Sequence"
+          type: array
+          items:
+            $ref: "#/components/schemas/SequenceItem"
         batchId:
           type: string
         pumpkin:
           type: boolean
         radioSessionId:
           type: string
-    Sequence:
+    SequenceItem:
       type: object
       description: Класс, представляющий звено последовательности радио станции
       required:
