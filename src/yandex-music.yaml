@@ -1850,7 +1850,10 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StationTracksResult"
         400:
           description: Bad Request
           content:
@@ -2496,6 +2499,8 @@ components:
             hasPlus:
               type: boolean
             isTutorialCompleted:
+              type: boolean
+            migrated:
               type: boolean
         defaultEmail:
           type: string
@@ -3445,3 +3450,60 @@ components:
             #   $ref: '#/components/schemas/Track'
             chart:
               $ref: "#/components/schemas/Chart"
+    StationTracksResult:
+      required:
+        - "id"
+        - "sequence"
+        - "batchId"
+        - "pumpkin"
+        - "radioSessionId"
+      properties:
+        id:
+          type: object
+          required:
+            - type
+            - tag
+          properties:
+            type:
+              type: string
+            tag:
+              type: string
+        sequence:
+          $ref: "#/components/schemas/Sequence"
+        batchId:
+          type: string
+        pumpkin:
+          type: boolean
+        radioSessionId:
+          type: string
+    Sequence:
+      description: Класс, представляющий звено последовательности радио станции
+      required:
+        - "type"
+        - "track"
+        - "liked"
+        - "trackParameters"
+      properties:
+        type: 
+          type: string
+        track:
+          $ref: "#/components/schemas/Track"
+        liked: 
+          type: boolean
+        trackParameters:
+          required:
+            - "bpm"
+            - "hue"
+            - "energy"
+          properties:
+            bpm:
+              type: number
+            hue:
+              type: number
+            energy:
+              type: number
+          
+
+        
+        
+      
