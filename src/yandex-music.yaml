@@ -1217,7 +1217,7 @@ paths:
                   result:
                     $ref: "#/components/schemas/Playlist"
         412:
-          description: Wrong revision
+          description: Wrong revision or Failed to patch current playlist
           content:
             application/json:
               schema:
