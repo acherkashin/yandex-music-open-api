@@ -1950,6 +1950,31 @@ paths:
           description: Ok
           content: {}
 
+  /non-music/calague:
+    get:
+      operationId: getBooksAndPodcasts
+      summary: "Получение блоков книг и подкастов с главной страницы"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    $ref: "#/components/schemas/BooksAndPodcastsResult"
+
 components:
   securitySchemes:
     oAuthProxied:
@@ -3517,3 +3542,41 @@ components:
               type: number
             energy:
               type: number
+    BooksAndPodcastsResult:
+      type: object
+      description: Блоки главной страницы кнги и подкастов
+      required:
+        - "title"
+        - "blocks"
+      properties:
+        title:
+          type: string
+        blocks:
+          type: array
+          items:
+            type: object
+            required:
+              - "id"
+              - "type"
+              - "typeForFrom"
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              type:
+                type: string
+              typeForFrom:
+                type: string
+              entities:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    # TODO: complete "data" type
+                    data:
+                      type: object
