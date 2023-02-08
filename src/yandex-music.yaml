@@ -1033,6 +1033,9 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
+              required:
+                - "title"
+                - "visibility"
               properties:
                 title:
                   type: string
