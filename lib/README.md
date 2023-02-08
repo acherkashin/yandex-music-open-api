@@ -22,7 +22,9 @@ const token = await getToken('your email', 'your password');
 const client = new YandexMusicClient({
     BASE: "https://api.music.yandex.net:443",
     HEADERS: {
-        'Authorization': `OAuth ${config.token}`
+        'Authorization': `OAuth ${config.token}`,
+        // specify 'en' to receive data in English
+        'Accept-Language': 'ru'
       },
 });
 ```
