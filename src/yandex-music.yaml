@@ -1912,7 +1912,21 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/StationResult"
 
   /rotor/stations/dashboard:
     get:
@@ -3583,3 +3597,72 @@ components:
                     # TODO: complete "data" type
                     data:
                       type: object
+    StationResult:
+      properties:
+        station:
+          type: object
+        data:
+          type: object
+        settings:
+          $ref: "#/components/schemas/RotorSettings"
+        settings2:
+          $ref: "#/components/schemas/RotorSettings2"
+        adParams:
+          $ref: "#/components/schemas/AdParams"
+        rupTitle:
+          type: string
+        rupDescription:
+          type: string
+    RotorSettings:
+      required:
+        - "language"
+        - "diversity"
+        - "mood"
+        - "energy"
+      properties:
+        language:
+          type: string
+        diversity:
+          type: string
+        mood:
+          type: number
+        energy:
+          type: number
+    RotorSettings2:
+      required:
+        - "language"
+        - "diversity"
+        - "moodEnergy"
+      properties:
+        language:
+          type: string
+        diversity:
+          type: string
+        moodEnergy:
+          type: string
+    AdParams:
+      required:
+        - "partnerId"
+        - "categoryId"
+        - "pageRef"
+        - "targetRef"
+        - "otherParams"
+      properties:
+        partnerId: 
+          type: string
+        categoryId: 
+          type: string 
+        pageRef: 
+          type: string 
+        targetRef: 
+          type: string 
+        otherParams: 
+          type: string 
+        adVolume: 
+          type: number
+        genreId:
+          type: number
+        genreName:
+          type: string
+        
+
