@@ -1930,7 +1930,7 @@ paths:
 
   /rotor/stations/dashboard:
     get:
-      # TODO: add operationId
+      operationId: getRotorStationsDashboard
       summary: "Получение рекомендованных станций текущего пользователя"
       security:
         - oAuth: []
@@ -1940,7 +1940,21 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Dashboard"
 
   /rotor/station/{station}/feedback:
     parameters:
@@ -3743,7 +3757,7 @@ components:
           $ref: "#/components/schemas/RestrictionEnum"
         mood:
           $ref: "#/components/schemas/DiscreteScale"
-        energy: 
+        energy:
           $ref: "#/components/schemas/DiscreteScale"
         diversity:
           $ref: "#/components/schemas/RestrictionEnum"
@@ -3821,4 +3835,18 @@ components:
             imageUrl:
               type: string
             serializedSeed:
-              type: string      
+              type: string
+    Dashboard:
+      required:
+        - "dashboardId"
+        - "stations"
+        - "pumpkin"
+      properties:
+        dashboardId:
+          type: string
+        stations:
+          type: array
+          items:
+            $ref: "#/components/schemas/StationResult"
+        pumpkin:
+          type: boolean
