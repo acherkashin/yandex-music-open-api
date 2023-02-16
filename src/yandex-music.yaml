@@ -3600,7 +3600,7 @@ components:
     StationResult:
       properties:
         station:
-          type: object
+          $ref: "#/components/schemas/Station"
         data:
           $ref: "#/components/schemas/RotorData"
         settings:
@@ -3613,6 +3613,35 @@ components:
           type: string
         rupDescription:
           type: string
+    Station:
+      required:
+        - "id"
+        - "name"
+        - "icon"
+        - "mtsIcon"
+      properties:
+        id:
+          $ref: "#/components/schemas/StationId"
+        parentId:
+          $ref: "#/components/schemas/StationId"
+        name:
+          type: string
+        icon:
+          $ref: "#/components/schemas/Icon"
+          description: Иконка станции
+        mtsIcon:
+          $ref: "#/components/schemas/Icon"
+        fullImageUrl:
+          type: string
+        mtsFullImageUrl:
+          type: string
+        idForFrom:
+          type: string
+          description: Категория (тип) станции
+        restrictions:
+          type: object
+        restrictions2:
+          type: object
     RotorSettings:
       required:
         - "language"
@@ -3648,23 +3677,28 @@ components:
         - "targetRef"
         - "otherParams"
       properties:
-        partnerId: 
+        partnerId:
           type: string
-        categoryId: 
-          type: string 
-        pageRef: 
-          type: string 
-        targetRef: 
-          type: string 
-        otherParams: 
-          type: string 
-        adVolume: 
+        categoryId:
+          type: string
+        pageRef:
+          type: string
+        targetRef:
+          type: string
+        otherParams:
+          type: string
+        adVolume:
           type: number
         genreId:
           type: number
         genreName:
           type: string
     RotorData:
+      required:
+        - "title"
+        - "description"
+        - "imageUrl"
+        - "artists"
       properties:
         title:
           type: string
@@ -3676,5 +3710,21 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Artist"
-        
-
+    Icon:
+      required:
+        - "backgroundColor"
+        - "imageUrl"
+      properties:
+        backgroundColor:
+          type: string
+        imageUrl:
+          type: string
+    StationId:
+      required:
+        - "type"
+        - "tag"
+      properties:
+        type:
+          type: string
+        tag:
+          type: string
