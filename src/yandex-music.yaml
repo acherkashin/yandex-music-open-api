@@ -3602,7 +3602,7 @@ components:
         station:
           type: object
         data:
-          type: object
+          $ref: "#/components/schemas/RotorData"
         settings:
           $ref: "#/components/schemas/RotorSettings"
         settings2:
@@ -3664,5 +3664,17 @@ components:
           type: number
         genreName:
           type: string
+    RotorData:
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        artists:
+          type: array
+          items:
+            $ref: "#/components/schemas/Artist"
         
 
