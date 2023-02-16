@@ -3740,22 +3740,22 @@ components:
       description: Ограничения для настроек станции старого формата
       properties:
         language:
-          type: object
+          $ref: "#/components/schemas/RestrictionEnum"
         mood:
           $ref: "#/components/schemas/DiscreteScale"
         energy: 
           $ref: "#/components/schemas/DiscreteScale"
         diversity:
-          type: object
+          $ref: "#/components/schemas/RestrictionEnum"
     Restrictions2:
       description: Ограничения для настроек станции
       properties:
         diversity:
           $ref: "#/components/schemas/RestrictionEnum2"
         moodEnergy:
-          type: object
+          $ref: "#/components/schemas/RestrictionEnum2"
         language:
-          type: object
+          $ref: "#/components/schemas/RestrictionEnum2"
     DiscreteScale:
       description: Класс, представляющий дискретное значение
       properties:
