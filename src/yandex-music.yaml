@@ -3622,26 +3622,34 @@ components:
       properties:
         id:
           $ref: "#/components/schemas/StationId"
+          description: Уникальный идентификатор станции
         parentId:
           $ref: "#/components/schemas/StationId"
+          description: Уникальный идентификатор станции, являющейся предком текущей
         name:
           type: string
+          description: Название станции
         icon:
           $ref: "#/components/schemas/Icon"
           description: Иконка станции
         mtsIcon:
           $ref: "#/components/schemas/Icon"
+          description: Иконка станции
         fullImageUrl:
           type: string
+          description: Ссылка на полное изображение
         mtsFullImageUrl:
           type: string
+          description: Ссылка на полную иконку
         idForFrom:
           type: string
           description: Категория (тип) станции
         restrictions:
-          type: object
+          $ref: "#/components/schemas/Restrictions"
+          description: Ограничения для настроек станции старого формата
         restrictions2:
-          type: object
+          $ref: "#/components/schemas/Restrictions2"
+          description: Ограничения для настроек станции
     RotorSettings:
       required:
         - "language"
@@ -3728,3 +3736,24 @@ components:
           type: string
         tag:
           type: string
+    Restrictions:
+      description: Ограничения для настроек станции старого формата
+      properties:
+        language:
+          type: object
+        mood:
+          type: object
+        energy: 
+          type: object
+        diversity:
+          type: object
+    Restrictions2:
+      description: Ограничения для настроек станции
+      properties:
+        diversity:
+          type: object
+        moodEnergy:
+          type: object
+        language:
+          type: object
+        
