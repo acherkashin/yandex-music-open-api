@@ -3742,18 +3742,83 @@ components:
         language:
           type: object
         mood:
-          type: object
+          $ref: "#/components/schemas/DiscreteScale"
         energy: 
-          type: object
+          $ref: "#/components/schemas/DiscreteScale"
         diversity:
           type: object
     Restrictions2:
       description: Ограничения для настроек станции
       properties:
         diversity:
-          type: object
+          $ref: "#/components/schemas/RestrictionEnum2"
         moodEnergy:
           type: object
         language:
           type: object
-        
+    DiscreteScale:
+      description: Класс, представляющий дискретное значение
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        min:
+          $ref: "#/components/schemas/MinMax"
+        max:
+          $ref: "#/components/schemas/MinMax"
+    MinMax:
+      required:
+        - "value"
+        - "name"
+      properties:
+        value:
+          type: number
+        name:
+          type: string
+    RestrictionEnum:
+      required:
+        - "type"
+        - "name"
+        - "possibleValues"
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        possibleValues:
+          type: object
+          required:
+            - "name"
+            - "value"
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+    RestrictionEnum2:
+      required:
+        - "type"
+        - "name"
+        - "possibleValues"
+      properties:
+        type:
+          type: string
+        name:
+          type: string
+        possibleValues:
+          type: object
+          required:
+            - "name"
+            - "value"
+            - "imageUrl"
+            - "serializedSeed"
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+            imageUrl:
+              type: string
+            serializedSeed:
+              type: string      
