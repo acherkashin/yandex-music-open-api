@@ -714,7 +714,20 @@ paths:
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Genre"
 
   /playlists/list:
     post:
@@ -3879,3 +3892,74 @@ components:
             $ref: "#/components/schemas/StationResult"
         pumpkin:
           type: boolean
+    Genre:
+      required:
+        - "id"
+        - "weight"
+        - "composerTop"
+        - "title"
+        - "titles"
+        - "images"
+        - "showInMenu"
+      properties:
+        id:
+          description: Уникальный идентификатор жанра
+          type: string
+        weight:
+          description: Вес TODO (возможно, чем выше показатель, тем больше нравится пользователю)
+          type: number
+        composerTop:
+          type: boolean
+        title: 
+          description: Заголовок жанра
+          type: string
+        titles:
+          description: Словарь заголовков на разных языках, где ключ - язык
+          type: object
+          additionalProperties:
+            type: object
+            required:
+              - "title"
+              - "fullTitle"
+            properties:
+              title: 
+                type: string
+              fullTitle:
+                type: string
+        images:
+          description: Изображение жанра
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            "208x208": "http://avatars.mds.yandex.net/get-music-misc/29541/metagenre-other-x208/orig"
+            "300x300": "http://avatars.mds.yandex.net/get-music-misc/49997/metagenre-other-x300/orig"
+        showInMenu: 
+          description: Показывать в меню
+          type: boolean
+        showInRegions: 
+          description: Список регионов в которых отображается жанр в списках
+          type: array
+          items:
+            type: number
+        fullTitle:
+          description: Полный заголовок
+          type: string
+        urlPart:
+          description: Часть ссылки на жанр для открытия в браузере
+          type: string
+        color:
+          description: Цвет фона изображения
+          type: string
+        radioIcon:
+          description: Иконка радио жанра
+          $ref: "#/components/schemas/Icon"
+        subGenres:
+          description: Поджанры текущего жанра музыки
+          $ref: "#/components/schemas/Genre"
+        hideInRegions:
+          description: В каких регионах скрывать жанр
+          type: array
+          items:
+            type: number
+
