@@ -1965,7 +1965,7 @@ paths:
         schema:
           type: string
     post:
-      # TODO: add operationId
+      operationId: sendStationFeedback
       summary: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
       tags:
         - "rotor"
@@ -1976,10 +1976,39 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
+              # required:
+              #   - "type"
+              # properties:
+              #   type:
+              #     description: Тип отправляемого фидбека
+              #     type: string
+              #     enum:
+              #       - radioStarted
+              #       - trackStarted
+              #       - trackFinished
+              #       - skip
+              #   timestamp:
+              #     description: Текущее время и дата
+              #     type: string
+                
+
       responses:
         200:
           description: Ok
-          content: {}
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    # TODO: specify type
+                    type: object
 
   /non-music/calague:
     get:
