@@ -1833,6 +1833,43 @@ paths:
           description: Ok
           content: {}
 
+  /rotor/station/{rotorID}/info:
+    parameters:
+      - in: path
+        required: true
+        name: rotorID
+        description: "ID радиостанции, для примера: user:onyourwave это моя волна"
+        schema:
+          type: string
+          example: user:onyourwave
+    get:
+      operationId: getStationInfo
+      summary: "Получение информации о станции и пользовательских настроек на неё"
+      tags:
+        - "rotor"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Station"
+
+
   /rotor/station/{rotorID}/tracks:
     parameters:
       - in: path
