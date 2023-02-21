@@ -2085,6 +2085,39 @@ paths:
                     type: object
                     $ref: "#/components/schemas/BooksAndPodcastsResult"
 
+  /queues:
+    # TODO: doesn't work
+    parameters:
+      - in: header
+        required: true
+        name: "X-Yandex-Music-Device"
+        description: Содержит информацию об устройстве с которого выполняется запрос. Именно к `device` привязывается очередь. На одном устройстве может быть создана одна очередь.
+        schema:
+          type: string
+          example: "os=unknown; os_version=unknown; manufacturer=unknown; model=unknown; clid=; device_id=unknown; uuid=unknown"
+    get:
+      operationId: getQueues
+      summary: Получение всех очередей треков с разных устройств для синхронизации между ними
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    #TODO: add result type
 components:
   securitySchemes:
     oAuthProxied:
