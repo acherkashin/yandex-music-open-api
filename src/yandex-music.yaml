@@ -2014,34 +2014,40 @@ paths:
         description: Станция
         schema:
           type: string
+        example: user:onyourwave
     post:
       operationId: sendStationFeedback
       summary: "Отправка ответной реакции на происходящее при прослушивании радио. Сообщения о начале прослушивания радио, начале и конце трека, его пропуска."
       tags:
         - "rotor"
+      security:
+        - oAuth: []
+        - oAuthProxied: []
       requestBody:
         required: true
         content:
-          # TODO: complete parameters
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
-              # required:
-              #   - "type"
-              # properties:
-              #   type:
-              #     description: Тип отправляемого фидбека
-              #     type: string
-              #     enum:
-              #       - radioStarted
-              #       - trackStarted
-              #       - trackFinished
-              #       - skip
-              #   timestamp:
-              #     description: Текущее время и дата
-              #     type: string
-                
-
+              required:
+                - "type"
+              properties:
+                type:
+                  description: Тип отправляемого фидбека
+                  type: string
+                  enum:
+                    - radioStarted
+                    - trackStarted
+                    - trackFinished
+                    - skip
+                timestamp:
+                  description: Текущее время и дата
+                  type: string
+                  example: "2023-02-26T09:41:23"
+                from:
+                  description: Откуда начато воспроизведение радио
+                  type: string
+                  example: mobile-radio-user-onyourwave
       responses:
         200:
           description: Ok
@@ -2057,8 +2063,8 @@ paths:
                     type: object
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    # TODO: specify type
-                    type: object
+                    description: "ok"
+                    type: string
 
   /non-music/calague:
     get:
