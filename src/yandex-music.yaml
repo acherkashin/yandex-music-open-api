@@ -1869,7 +1869,6 @@ paths:
                     items:
                       $ref: "#/components/schemas/Station"
 
-
   /rotor/station/{rotorID}/tracks:
     parameters:
       - in: path
@@ -2207,6 +2206,9 @@ components:
         hostname:
           type: string
         "req-id":
+          type: string
+        "app-name":
+          example: music-play-queue
           type: string
     Error:
       type: object
@@ -3986,7 +3988,7 @@ components:
           type: number
         composerTop:
           type: boolean
-        title: 
+        title:
           description: Заголовок жанра
           type: string
         titles:
@@ -3998,7 +4000,7 @@ components:
               - "title"
               - "fullTitle"
             properties:
-              title: 
+              title:
                 type: string
               fullTitle:
                 type: string
@@ -4010,10 +4012,10 @@ components:
           example:
             "208x208": "http://avatars.mds.yandex.net/get-music-misc/29541/metagenre-other-x208/orig"
             "300x300": "http://avatars.mds.yandex.net/get-music-misc/49997/metagenre-other-x300/orig"
-        showInMenu: 
+        showInMenu:
           description: Показывать в меню
           type: boolean
-        showInRegions: 
+        showInRegions:
           description: Список регионов в которых отображается жанр в списках
           type: array
           items:
@@ -4038,4 +4040,3 @@ components:
           type: array
           items:
             type: number
-
