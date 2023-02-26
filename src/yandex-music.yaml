@@ -2091,7 +2091,6 @@ paths:
                     $ref: "#/components/schemas/BooksAndPodcastsResult"
 
   /queues:
-    # TODO: doesn't work
     parameters:
       - in: header
         required: true
@@ -2118,11 +2117,9 @@ paths:
                 type: object
                 properties:
                   invocationInfo:
-                    type: object
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
-                    type: object
-                    #TODO: add result type
+                    $ref: "#/components/schemas/QueuesResult"
 components:
   securitySchemes:
     oAuthProxied:
@@ -4040,3 +4037,40 @@ components:
           type: array
           items:
             type: number
+    QueuesResult:
+      required:
+        - "queues"
+      properties:
+        queues:
+          type: array
+          items:
+            $ref: "#/components/schemas/QueueItem"
+    QueueItem:
+      description: Очередь треков в списке очередей устройств
+      required:
+        - "id"
+        - "context"
+        - "modified"
+      properties:
+        id:
+          description: Уникальный идентификатор очереди
+          type: string
+        context:
+          $ref: "#/components/schemas/QueueContext"
+        modified:
+          type: string
+    QueueContext:
+      description: Содержимое очереди, на основе чего она построена (плейлист, радио, ...)
+      required:
+        - "type"
+      properties:
+        id:
+          description: Уникальный идентификатор типа содержимого (плейлиста, альбома и т.д.)
+          type: string
+        description:
+          description: Описание содержимого (например, название плейлиста, радиостанции)
+          type: string
+        type:
+          description: Тип содержимого, на основе чего построена очередь
+          type: string
+          example: "radio"
