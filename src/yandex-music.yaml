@@ -1655,7 +1655,7 @@ paths:
                   type: string
                 from-cache:
                   type: boolean
-                  description: Проигрывается ли трек с кеша
+                  description: Проигрывается ли трек из кеша
                 from:
                   type: string
                   description: Наименования клиента с которого происходит прослушивание
@@ -2022,6 +2022,12 @@ paths:
       security:
         - oAuth: []
         - oAuthProxied: []
+      parameters:
+        - in: query
+          description: Уникальный идентификатор партии треков. Возвращается при получении треков. Должен отсутствовать, для типа 'radioStarted'
+          name: 'batch-id'
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -2047,6 +2053,14 @@ paths:
                   description: Откуда начато воспроизведение радио
                   type: string
                   example: mobile-radio-user-onyourwave
+                trackId:
+                  type: string
+                  description: Уникальной идентификатор трека
+                  example: 56157695:8288161
+                totalPlayedSeconds:
+                  type: number
+                  description: Сколько было проиграно секунд трека. Необходимо указывать только для типов 'trackFinished' и 'skip'
+
       responses:
         200:
           description: Ok
