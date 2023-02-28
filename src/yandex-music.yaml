@@ -1833,11 +1833,11 @@ paths:
           description: Ok
           content: {}
 
-  /rotor/station/{rotorID}/info:
+  /rotor/station/{stationId}/info:
     parameters:
       - in: path
         required: true
-        name: rotorID
+        name: stationId
         description: "ID радиостанции, для примера: user:onyourwave это моя волна"
         schema:
           type: string
@@ -1869,11 +1869,11 @@ paths:
                     items:
                       $ref: "#/components/schemas/Station"
 
-  /rotor/station/{rotorID}/tracks:
+  /rotor/station/{stationId}/tracks:
     parameters:
       - in: path
         required: true
-        name: rotorID
+        name: stationId
         description: "ID радиостанции, для примера: user:onyourwave это моя волна"
         schema:
           type: string
@@ -2005,11 +2005,11 @@ paths:
                     items:
                       $ref: "#/components/schemas/Dashboard"
 
-  /rotor/station/{station}/feedback:
+  /rotor/station/{stationId}/feedback:
     parameters:
       - in: path
         required: true
-        name: station
+        name: stationId
         description: Станция
         schema:
           type: string
