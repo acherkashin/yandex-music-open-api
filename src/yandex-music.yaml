@@ -2231,6 +2231,18 @@ components:
           type: string
           example: "Parameters requirements are not met"
     Account:
+      required:
+        - 'now'
+        - 'uid'
+        - 'login'
+        - 'region'
+        - 'fullName'
+        - 'secondName'
+        - 'fisrtName'
+        - 'displayName'
+        - 'serviceAvailable'
+        - 'hostedUser'
+        - 'passport-phones'
       type: object
       description: Основная информация об аккаунте
       properties:
@@ -2670,6 +2682,16 @@ components:
             type: object
             $ref: "#/components/schemas/TrackItem"
     Status:
+      required:
+        - "account"
+        - "permissions"
+        - "subscription"
+        - "subeditor"
+        - "subeditorLevel"
+        - "pretrialActive"
+        - "plus"
+        - "defaultEmail"
+        - "userhash"
       type: object
       properties:
         account:
@@ -2707,6 +2729,8 @@ components:
           type: object
           description: Блок с предупреждениями о конце подписки и подарках
           $ref: "#/components/schemas/Alert"
+        userhash:
+          type: string
     Permissions:
       type: object
       description: Информация о правах пользователя, их изначальных значениях и даты окончания
