@@ -2134,6 +2134,36 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     $ref: "#/components/schemas/QueuesResult"
+  /queues/{queueId}:
+    parameters:
+      - in: path
+        required: true
+        name: queueId
+        description: Идентификатор очереди
+        schema:
+          type: string
+    get:
+      operationId: getQueueById
+      summary: Получение очереди с треками по идентификатору
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/QueueItem"
+      
 components:
   securitySchemes:
     oAuthProxied:
@@ -3767,6 +3797,7 @@ components:
                     data:
                       type: object
     StationResult:
+      type: object
       properties:
         station:
           $ref: "#/components/schemas/Station"
@@ -3783,6 +3814,7 @@ components:
         rupDescription:
           type: string
     Station:
+      type: object
       required:
         - "id"
         - "name"
@@ -3820,6 +3852,7 @@ components:
           $ref: "#/components/schemas/Restrictions2"
           description: Ограничения для настроек станции
     RotorSettings:
+      type: object
       required:
         - "language"
         - "diversity"
@@ -3835,6 +3868,7 @@ components:
         energy:
           type: number
     RotorSettings2:
+      type: object
       required:
         - "language"
         - "diversity"
@@ -3847,6 +3881,7 @@ components:
         moodEnergy:
           type: string
     AdParams:
+      type: object
       required:
         - "partnerId"
         - "categoryId"
@@ -3871,6 +3906,7 @@ components:
         genreName:
           type: string
     RotorData:
+      type: object
       required:
         - "title"
         - "description"
@@ -3888,6 +3924,7 @@ components:
           items:
             $ref: "#/components/schemas/Artist"
     Icon:
+      type: object
       required:
         - "backgroundColor"
         - "imageUrl"
@@ -3906,6 +3943,7 @@ components:
         tag:
           type: string
     Restrictions:
+      type: object
       description: Ограничения для настроек станции старого формата
       properties:
         language:
@@ -3917,6 +3955,7 @@ components:
         diversity:
           $ref: "#/components/schemas/RestrictionEnum"
     Restrictions2:
+      type: object
       description: Ограничения для настроек станции
       properties:
         diversity:
@@ -3926,6 +3965,7 @@ components:
         language:
           $ref: "#/components/schemas/RestrictionEnum2"
     DiscreteScale:
+      type: object
       description: Класс, представляющий дискретное значение
       properties:
         type:
@@ -3937,6 +3977,7 @@ components:
         max:
           $ref: "#/components/schemas/MinMax"
     MinMax:
+      type: object
       required:
         - "value"
         - "name"
@@ -3966,6 +4007,7 @@ components:
             value:
               type: string
     RestrictionEnum2:
+      type: object
       required:
         - "type"
         - "name"
@@ -3992,6 +4034,7 @@ components:
             serializedSeed:
               type: string
     Dashboard:
+      type: object
       required:
         - "dashboardId"
         - "stations"
@@ -4006,6 +4049,7 @@ components:
         pumpkin:
           type: boolean
     Genre:
+      type: object
       required:
         - "id"
         - "weight"
@@ -4076,6 +4120,7 @@ components:
           items:
             type: number
     QueuesResult:
+      type: object
       required:
         - "queues"
       properties:
@@ -4084,6 +4129,7 @@ components:
           items:
             $ref: "#/components/schemas/QueueItem"
     QueueItem:
+      type: object
       description: Очередь треков в списке очередей устройств
       required:
         - "id"
@@ -4097,7 +4143,16 @@ components:
           $ref: "#/components/schemas/QueueContext"
         modified:
           type: string
+        tracks:
+          description: Поле присутствует, только при запросе очереди по идентификатору
+          type: array
+          items:
+            $ref: "#/components/schemas/QueueTrack"
+        currentIndex:
+          description: Поле присутствует, только при запросе очереди по идентификатору
+          type: number
     QueueContext:
+      type: object
       description: Содержимое очереди, на основе чего она построена (плейлист, радио, ...)
       required:
         - "type"
@@ -4112,3 +4167,16 @@ components:
           description: Тип содержимого, на основе чего построена очередь. Значение есть зачастую только когда `type` имеет значение `my_music` или `various`.
           type: string
           example: "radio"
+    QueueTrack:
+      type: object
+      required:
+        - "trackId"
+        - "albumId"
+        - "from"
+      properties:
+        trackId:
+          type: string
+        albumId:
+          type: string
+        from:
+          type: string
