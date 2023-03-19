@@ -833,6 +833,7 @@ paths:
       summary: Получение треков с отметкой "Не рекомендовать"
       tags:
         - "user"
+        - "tracks"
       security:
         - oAuth: []
         - oAuthProxied: []
