@@ -378,9 +378,9 @@ paths:
         schema:
           type: string
         required: true
-        example: "рок"
+        example: "rock"
     get:
-      # TODO: add operationId
+      operationId: getPlaylistsIdsByTag
       tags:
         - "tags"
       security:
