@@ -2117,6 +2117,8 @@ paths:
     get:
       operationId: getQueues
       summary: Получение всех очередей треков с разных устройств для синхронизации между ними
+      tags:
+        - queues
       security:
         - oAuth: []
         - oAuthProxied: []
@@ -2146,6 +2148,8 @@ paths:
     get:
       operationId: getQueueById
       summary: Получение очереди с треками по идентификатору
+      tags:
+        - queues
       security:
         - oAuth: []
         - oAuthProxied: []
