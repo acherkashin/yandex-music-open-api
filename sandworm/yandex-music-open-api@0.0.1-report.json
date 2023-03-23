@@ -1,0 +1,1188 @@
+{
+  "createdAt": 1678770297304,
+  "packageManager": "yarn-classic",
+  "name": "yandex-music-open-api",
+  "version": "0.0.1",
+  "rootVulnerabilities": [],
+  "dependencyVulnerabilities": [
+    {
+      "findings": {
+        "sources": [
+          {
+            "name": "@braintree/sanitize-url",
+            "version": "6.0.0",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "affects": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "@braintree/sanitize-url",
+            "version": "6.0.0",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "rootDependencies": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "paths": [
+          "swagger-ui>@braintree/sanitize-url"
+        ]
+      },
+      "metadata": null,
+      "vulnerable_versions": "<6.0.1",
+      "module_name": "@braintree/sanitize-url",
+      "severity": "moderate",
+      "github_advisory_id": "GHSA-q8gg-vj6m-hgmj",
+      "cves": [
+        "CVE-2022-48345"
+      ],
+      "access": "public",
+      "patched_versions": ">=6.0.1",
+      "cvss": {
+        "score": 6.1,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+      },
+      "updated": "2023-03-03T00:11:25.000Z",
+      "recommendation": "Upgrade to version 6.0.1 or later",
+      "cwe": [
+        "CWE-79"
+      ],
+      "found_by": null,
+      "deleted": null,
+      "id": 1091262,
+      "references": "- https://nvd.nist.gov/vuln/detail/CVE-2022-48345\n- https://github.com/braintree/sanitize-url/commit/d4bdc89f1743fe3cdb7c3f24b06e4c875f349b0c\n- https://github.com/braintree/sanitize-url/compare/v6.0.0...v6.0.1\n- https://github.com/braintree/sanitize-url/compare/v6.0.1...v6.0.2\n- https://github.com/advisories/GHSA-q8gg-vj6m-hgmj",
+      "created": "2023-02-24T06:30:16.000Z",
+      "reported_by": null,
+      "title": "@braintree/sanitize-url Cross-site Scripting vulnerability",
+      "npm_advisory_id": null,
+      "overview": "sanitize-url (aka @braintree/sanitize-url) before 6.0.1 allows XSS via HTML entities.",
+      "url": "https://github.com/advisories/GHSA-q8gg-vj6m-hgmj",
+      "name": "@braintree/sanitize-url",
+      "range": "<6.0.1",
+      "type": "vulnerability"
+    },
+    {
+      "findings": {
+        "sources": [
+          {
+            "name": "minimatch",
+            "version": "3.0.4",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "affects": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "patch-package",
+            "version": "6.5.1",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "rimraf",
+            "version": "2.7.1",
+            "flags": {
+              "prod": true,
+              "dev": true
+            }
+          },
+          {
+            "name": "glob",
+            "version": "7.1.7",
+            "flags": {
+              "prod": true,
+              "dev": true
+            }
+          },
+          {
+            "name": "minimatch",
+            "version": "3.0.4",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "clean-webpack-plugin",
+            "version": "4.0.0",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "del",
+            "version": "4.1.1",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "globby",
+            "version": "6.1.0",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "gh-pages",
+            "version": "3.2.3",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "webpack-dev-server",
+            "version": "4.11.1",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "rimraf",
+            "version": "3.0.2",
+            "flags": {
+              "dev": true
+            }
+          }
+        ],
+        "rootDependencies": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "clean-webpack-plugin",
+            "version": "4.0.0",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "gh-pages",
+            "version": "3.2.3",
+            "flags": {
+              "dev": true
+            }
+          },
+          {
+            "name": "webpack-dev-server",
+            "version": "4.11.1",
+            "flags": {
+              "dev": true
+            }
+          }
+        ],
+        "paths": [
+          "swagger-ui>patch-package>rimraf>glob>minimatch",
+          "clean-webpack-plugin>del>globby>glob>minimatch",
+          "clean-webpack-plugin>del>rimraf>glob>minimatch",
+          "gh-pages>globby>glob>minimatch",
+          "webpack-dev-server>rimraf>glob>minimatch"
+        ]
+      },
+      "metadata": null,
+      "vulnerable_versions": "<3.0.5",
+      "module_name": "minimatch",
+      "severity": "high",
+      "github_advisory_id": "GHSA-f8q6-p94x-37v3",
+      "cves": [
+        "CVE-2022-3517"
+      ],
+      "access": "public",
+      "patched_versions": ">=3.0.5",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "updated": "2023-02-28T19:28:58.000Z",
+      "recommendation": "Upgrade to version 3.0.5 or later",
+      "cwe": [
+        "CWE-400"
+      ],
+      "found_by": null,
+      "deleted": null,
+      "id": 1091174,
+      "references": "- https://nvd.nist.gov/vuln/detail/CVE-2022-3517\n- https://github.com/grafana/grafana-image-renderer/issues/329\n- https://github.com/isaacs/minimatch/commit/a8763f4388e51956be62dc6025cec1126beeb5e6\n- https://github.com/nodejs/node/issues/42510\n- https://lists.debian.org/debian-lts-announce/2023/01/msg00011.html\n- https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/MTEUUTNIEBHGKUKKLNUZSV7IEP6IP3Q3/\n- https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UM6XJ73Q3NAM5KSGCOKJ2ZIA6GUWUJLK/\n- https://github.com/advisories/GHSA-f8q6-p94x-37v3",
+      "created": "2022-10-18T12:00:32.000Z",
+      "reported_by": null,
+      "title": "minimatch ReDoS vulnerability",
+      "npm_advisory_id": null,
+      "overview": "A vulnerability was found in the minimatch package. This flaw allows a Regular Expression Denial of Service (ReDoS) when calling the braceExpand function with specific arguments, resulting in a Denial of Service.",
+      "url": "https://github.com/advisories/GHSA-f8q6-p94x-37v3",
+      "name": "minimatch",
+      "range": "<3.0.5",
+      "type": "vulnerability"
+    }
+  ],
+  "licenseUsage": [
+    {
+      "string": "MIT",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "@babel/runtime-corejs3",
+          "version": "7.21.0"
+        },
+        {
+          "name": "@babel/runtime",
+          "version": "7.21.0"
+        },
+        {
+          "name": "@braintree/sanitize-url",
+          "version": "6.0.0"
+        },
+        {
+          "name": "@types/hast",
+          "version": "2.3.4"
+        },
+        {
+          "name": "@types/hoist-non-react-statics",
+          "version": "3.3.1"
+        },
+        {
+          "name": "@types/prop-types",
+          "version": "15.7.5"
+        },
+        {
+          "name": "@types/react-redux",
+          "version": "7.1.25"
+        },
+        {
+          "name": "@types/react",
+          "version": "18.0.28"
+        },
+        {
+          "name": "@types/scheduler",
+          "version": "0.16.2"
+        },
+        {
+          "name": "@types/unist",
+          "version": "2.0.6"
+        },
+        {
+          "name": "ansi-styles",
+          "version": "4.3.0"
+        },
+        {
+          "name": "argparse",
+          "version": "1.0.10"
+        },
+        {
+          "name": "autolinker",
+          "version": "3.16.2"
+        },
+        {
+          "name": "balanced-match",
+          "version": "1.0.2"
+        },
+        {
+          "name": "base64-js",
+          "version": "1.5.1"
+        },
+        {
+          "name": "brace-expansion",
+          "version": "1.1.11"
+        },
+        {
+          "name": "braces",
+          "version": "3.0.2"
+        },
+        {
+          "name": "call-bind",
+          "version": "1.0.2"
+        },
+        {
+          "name": "chalk",
+          "version": "4.1.2"
+        },
+        {
+          "name": "character-entities-legacy",
+          "version": "1.1.4"
+        },
+        {
+          "name": "character-entities",
+          "version": "1.2.4"
+        },
+        {
+          "name": "character-reference-invalid",
+          "version": "1.1.4"
+        },
+        {
+          "name": "ci-info",
+          "version": "2.0.0"
+        },
+        {
+          "name": "classnames",
+          "version": "2.3.2"
+        },
+        {
+          "name": "color-convert",
+          "version": "2.0.1"
+        },
+        {
+          "name": "color-name",
+          "version": "1.1.4"
+        },
+        {
+          "name": "comma-separated-tokens",
+          "version": "1.0.8"
+        },
+        {
+          "name": "concat-map",
+          "version": "0.0.1"
+        },
+        {
+          "name": "cookie",
+          "version": "0.5.0"
+        },
+        {
+          "name": "copy-to-clipboard",
+          "version": "3.3.3"
+        },
+        {
+          "name": "core-js-pure",
+          "version": "3.28.0"
+        },
+        {
+          "name": "cross-fetch",
+          "version": "3.1.5"
+        },
+        {
+          "name": "cross-spawn",
+          "version": "6.0.5"
+        },
+        {
+          "name": "css.escape",
+          "version": "1.5.1"
+        },
+        {
+          "name": "csstype",
+          "version": "3.1.1"
+        },
+        {
+          "name": "deep-extend",
+          "version": "0.6.0"
+        },
+        {
+          "name": "deepmerge",
+          "version": "4.2.2"
+        },
+        {
+          "name": "drange",
+          "version": "1.1.1"
+        },
+        {
+          "name": "fast-json-patch",
+          "version": "3.1.1"
+        },
+        {
+          "name": "fault",
+          "version": "1.0.4"
+        },
+        {
+          "name": "fill-range",
+          "version": "7.0.1"
+        },
+        {
+          "name": "form-data-encoder",
+          "version": "1.7.2"
+        },
+        {
+          "name": "format",
+          "version": "0.2.2"
+        },
+        {
+          "name": "formdata-node",
+          "version": "4.4.1"
+        },
+        {
+          "name": "fs-extra",
+          "version": "9.1.0"
+        },
+        {
+          "name": "function-bind",
+          "version": "1.1.1"
+        },
+        {
+          "name": "get-intrinsic",
+          "version": "1.2.0"
+        },
+        {
+          "name": "has-flag",
+          "version": "4.0.0"
+        },
+        {
+          "name": "has-symbols",
+          "version": "1.0.3"
+        },
+        {
+          "name": "has",
+          "version": "1.0.3"
+        },
+        {
+          "name": "hast-util-parse-selector",
+          "version": "2.2.5"
+        },
+        {
+          "name": "hastscript",
+          "version": "6.0.0"
+        },
+        {
+          "name": "immutable",
+          "version": "3.8.2"
+        },
+        {
+          "name": "invariant",
+          "version": "2.2.4"
+        },
+        {
+          "name": "is-alphabetical",
+          "version": "1.0.4"
+        },
+        {
+          "name": "is-alphanumerical",
+          "version": "1.0.4"
+        },
+        {
+          "name": "is-ci",
+          "version": "2.0.0"
+        },
+        {
+          "name": "is-decimal",
+          "version": "1.0.4"
+        },
+        {
+          "name": "is-docker",
+          "version": "2.2.1"
+        },
+        {
+          "name": "is-hexadecimal",
+          "version": "1.0.4"
+        },
+        {
+          "name": "is-number",
+          "version": "7.0.0"
+        },
+        {
+          "name": "is-plain-object",
+          "version": "5.0.0"
+        },
+        {
+          "name": "is-wsl",
+          "version": "2.2.0"
+        },
+        {
+          "name": "js-file-download",
+          "version": "0.4.12"
+        },
+        {
+          "name": "js-tokens",
+          "version": "4.0.0"
+        },
+        {
+          "name": "js-yaml",
+          "version": "4.1.0"
+        },
+        {
+          "name": "jsonfile",
+          "version": "6.1.0"
+        },
+        {
+          "name": "klaw-sync",
+          "version": "6.0.0"
+        },
+        {
+          "name": "lodash.debounce",
+          "version": "4.0.8"
+        },
+        {
+          "name": "lodash",
+          "version": "4.17.21"
+        },
+        {
+          "name": "loose-envify",
+          "version": "1.4.0"
+        },
+        {
+          "name": "lowlight",
+          "version": "1.20.0"
+        },
+        {
+          "name": "micromatch",
+          "version": "4.0.5"
+        },
+        {
+          "name": "minimist",
+          "version": "1.2.8"
+        },
+        {
+          "name": "nice-try",
+          "version": "1.0.5"
+        },
+        {
+          "name": "node-domexception",
+          "version": "1.0.0"
+        },
+        {
+          "name": "node-fetch",
+          "version": "2.6.7"
+        },
+        {
+          "name": "object-assign",
+          "version": "4.1.1"
+        },
+        {
+          "name": "object-inspect",
+          "version": "1.12.3"
+        },
+        {
+          "name": "open",
+          "version": "7.4.2"
+        },
+        {
+          "name": "os-tmpdir",
+          "version": "1.0.2"
+        },
+        {
+          "name": "parse-entities",
+          "version": "2.0.0"
+        },
+        {
+          "name": "patch-package",
+          "version": "6.5.1"
+        },
+        {
+          "name": "path-is-absolute",
+          "version": "1.0.1"
+        },
+        {
+          "name": "path-key",
+          "version": "2.0.1"
+        },
+        {
+          "name": "picomatch",
+          "version": "2.3.1"
+        },
+        {
+          "name": "prismjs",
+          "version": "1.29.0"
+        },
+        {
+          "name": "prismjs",
+          "version": "1.27.0"
+        },
+        {
+          "name": "prop-types",
+          "version": "15.8.1"
+        },
+        {
+          "name": "property-information",
+          "version": "5.6.0"
+        },
+        {
+          "name": "punycode",
+          "version": "1.3.2"
+        },
+        {
+          "name": "querystring",
+          "version": "0.2.0"
+        },
+        {
+          "name": "querystringify",
+          "version": "2.2.0"
+        },
+        {
+          "name": "randexp",
+          "version": "0.5.3"
+        },
+        {
+          "name": "randombytes",
+          "version": "2.1.0"
+        },
+        {
+          "name": "react-copy-to-clipboard",
+          "version": "5.1.0"
+        },
+        {
+          "name": "react-debounce-input",
+          "version": "3.3.0"
+        },
+        {
+          "name": "react-dom",
+          "version": "17.0.2"
+        },
+        {
+          "name": "react-immutable-proptypes",
+          "version": "2.2.0"
+        },
+        {
+          "name": "react-immutable-pure-component",
+          "version": "2.2.2"
+        },
+        {
+          "name": "react-inspector",
+          "version": "6.0.1"
+        },
+        {
+          "name": "react-is",
+          "version": "16.13.1"
+        },
+        {
+          "name": "react-is",
+          "version": "17.0.2"
+        },
+        {
+          "name": "react-redux",
+          "version": "7.2.9"
+        },
+        {
+          "name": "react-syntax-highlighter",
+          "version": "15.5.0"
+        },
+        {
+          "name": "react",
+          "version": "17.0.2"
+        },
+        {
+          "name": "redux",
+          "version": "4.2.1"
+        },
+        {
+          "name": "refractor",
+          "version": "3.6.0"
+        },
+        {
+          "name": "regenerator-runtime",
+          "version": "0.13.11"
+        },
+        {
+          "name": "remarkable",
+          "version": "2.0.1"
+        },
+        {
+          "name": "repeat-string",
+          "version": "1.6.1"
+        },
+        {
+          "name": "requires-port",
+          "version": "1.0.0"
+        },
+        {
+          "name": "reselect",
+          "version": "4.1.7"
+        },
+        {
+          "name": "ret",
+          "version": "0.2.2"
+        },
+        {
+          "name": "safe-buffer",
+          "version": "5.1.2"
+        },
+        {
+          "name": "scheduler",
+          "version": "0.20.2"
+        },
+        {
+          "name": "serialize-error",
+          "version": "8.1.0"
+        },
+        {
+          "name": "shebang-command",
+          "version": "1.2.0"
+        },
+        {
+          "name": "shebang-regex",
+          "version": "1.0.0"
+        },
+        {
+          "name": "side-channel",
+          "version": "1.0.4"
+        },
+        {
+          "name": "slash",
+          "version": "2.0.0"
+        },
+        {
+          "name": "space-separated-tokens",
+          "version": "1.1.5"
+        },
+        {
+          "name": "supports-color",
+          "version": "7.2.0"
+        },
+        {
+          "name": "tmp",
+          "version": "0.0.33"
+        },
+        {
+          "name": "to-regex-range",
+          "version": "5.0.1"
+        },
+        {
+          "name": "toggle-selection",
+          "version": "1.0.6"
+        },
+        {
+          "name": "tr46",
+          "version": "0.0.3"
+        },
+        {
+          "name": "traverse",
+          "version": "0.6.7"
+        },
+        {
+          "name": "universalify",
+          "version": "2.0.0"
+        },
+        {
+          "name": "url-parse",
+          "version": "1.5.10"
+        },
+        {
+          "name": "url",
+          "version": "0.11.0"
+        },
+        {
+          "name": "web-streams-polyfill",
+          "version": "4.0.0-beta.3"
+        },
+        {
+          "name": "whatwg-url",
+          "version": "5.0.0"
+        },
+        {
+          "name": "xml-but-prettier",
+          "version": "1.0.1"
+        },
+        {
+          "name": "xml",
+          "version": "1.0.1"
+        },
+        {
+          "name": "xtend",
+          "version": "4.0.2"
+        }
+      ]
+    },
+    {
+      "string": "ISC",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "at-least-node",
+          "version": "1.0.0"
+        },
+        {
+          "name": "fs.realpath",
+          "version": "1.0.0"
+        },
+        {
+          "name": "glob",
+          "version": "7.1.7"
+        },
+        {
+          "name": "graceful-fs",
+          "version": "4.2.6"
+        },
+        {
+          "name": "inflight",
+          "version": "1.0.6"
+        },
+        {
+          "name": "inherits",
+          "version": "2.0.4"
+        },
+        {
+          "name": "isexe",
+          "version": "2.0.0"
+        },
+        {
+          "name": "minimatch",
+          "version": "3.0.4"
+        },
+        {
+          "name": "once",
+          "version": "1.4.0"
+        },
+        {
+          "name": "rimraf",
+          "version": "2.7.1"
+        },
+        {
+          "name": "semver",
+          "version": "5.7.1"
+        },
+        {
+          "name": "which",
+          "version": "1.3.1"
+        },
+        {
+          "name": "wrappy",
+          "version": "1.0.2"
+        },
+        {
+          "name": "yaml",
+          "version": "1.10.2"
+        }
+      ]
+    },
+    {
+      "string": "BSD-3-Clause",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "highlight.js",
+          "version": "10.7.3"
+        },
+        {
+          "name": "hoist-non-react-statics",
+          "version": "3.3.2"
+        },
+        {
+          "name": "ieee754",
+          "version": "1.2.1"
+        },
+        {
+          "name": "qs",
+          "version": "6.11.0"
+        },
+        {
+          "name": "redux-immutable",
+          "version": "4.0.0"
+        },
+        {
+          "name": "sprintf-js",
+          "version": "1.0.3"
+        }
+      ]
+    },
+    {
+      "string": "Apache-2.0",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "find-yarn-workspace-root",
+          "version": "2.0.0"
+        },
+        {
+          "name": "swagger-client",
+          "version": "3.18.5"
+        },
+        {
+          "name": "swagger-ui",
+          "version": "4.15.5"
+        }
+      ]
+    },
+    {
+      "string": "BSD-2-Clause",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "@yarnpkg/lockfile",
+          "version": "1.1.0"
+        },
+        {
+          "name": "webidl-conversions",
+          "version": "3.0.1"
+        }
+      ]
+    },
+    {
+      "string": "Python-2.0",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "argparse",
+          "version": "2.0.1"
+        }
+      ]
+    },
+    {
+      "string": "(MPL-2.0 OR Apache-2.0)",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": true
+      },
+      "dependencies": [
+        {
+          "name": "dompurify",
+          "version": "2.3.10"
+        }
+      ]
+    },
+    {
+      "string": "(MIT AND BSD-3-Clause)",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": true
+      },
+      "dependencies": [
+        {
+          "name": "sha.js",
+          "version": "2.4.11"
+        }
+      ]
+    },
+    {
+      "string": "0BSD",
+      "meta": {
+        "type": "Permissive",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "tslib",
+          "version": "2.5.0"
+        }
+      ]
+    },
+    {
+      "string": "(MIT OR CC0-1.0)",
+      "meta": {
+        "type": "Public Domain",
+        "isSpdxExpression": true
+      },
+      "dependencies": [
+        {
+          "name": "type-fest",
+          "version": "0.20.2"
+        }
+      ]
+    },
+    {
+      "string": "Unlicense",
+      "meta": {
+        "type": "Public Domain",
+        "isSpdxExpression": false
+      },
+      "dependencies": [
+        {
+          "name": "zenscroll",
+          "version": "4.0.2"
+        }
+      ]
+    }
+  ],
+  "licenseIssues": [],
+  "metaIssues": [
+    {
+      "severity": "high",
+      "title": "Package uses postinstall script: \"node -e \"try{require('./postinstall')}catch(e){}\"\"",
+      "shortTitle": "Uses postinstall script",
+      "name": "core-js-pure",
+      "version": "3.28.0",
+      "sandwormIssueCode": 201,
+      "sandwormIssueSpecifier": "postinstall",
+      "sandwormIssueId": "SWRM-201-core-js-pure-3.28.0-postinstall",
+      "findings": {
+        "sources": [
+          {
+            "name": "core-js-pure",
+            "version": "3.28.0",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "affects": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "@babel/runtime-corejs3",
+            "version": "7.21.0",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "core-js-pure",
+            "version": "3.28.0",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "swagger-client",
+            "version": "3.18.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "rootDependencies": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "paths": [
+          "swagger-ui>@babel/runtime-corejs3>core-js-pure",
+          "swagger-ui>swagger-client>@babel/runtime-corejs3>core-js-pure"
+        ]
+      },
+      "type": "meta"
+    },
+    {
+      "severity": "high",
+      "title": "Deprecated package",
+      "name": "querystring",
+      "version": "0.2.0",
+      "sandwormIssueCode": 200,
+      "sandwormIssueId": "SWRM-200-querystring-0.2.0",
+      "findings": {
+        "sources": [
+          {
+            "name": "querystring",
+            "version": "0.2.0",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "affects": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "swagger-client",
+            "version": "3.18.5",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "url",
+            "version": "0.11.0",
+            "flags": {
+              "prod": true
+            }
+          },
+          {
+            "name": "querystring",
+            "version": "0.2.0",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "rootDependencies": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "paths": [
+          "swagger-ui>swagger-client>url>querystring"
+        ]
+      },
+      "type": "meta"
+    },
+    {
+      "severity": "high",
+      "title": "Package uses postinstall script: \"patch-package\"",
+      "shortTitle": "Uses postinstall script",
+      "name": "swagger-ui",
+      "version": "4.15.5",
+      "sandwormIssueCode": 201,
+      "sandwormIssueSpecifier": "postinstall",
+      "sandwormIssueId": "SWRM-201-swagger-ui-4.15.5-postinstall",
+      "findings": {
+        "sources": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "affects": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "rootDependencies": [
+          {
+            "name": "swagger-ui",
+            "version": "4.15.5",
+            "flags": {
+              "prod": true
+            }
+          }
+        ],
+        "paths": [
+          "swagger-ui"
+        ]
+      },
+      "type": "meta"
+    }
+  ],
+  "errors": []
+}

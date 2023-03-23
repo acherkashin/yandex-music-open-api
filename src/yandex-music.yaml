@@ -2168,6 +2168,50 @@ paths:
                     $ref: "#/components/schemas/InvocationInfo"
                   result:
                     $ref: "#/components/schemas/QueueItem"
+
+  /queues/{queueId}/update-position:
+    parameters:
+      - in: path
+        required: true
+        name: queueId
+        description: Идентификатор очереди
+        schema:
+          type: string
+      - in: query
+        required: true
+        name: currentIndex
+        description: Текущий индекс
+        schema:
+          type: string
+      - in: query
+        required: true
+        name: IsInteractive
+        schema:
+          type: boolean
+        example: True
+    post:
+      operationId: updateQueuePosition
+      summary: Установка текущего индекса проигрываемого трека в очереди треков
+      tags:
+        - queues
+      security:
+        - oAuth: []
+        - oAuthProxied: []
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    $ref: "#/components/schemas/UpdateQueueResult"
       
 components:
   securitySchemes:
@@ -4184,4 +4228,14 @@ components:
         albumId:
           type: string
         from:
+          type: string
+    UpdateQueueResult:
+      type: object
+      required:
+        - "status"
+        - "mostRecentQueue"
+      properties:
+        status:
+          type: string
+        mostRecentQueue:
           type: string
