@@ -1633,6 +1633,50 @@ paths:
                     type: object
                     $ref: "#/components/schemas/SimilarTracks"
 
+  /tracks/{trackId}/lyrics:
+    parameters:
+      - in: path
+        required: true
+        name: trackId
+        schema:
+          type: string
+      - in: query
+        required: false
+        name: format
+        schema: 
+          type: string
+      - in: query
+        required: false
+        name: timeStamp
+        schema: 
+          type: string
+      - in: query
+        required: false
+        name: sign
+        schema: 
+          type: string
+    get:
+      operationId: getTrackLyrics
+      summary: Получение текста песни с таймкодами
+      tags:
+        - tracks
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                required:
+                  - "invocationInfo"
+                  - "result"
+                type: object
+                properties:
+                  invocationInfo:
+                    type: object
+                    $ref: "#/components/schemas/InvocationInfo"
+                  result:
+                    type: object
+                    # $ref: "#/components/schemas/SimilarTracks"
   /play-audio:
     post:
       summary: Метод для отправки текущего состояния прослушиваемого трека
