@@ -27,7 +27,7 @@ async function initSwaggerUI() {
       const tokenButton = document.createElement('button');
       const className = isAuthorized ? 'locked' : 'unlocked'
       tokenButton.className = `btn authorize ${className}`;
-      tokenButton.innerHTML = `<span>${(isAuthorized ? 'Authorized' : 'Login with Token')}</span><svg width="20" height="20"><use href="#${className}" xlink:href="#${className}"></use></svg>`
+      tokenButton.innerHTML = `<span>Login with Token</span><svg width="20" height="20"><use href="#${className}" xlink:href="#${className}"></use></svg>`
 
       tokenButton.addEventListener('click', () => {
         const token = prompt('Provide token');
