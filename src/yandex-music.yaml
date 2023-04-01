@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Yandex Music Api
-  description: "Swagger документация для Yandex Music API."
+  description: "Swagger документация для Yandex Music API. Не для всех аккаунтов работает авторизация по логину и паролю, в этом случае необходимо использовать авторизацию с помощью токена. **Самый простой способ получить токен** - [расширение для Google Chrome](https://chrome.google.com/webstore/detail/yandex-music-token/lcbjeookjibfhjjopieifgjnhlegmkib). Все способы описаны [здесь](https://github.com/MarshalX/yandex-music-token)."
   version: 0.0.1
 servers:
   - url: https://yandex-music-cors-proxy.onrender.com/https://api.music.yandex.net:443/
