@@ -19,7 +19,8 @@ export async function getTrackUrl(client: YandexMusicClient, trackId: string) {
 }
 
 export async function getDownloadInfo(trackInfo: TrackDownloadInfo[], headers?: any): Promise<DownloadInfo> {
-  const info = !!headers ? trackInfo.find((item) => item.codec === 'mp3' && !item.preview) : trackInfo[0];
+  const isAuthorized = headers?.['Authorization'];
+  const info = isAuthorized ? trackInfo.find((item) => item.codec === 'mp3' && !item.preview) : trackInfo[0];
 
   const downloadInfo = await axios.request<DownloadInfo>({
     url: `${info!.downloadInfoUrl}&format=json`,
